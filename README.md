@@ -11,5 +11,6 @@
 * Передать с помощью API информацию об вашей модификации
 
 # Полезные ссылки
-* [Внедрение и использование](https://bitbucket.org/P0LIR0ID/modslist/src/add2a4bedff1a9823569ae2a13624010c03ef418/example/modListSample.py?at=master)
+* [Внедрение](https://bitbucket.org/P0LIR0ID/modslist/src/127cd2a597c43b87c7b5c1c27eaff91a571a7fa8/example/inject.py?at=master)
+* [Использование](https://bitbucket.org/P0LIR0ID/modslist/src/127cd2a597c43b87c7b5c1c27eaff91a571a7fa8/example/api.py?at=master)
 * [Последний билд](https://bitbucket.org/P0LIR0ID/modslist/downloads/build.zip)
