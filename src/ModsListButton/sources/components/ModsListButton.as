@@ -99,7 +99,9 @@ package components {
 			if(this.lobby != null) {
 				var messengerBar: MessengerBar = this.lobby.messengerBar;
 				
-				this.modsButton = new ModsListButtonFrame(this.tooltipText);
+				if (fromLobby) {
+					this.modsButton = new ModsListButtonFrame(this.tooltipText);
+				}
 				
 				this.modsButton.width = 72;
 				this.modsButton.height = 32;
