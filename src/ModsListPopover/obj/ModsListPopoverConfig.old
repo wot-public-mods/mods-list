@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'20.06.2015'</value>
+      <value>'28.06.2015'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -37,12 +37,12 @@
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <external-library-path append="true">
-      <path-element>D:\games\wot\res_mods\0.9.8.1\gui\flash\ModsListPopover\libraries\framework.swc</path-element>
-      <path-element>D:\games\wot\res_mods\0.9.8.1\gui\flash\ModsListPopover\libraries\wg.swc</path-element>
+      <path-element>D:\games\wot_ct\res_mods\0.9.9\gui\flash\ModsListPopover\libraries\framework.swc</path-element>
+      <path-element>D:\games\wot_ct\res_mods\0.9.9\gui\flash\ModsListPopover\libraries\wg.swc</path-element>
     </external-library-path>
   </compiler>
   <file-specs>
-    <path-element>D:\games\wot\res_mods\0.9.8.1\gui\flash\ModsListPopover\sources\ModsListPopover_UI.as</path-element>
+    <path-element>D:\games\wot_ct\res_mods\0.9.9\gui\flash\ModsListPopover\sources\ModsListPopover_UI.as</path-element>
   </file-specs>
   <default-background-color>#FF8000</default-background-color>
   <default-frame-rate>24</default-frame-rate>

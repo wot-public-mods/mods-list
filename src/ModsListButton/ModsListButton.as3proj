@@ -8,14 +8,14 @@
     <movie fps="24" />
     <movie width="640" />
     <movie height="480" />
-    <movie version="11" />
-    <movie minorVersion="7" />
+    <movie version="12" />
+    <movie minorVersion="0" />
     <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <!-- example: <class path="..." /> -->
+    <class path="sources" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -57,9 +57,9 @@
   <!-- External Libraries -->
   <externalLibraryPaths>
     <element path="libraries\framework.swc" />
-    <element path="libraries\wg.swc" />
     <element path="libs\framework.swc" />
     <element path="libs\wg.swc" />
+    <element path="libraries\wg.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>

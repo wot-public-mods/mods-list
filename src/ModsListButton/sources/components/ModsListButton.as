@@ -7,8 +7,6 @@ package components {
 	import net.wg.infrastructure.events.LoaderEvent;
 	import net.wg.infrastructure.interfaces.IView;
 	import net.wg.gui.lobby.LobbyPage;
-	import net.wg.gui.login.impl.LoginPage;
-	import net.wg.gui.login.ILoginForm;
 	import net.wg.gui.components.controls.SoundButton;
 	import net.wg.gui.lobby.messengerBar.MessengerBar;
 	import net.wg.infrastructure.events.LifeCycleEvent;
@@ -22,8 +20,6 @@ package components {
 
 	public class ModsListButton extends AbstractView implements IPopOverCaller {
 
-		private var login: LoginPage = null;
-		private var loginForm: ILoginForm = null;
 		private var lobby: LobbyPage = null;
 		private var modsButton: ModsListButtonFrame = null;
 		private var canResize: Boolean = true;
@@ -64,6 +60,7 @@ package components {
 				return;
 			}
 			removeEventListener(Event.ADDED_TO_STAGE, init);
+			App.containerMgr.loader.loadLibraries(Vector.<String>(["toolTips.swf","popovers.swf"]));
 			App.containerMgr.loader.addEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded);
 		}
 
@@ -85,7 +82,6 @@ package components {
 					fromLobbyS(true);
 				}
 				if (current_alias == "login") {
-					this.login = view as LoginPage;
 					setTimeout(this.createModsButtonLoginWindow, 1);
 					fromLobbyS(false);
 				}
@@ -185,8 +181,6 @@ package components {
 			return result;
 		}
 		
-		
-		/*
 		private function recursivePrintDOC(dOC:DisplayObjectContainer, depth:int, currentDeph:int, depthIter:String) : void {
 			if (currentDeph <= depth) {
 				var child:DisplayObject = null;
@@ -204,7 +198,7 @@ package components {
 					child = dOC.getChildAt(i);
 					childOC = child as DisplayObjectContainer;
 					
-					logS(logStr + ' ' + getQualifiedClassName(child));
+					DebugUtils.LOG_DEBUG(logStr, getQualifiedClassName(child));
 					
 					if ((childOC) && (childOC.numChildren > 0)) {
 						this.recursivePrintDOC(childOC, depth, currentDeph + 1, depthIter);
@@ -214,7 +208,6 @@ package components {
 			}
 		}
 		
-		*/
 	}
  
 }

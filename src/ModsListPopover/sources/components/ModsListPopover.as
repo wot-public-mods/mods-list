@@ -1,6 +1,7 @@
 ﻿package components {
 	
 	import net.wg.infrastructure.base.SmartPopOverView;
+	
 	import net.wg.gui.components.controls.LabelControl;
 	import scaleform.clik.controls.ScrollingList;
 	import scaleform.clik.data.DataProvider;
