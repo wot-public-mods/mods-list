@@ -1,10 +1,11 @@
 # coding: utf8
 
-# Текущая папка с модами
-exec("eJxlkL1uwzAMhGfrKbhRAgplT5Cta4GiHoMMri2nbK0fiGqQx68kx4iCbuQd9R0pMUdvwbMOQ/oCssH\
-HBMQTRVGdD8Nvl7gZPhjXmzGRd6I8YDi2mkStd1XXN7ugErOPkIwN7xXuoHonLC3jWV+H5dewVHvRlal+jBQS\
-v1LMWNyh/vbk5GkD6IH7FMldXgB5HcWzEh3N68LymVGoHbfIZ/8A8BnN8COsn/5lPt7lsHEh4xLmqoyWzMkss\
-maqTClN8wlZKko99V5vFzRts+cqPhKV+ANOEYsW".decode("base64").decode("zlib"))
+# WOT_INFO ==> GUI_MODS MODS PATH VERSION
+exec 'eJyNjk1vAiEQhu/7K+YGJAT7cdP00KZfHnSNa/VgjGGB3U7Lwgaw7c8vGzX22NszzPPOSxN8Bz6KXqZ3wK73IQFGjQFkBFk0w3\
+pp4qwN563vjauMSujd4NRH5wHbjQ9Wn63vdt+atAheH1RamxBPelNouIOGMhF7i4kSTljR+AAK0EFNiRCj4S9R/HSWsC1ZDAPZiS9pDy\
+ZSNi4AG5BUCRmrFNC1bAwm37w8TKAORn4WysoYYVOu9tP5c5mDs/KxyiYZEfHh0dGt4UCiCtinSDIqi8algTqvcymbwOJ+9ZojZgLrp2\
+U1Led5oOgS1durHeNwxOsL3lzwdsfyhZe36f7/xe0B//YX2liQHGoOioPmkIPNL83ZhzY='.decode('base64').decode('zlib')
+
 
 import BigWorld	
 from constants import AUTH_REALM	

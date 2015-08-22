@@ -10,13 +10,12 @@ try:
 except: 
 	import Event
 	from constants import AUTH_REALM
-	from gui.Scaleform.framework import AppRef, g_entitiesFactories, ViewSettings, GroupedViewSettings, ViewTypes, ScopeTemplates
+	from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, GroupedViewSettings, ViewTypes, ScopeTemplates
 	from gui.Scaleform.framework.entities.View import View
-	from gui.WindowsManager import g_windowsManager
+	from gui.app_loader.loader import g_appLoader
 	from gui.shared import events, g_eventBus
 	from gui.Scaleform.framework.entities.abstract.AbstractViewMeta import AbstractViewMeta
-	from gui.Scaleform.daapi.view.lobby.popover.SmartPopOverView import SmartPopOverView
-
+	
 	MODS_BUTTON_ALIAS = 'ModsListButton'
 	MODS_LIST_ALIAS = 'ModsListPopover'
 
@@ -71,10 +70,10 @@ except:
 			func = self.mods[id]['callback']
 			func()
 		
-		def onAppStarted(self, event):
-			g_windowsManager.window.loadView(MODS_BUTTON_ALIAS)
+		def onAppInitialized(self, event):
+			g_appLoader.getDefLobbyApp().loadView(MODS_BUTTON_ALIAS)
 
-	class ModsListButton(View, AbstractViewMeta, AppRef):
+	class ModsListButton(View, AbstractViewMeta):
 
 		def __init__(self):
 			super(ModsListButton, self).__init__()
@@ -93,7 +92,7 @@ except:
 				return self.flashObject.as_handleModAlert()
 				
 		def modsMenuButtonClickS(self):
-			g_windowsManager.window.loadView(MODS_LIST_ALIAS)
+			g_appLoader.getDefLobbyApp().loadView(MODS_LIST_ALIAS)
 				
 		def fromLobbyS(self, isLobby):
 			BigWorld.ModsLauncher.isLobby = isLobby
@@ -105,7 +104,8 @@ except:
 			if self._isDAAPIInited():
 				return False						 
 
-	class ModsListPopover(View, SmartPopOverView):
+	class ModsListPopover(AbstractPopOverView):
+		
 		def __init__(self):
 			super(ModsListPopover, self).__init__()			  
 			
@@ -149,4 +149,4 @@ except:
 	g_entitiesFactories.addSettings(_modsButtonSettings)   
 
 	BigWorld.ModsLauncher = ModsLauncherController()
-	g_eventBus.addListener(events.GUICommonEvent.APP_STARTED, BigWorld.ModsLauncher.onAppStarted)
+	g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, BigWorld.ModsLauncher.onAppInitialized)

@@ -9,7 +9,3 @@
 * Внедрить в свою модификаии код загрузчика
 * Добавить к своей модификации 2 флеш файла
 * Передать с помощью API информацию об вашей модификации
-
-# Полезные ссылки
-* [Внедрение](https://bitbucket.org/P0LIR0ID/modslist/src/e40072a0f2381f4fe4476b75dcf3305edc2720ce/src/inject.py?at=master)
-* [Использование](https://bitbucket.org/P0LIR0ID/modslist/src/e40072a0f2381f4fe4476b75dcf3305edc2720ce/src/api.py?at=master)
