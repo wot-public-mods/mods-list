@@ -15,6 +15,7 @@ except:
 	from gui.app_loader.loader import g_appLoader
 	from gui.shared import events, g_eventBus
 	from gui.Scaleform.framework.entities.abstract.AbstractViewMeta import AbstractViewMeta
+	from gui.Scaleform.framework.entities.abstract.AbstractPopOverView import AbstractPopOverView
 	
 	MODS_BUTTON_ALIAS = 'ModsListButton'
 	MODS_LIST_ALIAS = 'ModsListPopover'
