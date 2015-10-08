@@ -155,39 +155,15 @@ package ModsListButton_source.poliroid.components {
 		}
 		
 		private function createModsButtonLogin(): void {
-			
-			this.logS("createModsButtonLogin 1");
-			
 			var LoginPageUI:DisplayObjectContainer = this.recursiveFindDOC(DisplayObjectContainer(stage), "LoginPageUI");
-			
-			this.logS("createModsButtonLogin 2");
-			try {
-				this.modsButtonLogin = new ModsListButtonFrame();
-			} catch (er:Error) {
-				this.logS(er.getStackTrace());
-			}
-			
-			
-			this.logS("createModsButtonLogin 3");
-			
+			this.modsButtonLogin = new ModsListButtonFrame();
 			this.modsButtonLogin.helpText = this.tooltipText;
 			this.modsButtonLogin.width = 72;
 			this.modsButtonLogin.height = 32;
-			
-			this.logS("createModsButtonLogin 4");
-			
 			this.modsButtonLogin.x = App.appWidth - 80;
 			this.modsButtonLogin.y = App.appHeight - 34;
-			
-			this.logS("createModsButtonLogin 5");
-			
 			LoginPageUI.addChild(this.modsButtonLogin);	
-			
-			this.logS("createModsButtonLogin 6");
-			
 			this.modsButtonLogin.addEventListener(MouseEvent.CLICK, this.handleModsButtonClick);
-			
-			this.logS("createModsButtonLogin 7");
 		}
 		
 		private function handleMessengerBarAdded(event: Event): void {
