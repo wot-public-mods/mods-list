@@ -148,7 +148,9 @@ package ModsListButton_source.poliroid.components {
 			messengerBar.channelCarousel.width = App.appWidth - 316;
 			
 			messengerBar.addEventListener(Event.RESIZE, this.handleMessengerBarResize);
-			messengerBar.addEventListener(Event.ADDED, this.handleMessengerBarAdded);
+			
+			setTimeout(this.resizeMessengerBar, 50);
+			setTimeout(this.resizeMessengerBar, 1000);
 			
 			this.modsButtonLobby.addEventListener(MouseEvent.CLICK, this.handleModsButtonClick);
 			
@@ -166,10 +168,13 @@ package ModsListButton_source.poliroid.components {
 			this.modsButtonLogin.addEventListener(MouseEvent.CLICK, this.handleModsButtonClick);
 		}
 		
-		private function handleMessengerBarAdded(event: Event): void {
+		private function resizeMessengerBar(): void {
 			if (this.lobby != null) {
 				var messengerBar: MessengerBar = this.lobby.messengerBar;
-				messengerBar.channelCarousel.width = App.appWidth - 316;
+				if (messengerBar.channelCarousel.width != App.appWidth - 316) {
+					messengerBar.channelCarousel.width = App.appWidth - 316;
+					setTimeout(this.resizeMessengerBar, 50);
+				}
 			}
 		}
 		
@@ -192,13 +197,18 @@ package ModsListButton_source.poliroid.components {
 		}
 		
 		public function as_handleChangeScreenResolution(width:Number, height:Number):void {
-			if (this.modsButtonLogin == null) {
-				this.createModsButtonLogin();
+			try {
+				if (this.modsButtonLogin == null) {
+					this.createModsButtonLogin();
+				}
+				if (!this.isLobby) {
+					this.modsButtonLogin.x = width - 80;
+					this.modsButtonLogin.y = height - 34;
+				}
+			} catch (er:Error) {
+				
 			}
-			if (!this.isLobby) {
-				this.modsButtonLogin.x = width - 80;
-				this.modsButtonLogin.y = height - 34;
-			}
+			
 		}
 		
 		private function recursiveFindDOC(dOC:DisplayObjectContainer, className:String) : DisplayObjectContainer {
