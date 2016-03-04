@@ -125,7 +125,7 @@ package ModsListButton_source.poliroid.components {
 			this.modsButtonLobby.helpDirection = "T";
 			this.modsButtonLobby.helpText = this.tooltipText;
 			this.modsButtonLobby.iconSource = "../../scripts/client/gui/mods/modsListApi/ModsListButtonIcon.png";
-			this.modsButtonLobby.iconOffsetLeft = 22;
+			this.modsButtonLobby.iconOffsetLeft = 24;
 			this.modsButtonLobby.iconOffsetTop = 4;
 			this.modsButtonLobby.label = "";
 			this.modsButtonLobby.paddingHorizontal = 0.0;
