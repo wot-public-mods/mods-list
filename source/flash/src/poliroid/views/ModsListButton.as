@@ -83,20 +83,15 @@ package poliroid.views {
 		
 		public function as_populateLogin(): void {
 			try {
-				
 				this.messangerBar = null;
-				
 				this.isLobby = false;
-				
-				this.buildButton();
-				
 				var LoginPageUI:DisplayObjectContainer = this.recursiveFindDOC(DisplayObjectContainer(stage), "LoginPageUI");
-				
-				this.modsButton.x = App.appWidth - 80;
-				this.modsButton.y = App.appHeight - 34;
-				
-				LoginPageUI.addChild(this.modsButton);
-				
+				if (LoginPageUI != null) {
+					this.buildButton();
+					this.modsButton.x = App.appWidth - 80;
+					this.modsButton.y = App.appHeight - 34;
+					LoginPageUI.addChild(this.modsButton);
+				}
 			} catch(err: Error) {
 				this.debugLogS("modsListButton::as_populateLogin:ERROR \n" + err.getStackTrace());
 			}
