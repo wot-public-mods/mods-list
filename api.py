@@ -1,5 +1,4 @@
-# coding: utf8
-
+﻿
 from gui.mods.modsListApi import g_modsListApi
 
 

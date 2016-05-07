@@ -1,1 +1,1 @@
-paste to ingame gui/mods folder
+﻿put to ingame gui/mods folder
