@@ -4,8 +4,6 @@ package poliroid.views {
 	import flash.events.*;
 	import flash.utils.*;
 	
-	import scaleform.clik.events.FocusHandlerEvent;
-	
 	import net.wg.infrastructure.base.AbstractView;
 	import net.wg.infrastructure.interfaces.IPopOverCaller;
 	
@@ -24,6 +22,7 @@ package poliroid.views {
 		
 		public function ModsListButton() {
 			super();
+			this.focusable = false;
 		}
 		
 		private function buildButton():void {
@@ -99,28 +98,28 @@ package poliroid.views {
 		
 		public function as_populateLobby(): void {
 			try {
-				
 				this.isLobby = true;
-				
 				this.buildButton();
-				
-				this.messangerBar = this.recursiveFindDOC(DisplayObjectContainer(stage), "MessengerBar_UI");
-				this.modsButton.x = App.appWidth - 165;
-				this.modsButton.y = this.messangerBar.notificationListBtn.y;
-				this.messangerBar.addChild(this.modsButton);
-				
-				this.messangerBar.channelCarousel.width = App.appWidth - 316;
-				this.messangerBar.addEventListener(Event.RESIZE, this.handleMessengerBarResize);
-				
-				this.resizeMessengerBar();
-				
-				setTimeout(this.resizeMessengerBar, 50);
-				setTimeout(this.resizeMessengerBar, 500);
-				setTimeout(this.resizeMessengerBar, 1000);
-				setTimeout(this.resizeMessengerBar, 2000);
-				setTimeout(this.resizeMessengerBar, 5000);
-				setTimeout(this.resizeMessengerBar, 10000);
-				
+				var MessengerBarUI:DisplayObjectContainer = this.recursiveFindDOC(DisplayObjectContainer(stage), "MessengerBar_UI");
+				if (MessengerBarUI != null) {
+					this.messangerBar = MessengerBarUI;
+					
+					this.modsButton.x = App.appWidth - 165;
+					this.modsButton.y = this.messangerBar.notificationListBtn.y;
+					this.messangerBar.addChild(this.modsButton);
+					
+					this.messangerBar.channelCarousel.width = App.appWidth - 316;
+					this.messangerBar.addEventListener(Event.RESIZE, this.handleMessengerBarResize);
+					
+					this.resizeMessengerBar();
+					
+					setTimeout(this.resizeMessengerBar, 50);
+					setTimeout(this.resizeMessengerBar, 500);
+					setTimeout(this.resizeMessengerBar, 1000);
+					setTimeout(this.resizeMessengerBar, 2000);
+					setTimeout(this.resizeMessengerBar, 5000);
+					setTimeout(this.resizeMessengerBar, 10000);
+				}
 			} catch(err: Error) {
 				this.debugLogS("modsListButton::as_populateLobby:ERROR \n" + err.getStackTrace());
 			}
@@ -138,19 +137,17 @@ package poliroid.views {
 		}
 		
 		private function resizeMessengerBar(): void {
-			try {
-				if (this.isLobby && this.messangerBar != null) {
-					
-					var new_size:Number = App.appWidth - 316;
-					
-					if (this.messangerBar.channelCarousel.width != new_size) {
-						setTimeout(this.resizeMessengerBar, 50);
-					}
-					this.messangerBar.channelCarousel.width = new_size;
+		
+			if (this.isLobby && this.messangerBar != null) {
+				
+				var new_size:Number = App.appWidth - 316;
+				
+				if (this.messangerBar.channelCarousel.width != new_size) {
+					setTimeout(this.resizeMessengerBar, 50);
 				}
-			} catch(err: Error) {
-				this.debugLogS("modsListButton::resizeMessengerBar:ERROR \n" + err.getStackTrace());
+				this.messangerBar.channelCarousel.width = new_size;
 			}
+		
 		}
 		
 		public function as_handleChangeScreenResolution(width:Number, height:Number):void {
