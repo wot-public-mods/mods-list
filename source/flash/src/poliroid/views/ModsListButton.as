@@ -11,7 +11,7 @@ package poliroid.views {
 	
 	public class ModsListButton extends AbstractView implements IPopOverCaller {
 		
-		private var modsButton: ModsListButtonFrame = null;
+		private var modsButton:ModsListButtonFrame = null;
 		private var tooltipText:String = 'Список модификаций: удобный запуск, настройка и оповещение.';
 		private var isLobby:Boolean = false;
 		private var messangerBar:* = null;
@@ -125,6 +125,19 @@ package poliroid.views {
 			}
 		}
 		
+		public function as_handleChangeScreenResolution(width:Number, height:Number):void {
+			if (!this.isLobby && this.modsButton != null) {
+				this.modsButton.x = App.appWidth - 80;
+				this.modsButton.y = App.appHeight - 34;
+			}
+		}
+		
+		public function as_handleButtonBlinking():void {
+			if (this.modsButton != null) {
+				this.modsButton.blinking = true;
+			}
+		}
+		
 		private function handleMessengerBarResize(event: Event): void {
 			try {
 				if (this.isLobby && this.messangerBar != null) {
@@ -150,13 +163,6 @@ package poliroid.views {
 		
 		}
 		
-		public function as_handleChangeScreenResolution(width:Number, height:Number):void {
-			if (!this.isLobby && this.modsButton != null) {
-				this.modsButton.x = App.appWidth - 80;
-				this.modsButton.y = App.appHeight - 34;
-			}
-		}
-		
 		private function recursiveFindDOC(dOC:DisplayObjectContainer, className:String) : DisplayObjectContainer {
 			var child:DisplayObject = null;
 			var childOC:DisplayObjectContainer = null;
@@ -172,5 +178,11 @@ package poliroid.views {
 			}
 			return result;
 		}
+		
+        override protected function nextFrameAfterPopulateHandler():void {
+            if (this.parent != App.instance) {
+				(App.instance as MovieClip).addChild(this);
+			}
+        }
 	}
 }

@@ -39,6 +39,9 @@ package poliroid.components {
 			
 			super();
 			
+			this.focusable = false;
+			this.tabEnabled = false;
+			
 			this._images.button_normal = new imageButtonNormal() as Bitmap;
 			this.addChild(this._images.button_normal);
 			
@@ -68,7 +71,7 @@ package poliroid.components {
 			this.blinker_current_frame = 0;
 			this.blinker_blink = true;
 			this.blinker_alpha = 0;
-			this.blinker_interval = setInterval(drawBlink, 25);
+			this.blinker_interval = setInterval(this.drawBlink, 25);
 		}
 		
 		public function stopBlinking():void {
@@ -87,7 +90,7 @@ package poliroid.components {
 		
 		private function drawBlink(): void {
 			
-			if (!this.button_blink.visible){ 
+			if (!this._images.button_blink.visible){ 
 				this._images.button_blink.visible = true;
 			}
 			this._images.button_blink.alpha = this.blinker_alpha / 15;

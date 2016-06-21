@@ -1,14 +1,13 @@
-﻿
+
 import BigWorld
 import Event
-import GUI
 from constants import AUTH_REALM
-from gui import g_guiResetters
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, GroupedViewSettings, ViewTypes, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View
 from gui.Scaleform.framework.entities.abstract.AbstractPopOverView import AbstractPopOverView
 from gui.app_loader.loader import g_appLoader
-from gui.shared import events, g_eventBus
+from gui.app_loader.settings import APP_NAME_SPACE
+from gui.shared import events, g_eventBus, EVENT_BUS_SCOPE
 
 from gui.Scaleform.daapi.view.login.LoginView import LoginView
 from gui.Scaleform.daapi.view.lobby.LobbyView import LobbyView
@@ -25,36 +24,39 @@ class ModsListApiController(object):
 		self.titleText = 'Список модификаций' if AUTH_REALM in ['RU', 'CT'] else 'Modifications list'
 		
 		self.isLobby = False
-		self.flash = None
 		
 		self.onChangeScreenResolution = Event.Event()
 		self.onButtonBlinking = Event.Event()
 		self.onListUpdated = Event.Event()
+		self.onScopeChanged = Event.Event()
 		
 		loginPopulate = LoginView._populate
 		lobbyPopulate = LobbyView._populate
 		LoginView._populate = lambda baseClass: self.__hooked_loginPopulate(baseClass, loginPopulate)
 		LobbyView._populate = lambda baseClass: self.__hooked_lobbyPopulate(baseClass, lobbyPopulate)
 		
-		g_guiResetters.add(self.onChangeScreenResolution)
-		g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, self.__onAppInitialized)
-	
-	def __onAppInitialized(self, *args):
-		app = g_appLoader.getDefLobbyApp()
-		if app is not None:
-			BigWorld.callback(0.0, lambda: app.loadView('modsListButton'))
+		g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, self.__onAppInitialized, scope=EVENT_BUS_SCOPE.GLOBAL)
+		g_eventBus.addListener(events.GameEvent.CHANGE_APP_RESOLUTION, self.__onAppResolutionChanged, scope=EVENT_BUS_SCOPE.GLOBAL)
 		
+	def __onAppInitialized(self, event):
+		if event.ns == APP_NAME_SPACE.SF_LOBBY:
+			app = g_appLoader.getApp(event.ns)
+			if app is not None:
+				BigWorld.callback(0.0, lambda: app.loadView('modsListButton'))
+		
+	def __onAppResolutionChanged(self, event):
+		if event.ctx is not None and not self.isLobby:
+			self.onChangeScreenResolution(event.ctx['width'], event.ctx['height'])
+			
 	def __hooked_loginPopulate(self, baseClass, baseFunc):
 		baseFunc(baseClass)
 		self.isLobby = False
-		if self.flash is not None:
-			self.flash.processPopulate()
+		self.onScopeChanged()
 	
 	def __hooked_lobbyPopulate(self, baseClass, baseFunc):
 		baseFunc(baseClass)
 		self.isLobby = True
-		if self.flash is not None:
-			self.flash.processPopulate()
+		self.onScopeChanged()
 	
 	def addMod(self, id, name = None, description = None, icon = None, enabled = None, login = None, lobby = None, callback = None):
 		if id in self.__mods.keys(): 
@@ -87,7 +89,7 @@ class ModsListApiController(object):
 			return
 		self.__mods[id]['alert'] = True
 		self.onListUpdated()
-		self.onButtonState() 
+		self.onButtonBlinking() 
 
 	def clearAlert(self, id):
 		if id not in self.__mods.keys(): 
@@ -111,17 +113,18 @@ class ModsListApiController(object):
 class ModsListButton(View):
 	
 	def _populate(self):
-		g_modsListApi.flash = self
 		super(ModsListButton, self)._populate()
 		g_modsListApi.onButtonBlinking += self.__handleButtonBlinking
-		g_modsListApi.onChangeScreenResolution += self.__onChangeScreenResolution
+		g_modsListApi.onChangeScreenResolution += self.processScreenResolution
+		g_modsListApi.onScopeChanged += self.processPopulate
 		if self._isDAAPIInited():
 			self.flashObject.as_setTooltipText(g_modsListApi.tooltipText)
 		self.processPopulate()
 	
 	def _dispose(self):
 		g_modsListApi.onButtonBlinking -= self.__handleButtonBlinking  
-		g_modsListApi.onChangeScreenResolution -= self.__onChangeScreenResolution
+		g_modsListApi.onChangeScreenResolution -= self.processScreenResolution
+		g_modsListApi.onScopeChanged -= self.processPopulate
 		super(ModsListButton, self)._dispose()	   
 	
 	def onButtonClickS(self):
@@ -140,10 +143,10 @@ class ModsListButton(View):
 	def debugLogS(self, *args):
 		print '[DEBUG] modsListApi BUTTON ' + ' '.join([str(arg) for arg in args])
 	
-	def __onChangeScreenResolution(self):
-		if self._isDAAPIInited() and not g_modsListApi.isLobby:
-			screen = GUI.screenResolution()
-			return self.flashObject.as_handleChangeScreenResolution(screen[0], screen[1])
+	def processScreenResolution(self, width, height):
+		if self._isDAAPIInited():
+			# fixed https://youtu.be/mYuOQ-LMKNU
+			return BigWorld.callback(0.0, lambda: self.flashObject.as_handleChangeScreenResolution(width, height))
 	
 	def __handleButtonBlinking(self):
 		if self._isDAAPIInited():
@@ -193,3 +196,5 @@ g_modsListApi = ModsListApiController()
 
 g_entitiesFactories.addSettings(ViewSettings('modsListButton', ModsListButton, '../../scripts/client/gui/mods/modsListApi/modsListButton.swf', ViewTypes.WINDOW, None, ScopeTemplates.GLOBAL_SCOPE))
 g_entitiesFactories.addSettings(GroupedViewSettings('modsListPopover', ModsListPopover, '../../scripts/client/gui/mods/modsListApi/modsListPopover.swf', ViewTypes.WINDOW, 'modsListPopover', 'modsListPopover', ScopeTemplates.DEFAULT_SCOPE))
+
+print "[NOTE] package loaded: mod_modsListAPI"

@@ -1,4 +1,4 @@
-﻿
+
 from gui.mods.modsListApi import g_modsListApi
 
 
@@ -131,7 +131,7 @@ g_modsListApi.updateMod(
 
 
 """
-	Управления состоянием мода (оранжевый тикет) (на примере test_1)
+	Управления состоянием мода (оранжевый тикет + мигание кнопки) (на примере test_1)
 """
 
 g_modsListApi.alertMod("test_1")
