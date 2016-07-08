@@ -1,13 +1,14 @@
-﻿package  {
+﻿package  
+{
 	
-	import poliroid.views.ModsListButton;
+	import poliroid.views.lobby.ModsListButton;
 
-	public class modsListButton_UI extends ModsListButton {
+	public class modsListButton_UI extends ModsListButton 
+	{
 		
-		public function modsListButton_UI() {
-			
+		public function modsListButton_UI() 
+		{
 			super();
-			
 		}
 	}
 }

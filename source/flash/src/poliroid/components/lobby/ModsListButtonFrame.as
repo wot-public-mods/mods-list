@@ -1,27 +1,29 @@
-package poliroid.components {
-	
-	import net.wg.gui.components.controls.SoundButton;
+package poliroid.components.lobby {
 	
 	import flash.display.Bitmap;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
-	import flash.utils.*;
+	import flash.utils.clearInterval;
+	import flash.utils.setInterval;
 	
-	dynamic public class ModsListButtonFrame extends SoundButton {
+	import net.wg.gui.components.controls.SoundButton;
+	
+	dynamic public class ModsListButtonFrame extends SoundButton
+	{
 		
-		[Embed(source="../../../res/modsListApi/button_normal.png")]
+		[Embed(source="../../../../res/modsListApi/button_normal.png")]
 		private static var imageButtonNormal:Class;
 		
-		[Embed(source="../../../res/modsListApi/button_hover.png")]
+		[Embed(source="../../../../res/modsListApi/button_hover.png")]
 		private static var imageButtonHover:Class;
 		
-		[Embed(source="../../../res/modsListApi/button_pressed.png")]
+		[Embed(source="../../../../res/modsListApi/button_pressed.png")]
 		private static var imageButtonPressed:Class;
 		
-		[Embed(source="../../../res/modsListApi/button_blink.png")]
+		[Embed(source="../../../../res/modsListApi/button_blink.png")]
 		private static var imageButtonBlink:Class;
 		
-		[Embed(source="../../../res/modsListApi/button_icon.png")]
+		[Embed(source="../../../../res/modsListApi/button_icon.png")]
 		private static var imageButtonIcon:Class;
 		
 		

@@ -1,35 +1,35 @@
-﻿package poliroid.components {
+﻿package poliroid.components.lobby 
+{
 	
-	import flash.display.MovieClip;
-	import flash.utils.ByteArray;
-	import flash.events.MouseEvent;
-	import flash.display.Loader;
-	import flash.text.TextField;
 	import flash.display.BitmapData;
 	import flash.display.Bitmap;
-	import flash.events.Event;
+	import flash.display.Loader;
+	import flash.display.MovieClip;
 	import flash.filters.DropShadowFilter;
 	import flash.filters.ColorMatrixFilter;
-	
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.text.TextField;
+	import flash.utils.ByteArray;
 	
 	import poliroid.utils.Base64;
 	
 	import scaleform.clik.constants.InvalidationType;
-	
 	import net.wg.gui.components.controls.SoundListItemRenderer;
 	
-	public class ModsListItemRenderer extends SoundListItemRenderer {
+	public class ModsListItemRenderer extends SoundListItemRenderer 
+	{
 		
-		[Embed(source="../../../res/modsListApi/button_default.jpg")]
+		[Embed(source="../../../../res/modsListApi/button_default.jpg")]
 		private static var imageButtonDefault:Class;
 		
-		[Embed(source="../../../res/modsListApi/button_hover.jpg")]
+		[Embed(source="../../../../res/modsListApi/button_hover.jpg")]
 		private static var imageButtonHover:Class;
 		
-		[Embed(source="../../../res/modsListApi/button_disabled.jpg")]
+		[Embed(source="../../../../res/modsListApi/button_disabled.jpg")]
 		private static var imageButtonDisabled:Class;
 		
-		[Embed(source="../../../res/modsListApi/alert_icon.png")]
+		[Embed(source="../../../../res/modsListApi/alert_icon.png")]
 		private static var imageAlertIcon:Class;
 		
 		public var modName:TextField;
@@ -42,14 +42,14 @@
 		private var _enabled:Boolean = true;
 		private var _images:Object = null;
 		
-		//private var popupCursor:Bitmap = null;
-		
-		public function ModsListItemRenderer() {
+		public function ModsListItemRenderer() 
+		{
 			super();
 			this._images = new Object();
 		}
 		
-		override public function setData(newDat:Object): void {
+		override public function setData(newDat:Object) : void 
+		{
 			if(newDat == null) {
 				return;
 			}
@@ -57,7 +57,8 @@
 			invalidateData();
 		}
 
-		override protected function configUI(): void {
+		override protected function configUI() : void 
+		{
 			super.configUI();
 			
 			this.width = 280;
@@ -94,37 +95,35 @@
 			this.modIcon.height = 50;
 			this.addChild(this.modIcon);
 			
-			if(this.data) {
-				this.setup();
-			}
+			if (this.data) this.setup();
 		}
 
-		override protected function handleMouseRollOver(event:MouseEvent): void {
+		override protected function handleMouseRollOver(event:MouseEvent) : void 
+		{
 			super.handleMouseRollOver(event);
 			this._hovered = true;
 			this.drawBG();
 			App.toolTipMgr.show(this.descr);
 		}
 
-		override protected function handleMouseRollOut(event:MouseEvent): void {
+		override protected function handleMouseRollOut(event:MouseEvent) : void 
+		{
 			super.handleMouseRollOut(event);
 			this._hovered = false;
 			this.drawBG();
 			App.toolTipMgr.hide();
 		}
 		
-		override protected function draw(): void {
-			if(isInvalid(InvalidationType.DATA)) {
-				this.setup();
-			}			
+		override protected function draw() : void 
+		{
+			if (isInvalid(InvalidationType.DATA)) this.setup(); 	
 			super.draw();
-			if(!this.data) {
-				this.visible = false;
-			}
+			if (!this.data) this.visible = false;
 			this._images.alert_icon.visible = this.data.alert;
 		}
 		
-		private function setup(): void {
+		private function setup() : void 
+		{
 			if(this.data) {
 				this.id = this.data.id;
 				this.descr = this.data.description;
@@ -147,14 +146,16 @@
 			}
 		}
 		
-		private function drawBGBase(elem:Bitmap):void{
+		private function drawBGBase(elem:Bitmap) : void
+		{
 			this._images.button_disabled.visible = false;
 			this._images.button_hover.visible = false;
 			this._images.button_default.visible = false;
 			elem.visible = true;
 		}
 		
-		private function drawBG():void {
+		private function drawBG() : void 
+		{
 			if(this._enabled == false) {
 				this.drawBGBase(this._images.button_disabled);
 				return;
@@ -167,13 +168,16 @@
 		
 		}
 		
-		private function setModIcon(): void {
+		private function setModIcon() : void 
+		{
+			
 			this.icoLoader = new Loader();
 			this.icoLoader.loadBytes(Base64.decodeToByteArray(this.iconStr));
 			this.icoLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, this.icoLoadComplete);
 		}
 
-		private function icoLoadComplete(e: Event): void {
+		private function icoLoadComplete(e:Event) : void 
+		{
 			var bmp: BitmapData = new BitmapData(50, 50, true, 0x0);
 			bmp.draw(this.icoLoader);
 			

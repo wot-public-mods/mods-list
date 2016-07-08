@@ -1,15 +1,17 @@
-﻿package poliroid.views {
+﻿package poliroid.views.lobby 
+{
 	
 	import net.wg.infrastructure.base.SmartPopOverView;
 	
-	import poliroid.components.ModsListItemRenderer;
+	import poliroid.components.lobby.ModsListItemRenderer;
 	
 	import scaleform.clik.controls.ScrollingList;
 	import scaleform.clik.data.DataProvider;
 	import scaleform.clik.events.ListEvent;
 	import flash.text.TextField;
 	
-	public class ModsListPopover extends SmartPopOverView {
+	public class ModsListPopover extends SmartPopOverView 
+	{
 		
 		public var getModsListS:Function = null;
 		public var callModS:Function = null;

@@ -62,6 +62,7 @@
     <element path="libraries\wg.swc" />
     <element path="lib\wg.swc" />
     <element path="lib\framework.swc" />
+    <element path="lib\wg_lobby.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>
@@ -82,6 +83,68 @@
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
     <hidden path="obj" />
+    <hidden path="achivments.as3proj" />
+    <hidden path="armorResist.as3proj" />
+    <hidden path="brandingOperator.as3proj" />
+    <hidden path="brandingPlayer.as3proj" />
+    <hidden path="efficiency.as3proj" />
+    <hidden path="potapov.as3proj" />
+    <hidden path="vehiclePreviewArmorGUI.as3proj" />
+    <hidden path="vehiclePreviewArmorMouse.as3proj" />
+    <hidden path="wgfmPlayer.as3proj" />
+    <hidden path="src\wgfmPlayer_UI.as" />
+    <hidden path="src\armorResist_UI.as" />
+    <hidden path="src\brandingOperator_UI.as" />
+    <hidden path="src\brandingPlayer_UI.as" />
+    <hidden path="src\efficiency_injector.as" />
+    <hidden path="src\efficiency_UI.as" />
+    <hidden path="src\modsSettingsApi_UI.as" />
+    <hidden path="src\potapov_UI.as" />
+    <hidden path="src\vehiclePreviewArmorGUI_UI.as" />
+    <hidden path="src\vehiclePreviewArmorMouse_UI.as" />
+    <hidden path="src\achivments_UI.as" />
+    <hidden path="src\poliroid\views\lobby\WgfmPlayer.as" />
+    <hidden path="src\poliroid\views\lobby\BrandingPlayer.as" />
+    <hidden path="src\poliroid\views\lobby\ModsListButton.as" />
+    <hidden path="src\poliroid\views\lobby\VehiclePreviewArmorGUI.as" />
+    <hidden path="src\poliroid\views\lobby\VehiclePreviewArmorMouse.as" />
+    <hidden path="src\poliroid\views\lobby\BrandingOperator.as" />
+    <hidden path="src\poliroid\views\battle" />
+    <hidden path="src\poliroid\utils\ComponentsHelper.as" />
+    <hidden path="src\poliroid\utils\Constants.as" />
+    <hidden path="src\poliroid\utils\Logger.as" />
+    <hidden path="src\poliroid\utils\Utils.as" />
+    <hidden path="src\poliroid\utils\ValueProxy.as" />
+    <hidden path="src\poliroid\lang" />
+    <hidden path="src\poliroid\events" />
+    <hidden path="src\poliroid\components\volumeButton.as" />
+    <hidden path="src\poliroid\components\ButtonModEnable.as" />
+    <hidden path="src\poliroid\components\ColissionButton.as" />
+    <hidden path="src\poliroid\components\dislikeButton.as" />
+    <hidden path="src\poliroid\components\equalizerAnimation.as" />
+    <hidden path="src\poliroid\components\HotKeyControl.as" />
+    <hidden path="src\poliroid\components\keyHolder.as" />
+    <hidden path="src\poliroid\components\likeButton.as" />
+    <hidden path="src\poliroid\components\modsSettingsApiComponent.as" />
+    <hidden path="src\poliroid\components\playButton.as" />
+    <hidden path="src\poliroid\components\settingsFirst.as" />
+    <hidden path="src\poliroid\components\settingsSecond.as" />
+    <hidden path="src\poliroid\components\ShellButton.as" />
+    <hidden path="src\poliroid\components\stationName.as" />
+    <hidden path="src\poliroid\components\BrandingItemRenderer.as" />
+    <hidden path="src\poliroid\components\battle" />
+    <hidden path="res\achivments" />
+    <hidden path="res\armorResist" />
+    <hidden path="res\branding" />
+    <hidden path="res\efficiency" />
+    <hidden path="res\modsSettingsApi" />
+    <hidden path="res\vehiclePreview" />
+    <hidden path="res\wgfmPlayer" />
+    <hidden path="lib\gui_battle-1.0-SNAPSHOT.swc" />
+    <hidden path="lib\gui_base-1.0-SNAPSHOT.swc" />
+    <hidden path="lib\common-1.0-SNAPSHOT.swc" />
+    <hidden path="lib\battle.swc" />
+    <hidden path="lib\base_app-1.0-SNAPSHOT.swc" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand>build/before.cmd</preBuildCommand>

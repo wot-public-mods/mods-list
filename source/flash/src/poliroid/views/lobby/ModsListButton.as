@@ -1,15 +1,21 @@
-package poliroid.views {
+package poliroid.views.lobby 
+{
 	
-	import flash.display.*;
-	import flash.events.*;
-	import flash.utils.*;
+	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
+	import flash.display.MovieClip;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.utils.getQualifiedClassName;
+	import flash.utils.setTimeout;
 	
 	import net.wg.infrastructure.base.AbstractView;
 	import net.wg.infrastructure.interfaces.IPopOverCaller;
 	
-	import poliroid.components.ModsListButtonFrame;
+	import poliroid.components.lobby.ModsListButtonFrame;
 	
-	public class ModsListButton extends AbstractView implements IPopOverCaller {
+	public class ModsListButton extends AbstractView implements IPopOverCaller 
+	{
 		
 		private var modsButton:ModsListButtonFrame = null;
 		private var tooltipText:String = 'Список модификаций: удобный запуск, настройка и оповещение.';
@@ -20,55 +26,52 @@ package poliroid.views {
 		public var logS:Function = null;
 		public var debugLogS:Function = null;
 		
-		public function ModsListButton() {
+		public function ModsListButton() 
+		{
 			super();
 			this.focusable = false;
 		}
 		
-		private function buildButton():void {
-			try {
-				this.modsButton = new ModsListButtonFrame();
-				this.modsButton.width = 72;
-				this.modsButton.height = 33;
-				this.modsButton.addEventListener(MouseEvent.CLICK, this.handleModsButtonClick);
-				this.modsButton.helpText = this.tooltipText;
-			} catch(err: Error) {
-				this.debugLogS("modsListButton::buildButton:ERROR \n" + err.getStackTrace());
-				this.modsButton = null;
-			}
+		private function buildButton() : void 
+		{
+			this.modsButton = new ModsListButtonFrame();
+			this.modsButton.width = 72;
+			this.modsButton.height = 33;
+			this.modsButton.addEventListener(MouseEvent.CLICK, this.handleModsButtonClick);
+			this.modsButton.helpText = this.tooltipText;
 		}
 		
-		override protected function onPopulate() : void {
+		override protected function onPopulate() : void 
+		{
 			super.onPopulate();
 			App.instance.loaderMgr.loadLibraries(Vector.<String>(["toolTips.swf", "popovers.swf"]));
 		}
 		
-		private function handleModsButtonClick(event: MouseEvent): void {
-			try {
-				this.onButtonClickS();
-				App.toolTipMgr.hide();
-				this.modsButton.blinking = false;
-				App.popoverMgr.show(this, "modsListPopover");
-			} catch(err: Error) {
-				this.debugLogS("modsListButton::handleModsButtonClick:ERROR \n" + err.getStackTrace());
+		override protected function nextFrameAfterPopulateHandler() : void 
+		{
+			if (this.parent != App.instance) {
+				(App.instance as MovieClip).addChild(this);
 			}
 		}
 		
-		public function getTargetButton(): DisplayObject {
+		public function getTargetButton() : DisplayObject 
+		{
 			if (this.modsButton != null) {
 				return DisplayObject(this.modsButton);
 			}
 			return DisplayObject(this);
 		}
 		
-		public function getHitArea(): DisplayObject {
+		public function getHitArea() : DisplayObject 
+		{
 			if (this.modsButton != null) {
 				return DisplayObject(this.modsButton);
 			}
 			return DisplayObject(this);
 		}
 		
-		public function as_setTooltipText(tooltipText:String): void {
+		public function as_setTooltipText(tooltipText:String) : void 
+		{
 			try {
 				
 				this.tooltipText = tooltipText;
@@ -80,7 +83,8 @@ package poliroid.views {
 			}
 		}
 		
-		public function as_populateLogin(): void {
+		public function as_populateLogin() : void 
+		{
 			try {
 				this.messangerBar = null;
 				this.isLobby = false;
@@ -96,7 +100,8 @@ package poliroid.views {
 			}
 		}
 		
-		public function as_populateLobby(): void {
+		public function as_populateLobby() : void 
+		{
 			try {
 				this.isLobby = true;
 				this.buildButton();
@@ -125,20 +130,31 @@ package poliroid.views {
 			}
 		}
 		
-		public function as_handleChangeScreenResolution(width:Number, height:Number):void {
+		public function as_handleChangeScreenResolution(width:Number, height:Number) : void 
+		{
 			if (!this.isLobby && this.modsButton != null) {
 				this.modsButton.x = App.appWidth - 80;
 				this.modsButton.y = App.appHeight - 34;
 			}
 		}
 		
-		public function as_handleButtonBlinking():void {
+		public function as_handleButtonBlinking() : void 
+		{
 			if (this.modsButton != null) {
 				this.modsButton.blinking = true;
 			}
 		}
 		
-		private function handleMessengerBarResize(event: Event): void {
+		private function handleModsButtonClick(event: MouseEvent) : void 
+		{
+			this.onButtonClickS();
+			App.toolTipMgr.hide();
+			this.modsButton.blinking = false;
+			App.popoverMgr.show(this, "modsListPopover");
+		}
+		
+		private function handleMessengerBarResize(event: Event) : void 
+		{
 			try {
 				if (this.isLobby && this.messangerBar != null) {
 					this.modsButton.x = App.appWidth - 165;
@@ -149,7 +165,8 @@ package poliroid.views {
 			}
 		}
 		
-		private function resizeMessengerBar(): void {
+		private function resizeMessengerBar() : void 
+		{
 		
 			if (this.isLobby && this.messangerBar != null) {
 				
@@ -163,7 +180,8 @@ package poliroid.views {
 		
 		}
 		
-		private function recursiveFindDOC(dOC:DisplayObjectContainer, className:String) : DisplayObjectContainer {
+		private function recursiveFindDOC(dOC:DisplayObjectContainer, className:String) : DisplayObjectContainer 
+		{
 			var child:DisplayObject = null;
 			var childOC:DisplayObjectContainer = null;
 			var i:int = 0;
@@ -179,10 +197,5 @@ package poliroid.views {
 			return result;
 		}
 		
-        override protected function nextFrameAfterPopulateHandler():void {
-            if (this.parent != App.instance) {
-				(App.instance as MovieClip).addChild(this);
-			}
-        }
 	}
 }

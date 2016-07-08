@@ -1,4 +1,4 @@
-
+﻿
 import BigWorld
 import Event
 from constants import AUTH_REALM
@@ -43,7 +43,7 @@ class ModsListApiController(object):
 			app = g_appLoader.getApp(event.ns)
 			if app is not None:
 				BigWorld.callback(0.0, lambda: app.loadView('modsListButton'))
-		
+	
 	def __onAppResolutionChanged(self, event):
 		if event.ctx is not None and not self.isLobby:
 			self.onChangeScreenResolution(event.ctx['width'], event.ctx['height'])
@@ -100,8 +100,10 @@ class ModsListApiController(object):
 	def getModsList(self):
 		result = list()
 		for item in self.__mods.values():
-			if self.isLobby and item['lobby']: result.append(item)
-			elif not self.isLobby and item['login']: result.append(item)
+			if self.isLobby and item['lobby']: 
+				result.append(item)
+			elif not self.isLobby and item['login']: 
+				result.append(item)
 		return result
 		
 	def callMod(self, id):
@@ -145,7 +147,7 @@ class ModsListButton(View):
 	
 	def processScreenResolution(self, width, height):
 		if self._isDAAPIInited():
-			# fixed https://youtu.be/mYuOQ-LMKNU
+			# fix for https://youtu.be/mYuOQ-LMKNU
 			return BigWorld.callback(0.0, lambda: self.flashObject.as_handleChangeScreenResolution(width, height))
 	
 	def __handleButtonBlinking(self):
