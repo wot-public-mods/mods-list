@@ -121,7 +121,8 @@ class ModsListButton(View):
 		g_modsListApi.onScopeChanged += self.processPopulate
 		if self._isDAAPIInited():
 			self.flashObject.as_setTooltipText(g_modsListApi.tooltipText)
-		self.processPopulate()
+		if not g_modsListApi.isLobby:
+			self.processPopulate()
 	
 	def _dispose(self):
 		g_modsListApi.onButtonBlinking -= self.__handleButtonBlinking  
