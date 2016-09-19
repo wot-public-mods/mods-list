@@ -1,7 +1,7 @@
 ﻿package  
 {
 	
-	import poliroid.views.lobby.ModsListButton;
+	import com.poliroid.views.lobby.ModsListButton;
 
 	public class modsListButton_UI extends ModsListButton 
 	{

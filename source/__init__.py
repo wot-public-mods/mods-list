@@ -11,8 +11,10 @@ from gui.shared import events, g_eventBus, EVENT_BUS_SCOPE
 
 from gui.Scaleform.daapi.view.login.LoginView import LoginView
 from gui.Scaleform.daapi.view.lobby.LobbyView import LobbyView
+from gui.Scaleform.daapi.view.meta.MessengerBarMeta import MessengerBarMeta
 
-__all__ = ("g_modsListApi")
+
+__all__ = ('g_modsListApi')
 
 class ModsListApiController(object):
 
@@ -20,7 +22,7 @@ class ModsListApiController(object):
 		
 		self.__mods = dict()
 		
-		self.tooltipText = 'Список модификаций: удобный запуск, настройка и оповещение.' if AUTH_REALM in ['RU', 'CT'] else 'Modifications list: comfortable run, setup and alert.'
+		self.tooltipText = '{BODY}Список модификаций: удобный запуск, настройка и оповещение{/BODY}' if AUTH_REALM in ['RU', 'CT'] else '{BODY}Modifications list: comfortable run, setup and alert{BODY}'
 		self.titleText = 'Список модификаций' if AUTH_REALM in ['RU', 'CT'] else 'Modifications list'
 		
 		self.isLobby = False
@@ -29,12 +31,14 @@ class ModsListApiController(object):
 		self.onButtonBlinking = Event.Event()
 		self.onListUpdated = Event.Event()
 		self.onScopeChanged = Event.Event()
+		self.handleChannelCarouselResize = Event.Event()
 		
 		loginPopulate = LoginView._populate
 		lobbyPopulate = LobbyView._populate
+		MessengerBarButtonVisibleS = MessengerBarMeta.as_setVehicleCompareCartButtonVisibleS
 		LoginView._populate = lambda baseClass: self.__hooked_loginPopulate(baseClass, loginPopulate)
 		LobbyView._populate = lambda baseClass: self.__hooked_lobbyPopulate(baseClass, lobbyPopulate)
-		
+		MessengerBarMeta.as_setVehicleCompareCartButtonVisibleS = lambda baseClass, value: self.__hooked_compareBasketButtonVisibility(baseClass, MessengerBarButtonVisibleS, value)
 		g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, self.__onAppInitialized, scope=EVENT_BUS_SCOPE.GLOBAL)
 		g_eventBus.addListener(events.GameEvent.CHANGE_APP_RESOLUTION, self.__onAppResolutionChanged, scope=EVENT_BUS_SCOPE.GLOBAL)
 		
@@ -45,8 +49,7 @@ class ModsListApiController(object):
 				BigWorld.callback(0.0, lambda: app.loadView('modsListButton'))
 	
 	def __onAppResolutionChanged(self, event):
-		if event.ctx is not None and not self.isLobby:
-			self.onChangeScreenResolution(event.ctx['width'], event.ctx['height'])
+		self.onChangeScreenResolution()
 			
 	def __hooked_loginPopulate(self, baseClass, baseFunc):
 		baseFunc(baseClass)
@@ -58,11 +61,16 @@ class ModsListApiController(object):
 		self.isLobby = True
 		self.onScopeChanged()
 	
+	def __hooked_compareBasketButtonVisibility(self, baseClass, baseFunc, isVisible):
+		baseFunc(baseClass, isVisible)
+		if not isVisible:
+			self.handleChannelCarouselResize()
+	
 	def addMod(self, id, name = None, description = None, icon = None, enabled = None, login = None, lobby = None, callback = None):
 		if id in self.__mods.keys(): 
 			self.updateMod(id, name, description, icon, enabled, login, lobby, callback)
 			return
-		if name is None or description is None or icon is None or enabled is None or login is None or lobby is None or callback is None:
+		if name is None or description is None or enabled is None or login is None or lobby is None or callback is None:
 			return
 		self.__mods[id] = {'id': id, 'name': name, 'icon': icon, 'description': description, 'enabled': enabled, 'login': login, 'lobby': lobby, 'callback': callback, 'alert': False}
 		self.onListUpdated()
@@ -104,18 +112,18 @@ class ModsListApiController(object):
 				result.append(item)
 			elif not self.isLobby and item['login']: 
 				result.append(item)
-		return result
+		return sorted(result, key=lambda x: x['name'])
 		
 	def callMod(self, id):
 		if id not in self.__mods.keys(): 
 			return
-		func = self.__mods[id]['callback']
-		func()
-
+		self.__mods[id]['callback']()
+	
 class ModsListButton(View):
 	
 	def _populate(self):
 		super(ModsListButton, self)._populate()
+		g_modsListApi.handleChannelCarouselResize += self.__handleChannelCarouselResize
 		g_modsListApi.onButtonBlinking += self.__handleButtonBlinking
 		g_modsListApi.onChangeScreenResolution += self.processScreenResolution
 		g_modsListApi.onScopeChanged += self.processPopulate
@@ -125,6 +133,7 @@ class ModsListButton(View):
 			self.processPopulate()
 	
 	def _dispose(self):
+		g_modsListApi.handleChannelCarouselResize -= self.__handleChannelCarouselResize
 		g_modsListApi.onButtonBlinking -= self.__handleButtonBlinking  
 		g_modsListApi.onChangeScreenResolution -= self.processScreenResolution
 		g_modsListApi.onScopeChanged -= self.processPopulate
@@ -146,14 +155,18 @@ class ModsListButton(View):
 	def debugLogS(self, *args):
 		print '[DEBUG] modsListApi BUTTON ' + ' '.join([str(arg) for arg in args])
 	
-	def processScreenResolution(self, width, height):
+	def processScreenResolution(self):
 		if self._isDAAPIInited():
-			# fix for https://youtu.be/mYuOQ-LMKNU
-			return BigWorld.callback(0.0, lambda: self.flashObject.as_handleChangeScreenResolution(width, height))
+			# BigWorld.callback for fix this https://youtu.be/mYuOQ-LMKNU
+			return BigWorld.callback(0.0, self.flashObject.as_handleChangeScreenResolution)
 	
 	def __handleButtonBlinking(self):
 		if self._isDAAPIInited():
 			return self.flashObject.as_handleButtonBlinking()
+	
+	def __handleChannelCarouselResize(self):
+		if self._isDAAPIInited():
+			return BigWorld.callback(0.0, self.flashObject.as_handleChannelCarouselResize)
 	
 	def onFocusIn(self, *args):
 		if self._isDAAPIInited():
@@ -200,4 +213,4 @@ g_modsListApi = ModsListApiController()
 g_entitiesFactories.addSettings(ViewSettings('modsListButton', ModsListButton, '../../scripts/client/gui/mods/modsListApi/modsListButton.swf', ViewTypes.WINDOW, None, ScopeTemplates.GLOBAL_SCOPE))
 g_entitiesFactories.addSettings(GroupedViewSettings('modsListPopover', ModsListPopover, '../../scripts/client/gui/mods/modsListApi/modsListPopover.swf', ViewTypes.WINDOW, 'modsListPopover', 'modsListPopover', ScopeTemplates.DEFAULT_SCOPE))
 
-print "[NOTE] package loaded: mod_modsListAPI"
+print '[NOTE] package loaded: mod_modsListAPI'

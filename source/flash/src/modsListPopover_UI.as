@@ -1,7 +1,7 @@
 ﻿package
 {
 	
-	import poliroid.views.lobby.ModsListPopover;
+	import com.poliroid.views.lobby.ModsListPopover;
 
 	public class modsListPopover_UI extends ModsListPopover
 	{
