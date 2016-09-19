@@ -4,6 +4,8 @@
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.filters.DropShadowFilter;
+	import flash.filters.ColorMatrixFilter;
 	import flash.net.URLRequest;
 	import flash.text.TextField;
 	
@@ -14,17 +16,11 @@
 	{
 		
 		public var alertMC: MovieClip = null;
-		public var backgroundMC: MovieClip = null;
 		public var modIconMC: MovieClip = null;
 		public var modNameTF: TextField = null;
 		
 		public var _id: String = "";
-		
 		protected var _descr: String = "";
-		protected var _hovered: Boolean = false;
-		protected var _enabled: Boolean = false;
-		
-		protected static const BACKGROUND_VALIDATION: String = "background";
 		
 		public function ModsListItemRenderer() : void 
 		{
@@ -40,10 +36,9 @@
 		
 		override protected function onDispose(): void
 		{
-			alertMC  = null;
-			backgroundMC  = null;
-			modIconMC  = null;
-			modNameTF  = null;
+			alertMC = null;
+			modIconMC = null;
+			modNameTF = null;
 			super.onDispose();
 		}
 		
@@ -58,16 +53,12 @@
 		override protected function handleMouseRollOver(event:MouseEvent) : void 
 		{
 			super.handleMouseRollOver(event);
-			_hovered = true;
-			invalidate(BACKGROUND_VALIDATION);
 			App.toolTipMgr.show(_descr);
 		}
 		
 		override protected function handleMouseRollOut(event:MouseEvent) : void 
 		{
 			super.handleMouseRollOut(event);
-			_hovered = false;
-			invalidate(BACKGROUND_VALIDATION);
 			App.toolTipMgr.hide();
 		}
 		
@@ -81,17 +72,6 @@
 				visible = false;
 				
 			super.draw();
-			
-			if (isInvalid(BACKGROUND_VALIDATION)) 
-			{
-				if (!_enabled) {
-					backgroundMC.gotoAndStop("disabled");
-				} else if (_hovered) {
-					backgroundMC.gotoAndStop("hovered");
-				} else {
-					backgroundMC.gotoAndStop("normal");
-				}
-			}
 		}
 		
 		private function setup() : void 
@@ -99,26 +79,32 @@
 			if (!data)
 				return;
 			
-			_enabled = data.enabled;
+			enabled = data.enabled;
+			
 			_id = data.id;
 			_descr = data.description;
 			
 			alertMC.visible = data.alert;
+			
 			modNameTF.text = data.name;
-			modNameTF.alpha = _enabled ? 1 : 0.9;
-			modNameTF.textColor = _enabled ? 0xDDDDD0 : 0xCCCCCC;
+			modNameTF.alpha = data.enabled ? 1 : 0.9;
+			modNameTF.textColor = data.enabled ? 0xDDDDD0 : 0xCCCCCC;
 			
-			invalidate(BACKGROUND_VALIDATION);
-			
-			var loader:Loader = new Loader();
-			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function (event:Event){
-				modIconMC.addChild(loader);
-				modIconMC.width = modIconMC.height = 50;
-			});
-			
-			if (data.icon)
+			if (data.icon) {
+				var loader:Loader = new Loader();
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function (event:Event){
+					modIconMC.addChild(loader);
+					modIconMC.height = modIconMC.width = 50;
+				});
 				// use "../../" to premature up from "gui/flash" directory
 				loader.load(new URLRequest("../../" + data.icon));
+				
+				var shadow:DropShadowFilter = new DropShadowFilter(0, 0, 0, 0.7, 3, 3, 3, 8);
+				var greyscale:ColorMatrixFilter = new ColorMatrixFilter([0.25, 0.25, 0.25, 0, 0, 0.25, 0.25, 0.25, 0, 0, 0.25, 0.25, 0.25, 0, 0, 0, 0, 0, 1, 0]);
+				modIconMC.filters = data.enabled ? [shadow] : [greyscale, shadow];
+				modIconMC.alpha = data.enabled ? 1 : 0.8;
+			}
+				
 		}
 	}
 }

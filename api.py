@@ -52,7 +52,7 @@ g_modsListApi.addMod(
 """
 
 from constants import AUTH_REALM
-ru_realm = True if AUTH_REALM in ['EU', 'CT'] else False
+ru_realm = True if AUTH_REALM in ['RU', 'CT'] else False
 
 def test2_callback():
 	print 'test2 кнопка нажата' if ru_realm else 'test2 button clicked'

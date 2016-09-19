@@ -7,11 +7,10 @@
 	import scaleform.clik.data.DataProvider;
 	import scaleform.clik.events.ListEvent;
 	import net.wg.infrastructure.base.SmartPopOverView;
-	
-	import com.poliroid.components.lobby.ModsListItemRenderer;
-	
 	import net.wg.infrastructure.interfaces.IWrapper;
 	import net.wg.gui.components.popOvers.PopOver;
+	
+	import com.poliroid.components.lobby.ModsListItemRenderer;
 	
 	public class ModsListPopover extends SmartPopOverView
 	{
@@ -48,11 +47,11 @@
 			_list.itemRenderer = ModsListItemRenderer;
 			_list.itemRendererInstanceName = "";
 			_list.rowHeight = 70;
-			_list.rowCount = 4;
 			_list.enabled = true;
 			_list.visible = true;
 			_list.scrollBar = "";
 			_list.wrapping = "normal";
+			
 			addChild(_list);
 			
 			getModsListS();
