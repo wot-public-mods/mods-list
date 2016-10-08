@@ -1,28 +1,35 @@
 ﻿package com.poliroid.views.lobby 
 {
+
 	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import flash.utils.setTimeout;
-	
+
 	import scaleform.clik.events.ButtonEvent;
 	import scaleform.clik.utils.Constraints;
+	
+	import net.wg.data.Aliases;
 	import net.wg.infrastructure.base.AbstractView;
+	import net.wg.infrastructure.events.LifeCycleEvent;
+	import net.wg.infrastructure.events.LoaderEvent;
+	import net.wg.infrastructure.interfaces.IManagedContainer;
 	import net.wg.infrastructure.interfaces.IPopOverCaller;
+	import net.wg.infrastructure.interfaces.IView;
+	import net.wg.infrastructure.managers.impl.ContainerManagerBase;
+	import net.wg.gui.components.containers.MainViewContainer;
+	import net.wg.gui.lobby.messengerBar.MessengerBar;
+	import net.wg.gui.lobby.LobbyPage;
+	import net.wg.gui.login.impl.LoginPage;
 	
 	import com.poliroid.components.lobby.ModsListBlinkingButton;
-	import com.poliroid.utils.Utils;
 	
 	public class ModsListButton extends AbstractView implements IPopOverCaller 
 	{
-		
 		public var onButtonClickS:Function = null;
-		
-		private var _modsButton:ModsListBlinkingButton = null;
-		private var _tooltipText:String = "";
+		private var _button:ModsListBlinkingButton = null;
 		private var _isLobby:Boolean = false;
-		private var _messangerBar:* = null;
+		private var _tooltipText:String = "";
+		private var _messangerBar:MessengerBar = null;
 		
 		public function ModsListButton() 
 		{
@@ -30,129 +37,171 @@
 			focusable = false;
 		}
 		
-		private function buildButton() : void 
-		{
-			_modsButton = new ModsListBlinkingButton();
-			_modsButton.addEventListener(ButtonEvent.CLICK, handleModsButtonClick);
-			_modsButton.tooltip = _tooltipText;
-		}
-		
 		override protected function onPopulate() : void 
 		{
 			super.onPopulate();
+			
 			// load popovers.swf for show popup in Login Window
 			App.instance.loaderMgr.loadLibraries(Vector.<String>(["popovers.swf"]));
 		}
 		
+		override protected function onDispose() : void 
+		{
+			if (_button) {
+				_button.removeEventListener(ButtonEvent.CLICK, onButtonClick);
+				_button.dispose();
+				_button = null;
+			}
+			
+			(App.containerMgr as ContainerManagerBase).loader.removeEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded);
+			
+			App.instance.stage.removeEventListener(Event.RESIZE, onResize);
+			
+			super.onDispose();
+		}
+			
+		override protected function configUI() : void 
+		{
+			super.configUI();
+			
+			// subscribe to container manager loader
+			(App.containerMgr as ContainerManagerBase).loader.addEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded, false, 0, true);
+			
+			// subscribe to stage resize
+			App.instance.stage.addEventListener(Event.RESIZE, onResize);
+			
+			// process already loaded views
+            var containerMgr:ContainerManagerBase = App.containerMgr as ContainerManagerBase;
+            for each (var container:IManagedContainer in containerMgr.containersMap)
+            {
+                var viewContainer:MainViewContainer = container as MainViewContainer;
+                if (viewContainer != null)
+                {
+                    var num:int = viewContainer.numChildren;
+                    for (var idx:int = 0; idx < num; ++idx)
+                    {
+                        var view:IView = viewContainer.getChildAt(idx) as IView;
+                        if (view != null)
+                            processView(view, true);
+                    }
+                }
+            }
+		}
+		
 		override protected function nextFrameAfterPopulateHandler() : void 
 		{
-			// this one needs for Focus in Login Window   
+			// this needs for valid Focus in Login Window   
 			if (parent != App.instance) {
 				(App.instance as MovieClip).addChild(this);
 			}
 		}
 		
-		public function getTargetButton() : DisplayObject 
-		{
-			if (_modsButton) {
-				return DisplayObject(_modsButton);
-			}
-			return DisplayObject(this);
+		private function onViewLoaded(event:LoaderEvent) : void
+        {
+			var view:IView = event.view as IView;
+			processView(view);
 		}
 		
-		public function getHitArea() : DisplayObject 
-		{
-			if (_modsButton != null) {
-				return DisplayObject(_modsButton);
+		private function processView(view:IView, populated:Boolean = false) : void
+        {
+			var alias:String = view.as_config.alias;
+			
+			if (alias == Aliases.LOGIN) {
+				_messangerBar = null;
+				_isLobby = false;
+				
+				assembleButton(App.appWidth - 80, App.appHeight - 35);
+				
+				(view as LoginPage).addChild(_button);
 			}
-			return DisplayObject(this);
-		}
-		
-		public function as_setTooltipText(tooltipText:String) : void 
-		{
-			_tooltipText = tooltipText;
-			if (_modsButton) {
-				_modsButton.helpText = tooltipText;
-			}
-		}
-		
-		public function as_populateLogin() : void 
-		{
-			_messangerBar = null;
-			_isLobby = false;
-			var LoginPageUI:DisplayObjectContainer = Utils.recursiveFindDOC(stage, "LoginPageUI");
-			if (LoginPageUI) {
-				buildButton();
-				_modsButton.x = App.appWidth - 80;
-				_modsButton.y = App.appHeight - 35;
-				LoginPageUI.addChild(_modsButton);
-			}
-		}
-		
-		public function as_populateLobby() : void 
-		{
-			_isLobby = true;
-			var MessengerBarUI:DisplayObjectContainer = Utils.recursiveFindDOC(stage, "MessengerBar_UI");
-			if (MessengerBarUI) {
-				_messangerBar = MessengerBarUI;
-				buildButton();
-				_modsButton.x = 858;
-				_modsButton.y = 9;
+			
+			if (alias == Aliases.LOBBY) {
+				_isLobby = true;
+				_messangerBar = ((view as LobbyPage).messengerBar as MessengerBar);
+				
+				assembleButton(858, 9);
 				
 				// move "vehicle compare butoon" and "vehicle name anim" left
 				_messangerBar.vehicleCompareCartBtn.x -= 77;
 				_messangerBar.animPlacer.x -= 77;
 				
 				// append modsButton to messangerBar.constraints (all bottom buttons position manager)
-				_messangerBar.addChild(_modsButton);
-				_messangerBar.constraints.addElement("modsButton", _modsButton, Constraints.RIGHT);
-				
-				// shitty channelCarousel resizing
-				setTimeout(channelCarouselResize, 50);
-				setTimeout(channelCarouselResize, 500);
-				setTimeout(channelCarouselResize, 1000);
+				_messangerBar.addChild(_button);
+				_messangerBar.constraints.addElement("modsButton", _button, Constraints.RIGHT);
 			}
 		}
 		
-		public function as_handleChangeScreenResolution() : void 
+		public function getTargetButton() : DisplayObject 
 		{
-			if (!_isLobby && _modsButton) {
-				_modsButton.x = App.appWidth - 80;
-				_modsButton.y = App.appHeight - 35;
-			} else {
-				channelCarouselResize()
-			}
+			// this need for correct smart popover work
+			return _button;
 		}
 		
-		public function as_handleButtonBlinking() : void 
+		public function getHitArea() : DisplayObject 
 		{
-			if (_modsButton)
-				_modsButton.blinking = true;
+			// this need for correct smart popover work
+			return _button;
 		}
 		
-		public function as_handleChannelCarouselResize() : void 
+		private function onButtonClick(event: ButtonEvent) : void 
 		{
-			channelCarouselResize();	
-		}
-		
-		private function channelCarouselResize(event:Event = null) {
-			if (_isLobby && _messangerBar) {
-				var rightNext:DisplayObject = _messangerBar.vehicleCompareCartBtn.visible ? _messangerBar.vehicleCompareCartBtn: _modsButton;
-				var validChannelCarouselwidth:Number = rightNext.x - _messangerBar.channelCarousel.x - 1;
-				if (_messangerBar.channelCarousel.width != validChannelCarouselwidth)
-					_messangerBar.channelCarousel.width = validChannelCarouselwidth;
-			}
-			
-		}
-		
-		private function handleModsButtonClick(event: ButtonEvent) : void 
-		{
-			onButtonClickS();
+			onButtonClickS(_isLobby);
+			_button.blinking = false;
 			App.toolTipMgr.hide();
 			App.popoverMgr.show(this, "modsListPopover");
-			if (_modsButton)
-				_modsButton.blinking = false;
 		}
 		
+		private function onResize(e:Event = null) : void 
+		{
+			if (_isLobby) {
+				channelCarouselResize();
+			} else {
+				_button.x = App.appWidth - 80;
+				_button.y = App.appHeight - 35;
+			}
+		}
+		
+		private function channelCarouselResize(e:Event = null) 
+		{
+			if (_isLobby && _messangerBar) 
+			{
+				var rightNext:DisplayObject = _messangerBar.vehicleCompareCartBtn.visible ? _messangerBar.vehicleCompareCartBtn: _button;
+				var validWidth:Number = rightNext.x - _messangerBar.channelCarousel.x - 1;
+				if (_messangerBar.channelCarousel.width != validWidth)
+					_messangerBar.channelCarousel.width = validWidth;
+			}
+		}
+		
+		private function assembleButton(_x:Number, _y:Number) : void
+		{
+			if (_button) {
+				_button.removeEventListener(ButtonEvent.CLICK, onButtonClick);
+				_button.dispose();
+				_button = null;
+			}
+			_button = new ModsListBlinkingButton();
+			_button.x = _x;
+			_button.y = _y;
+			_button.tooltip = _tooltipText;
+			_button.addEventListener(ButtonEvent.CLICK, onButtonClick);
+		}
+		
+		public function as_setTooltipText(tooltipText:String) : void 
+		{
+			_tooltipText = tooltipText;
+			if (_button) 
+				_button.tooltip = _tooltipText;
+		}
+		
+		public function as_ButtonBlinking() : void 
+		{
+			if (_button)
+				_button.blinking = true;
+		}
+		
+		public function as_handleCompareBasketVisibility() : void 
+		{
+			channelCarouselResize();
+		}
 	}
 }

@@ -1,18 +1,13 @@
-﻿
-import BigWorld
+﻿import BigWorld
 import Event
 from constants import AUTH_REALM
+from gui.app_loader.loader import g_appLoader
+from gui.app_loader.settings import APP_NAME_SPACE
+from gui.Scaleform.daapi.view.meta.MessengerBarMeta import MessengerBarMeta
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, GroupedViewSettings, ViewTypes, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View
 from gui.Scaleform.framework.entities.abstract.AbstractPopOverView import AbstractPopOverView
-from gui.app_loader.loader import g_appLoader
-from gui.app_loader.settings import APP_NAME_SPACE
 from gui.shared import events, g_eventBus, EVENT_BUS_SCOPE
-
-from gui.Scaleform.daapi.view.login.LoginView import LoginView
-from gui.Scaleform.daapi.view.lobby.LobbyView import LobbyView
-from gui.Scaleform.daapi.view.meta.MessengerBarMeta import MessengerBarMeta
-
 
 __all__ = ('g_modsListApi')
 
@@ -21,26 +16,18 @@ class ModsListApiController(object):
 	def __init__(self):
 		
 		self.__mods = dict()
+		self.isLobby = False
 		
 		self.tooltipText = '{BODY}Список модификаций: удобный запуск, настройка и оповещение{/BODY}' if AUTH_REALM in ['RU', 'CT'] else '{BODY}Modifications list: comfortable run, setup and alert{BODY}'
 		self.titleText = 'Список модификаций' if AUTH_REALM in ['RU', 'CT'] else 'Modifications list'
 		
-		self.isLobby = False
-		
-		self.onChangeScreenResolution = Event.Event()
 		self.onButtonBlinking = Event.Event()
 		self.onListUpdated = Event.Event()
-		self.onScopeChanged = Event.Event()
-		self.handleChannelCarouselResize = Event.Event()
+		self.handleCompareBasketVisibility = Event.Event()
 		
-		loginPopulate = LoginView._populate
-		lobbyPopulate = LobbyView._populate
 		MessengerBarButtonVisibleS = MessengerBarMeta.as_setVehicleCompareCartButtonVisibleS
-		LoginView._populate = lambda baseClass: self.__hooked_loginPopulate(baseClass, loginPopulate)
-		LobbyView._populate = lambda baseClass: self.__hooked_lobbyPopulate(baseClass, lobbyPopulate)
 		MessengerBarMeta.as_setVehicleCompareCartButtonVisibleS = lambda baseClass, value: self.__hooked_compareBasketButtonVisibility(baseClass, MessengerBarButtonVisibleS, value)
 		g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, self.__onAppInitialized, scope=EVENT_BUS_SCOPE.GLOBAL)
-		g_eventBus.addListener(events.GameEvent.CHANGE_APP_RESOLUTION, self.__onAppResolutionChanged, scope=EVENT_BUS_SCOPE.GLOBAL)
 		
 	def __onAppInitialized(self, event):
 		if event.ns == APP_NAME_SPACE.SF_LOBBY:
@@ -48,23 +35,10 @@ class ModsListApiController(object):
 			if app is not None:
 				BigWorld.callback(0.0, lambda: app.loadView('modsListButton'))
 	
-	def __onAppResolutionChanged(self, event):
-		self.onChangeScreenResolution()
-			
-	def __hooked_loginPopulate(self, baseClass, baseFunc):
-		baseFunc(baseClass)
-		self.isLobby = False
-		self.onScopeChanged()
-	
-	def __hooked_lobbyPopulate(self, baseClass, baseFunc):
-		baseFunc(baseClass)
-		self.isLobby = True
-		self.onScopeChanged()
-	
 	def __hooked_compareBasketButtonVisibility(self, baseClass, baseFunc, isVisible):
 		baseFunc(baseClass, isVisible)
 		if not isVisible:
-			self.handleChannelCarouselResize()
+			self.handleCompareBasketVisibility()
 	
 	def addMod(self, id, name = None, description = None, icon = None, enabled = None, login = None, lobby = None, callback = None):
 		if id in self.__mods.keys(): 
@@ -117,57 +91,36 @@ class ModsListApiController(object):
 	def callMod(self, id):
 		if id not in self.__mods.keys(): 
 			return
-		self.__mods[id]['callback']()
+		callback = self.__mods[id]['callback']
+		if callback:
+			callback()
 	
 class ModsListButton(View):
 	
 	def _populate(self):
 		super(ModsListButton, self)._populate()
-		g_modsListApi.handleChannelCarouselResize += self.__handleChannelCarouselResize
+		g_modsListApi.handleCompareBasketVisibility += self.__handleCompareBasketVisibility
 		g_modsListApi.onButtonBlinking += self.__handleButtonBlinking
-		g_modsListApi.onChangeScreenResolution += self.processScreenResolution
-		g_modsListApi.onScopeChanged += self.processPopulate
-		if self._isDAAPIInited():
-			self.flashObject.as_setTooltipText(g_modsListApi.tooltipText)
-		if not g_modsListApi.isLobby:
-			self.processPopulate()
+		self.flashObject.as_setTooltipText(g_modsListApi.tooltipText)
 	
 	def _dispose(self):
-		g_modsListApi.handleChannelCarouselResize -= self.__handleChannelCarouselResize
-		g_modsListApi.onButtonBlinking -= self.__handleButtonBlinking  
-		g_modsListApi.onChangeScreenResolution -= self.processScreenResolution
-		g_modsListApi.onScopeChanged -= self.processPopulate
+		g_modsListApi.onButtonBlinking -= self.__handleButtonBlinking
+		g_modsListApi.handleCompareBasketVisibility -= self.__handleCompareBasketVisibility
 		super(ModsListButton, self)._dispose()	   
 	
-	def onButtonClickS(self):
+	def onButtonClickS(self, isLobby):
+		g_modsListApi.isLobby = isLobby
 		g_appLoader.getDefLobbyApp().loadView('modsListPopover')
-	
-	def processPopulate(self):
-		if self._isDAAPIInited():
-			if g_modsListApi.isLobby:
-				self.flashObject.as_populateLobby()
-			else:
-				self.flashObject.as_populateLogin()
-	
-	def logS(self, *args):
-		print '[INFO] modsListApi BUTTON ' + ' '.join([str(arg) for arg in args])
-	
-	def debugLogS(self, *args):
-		print '[DEBUG] modsListApi BUTTON ' + ' '.join([str(arg) for arg in args])
-	
-	def processScreenResolution(self):
-		if self._isDAAPIInited():
-			# BigWorld.callback for fix this https://youtu.be/mYuOQ-LMKNU
-			return BigWorld.callback(0.0, self.flashObject.as_handleChangeScreenResolution)
 	
 	def __handleButtonBlinking(self):
 		if self._isDAAPIInited():
-			return self.flashObject.as_handleButtonBlinking()
+			return self.flashObject.as_ButtonBlinking()
 	
-	def __handleChannelCarouselResize(self):
+	def __handleCompareBasketVisibility(self):
 		if self._isDAAPIInited():
-			return BigWorld.callback(0.0, self.flashObject.as_handleChannelCarouselResize)
-	
+			# BigWorld.callback for process CompareButton visibility in next frame
+			BigWorld.callback(0, self.flashObject.as_handleCompareBasketVisibility)
+			
 	def onFocusIn(self, *args):
 		if self._isDAAPIInited():
 			return False	
