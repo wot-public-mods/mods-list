@@ -116,6 +116,12 @@
 			}
 			
 			if (alias == Aliases.LOBBY) {
+				
+				// in case whan angar loaded faster then nextFrameAfterPopulateHandler shot
+				if (parent != App.instance)
+					(App.instance as MovieClip).addChild(this);
+				
+				
 				_isLobby = true;
 				_messangerBar = ((view as LobbyPage).messengerBar as MessengerBar);
 				
@@ -128,7 +134,14 @@
 				// append modsButton to messangerBar.constraints (all bottom buttons position manager)
 				_messangerBar.addChild(_button);
 				_messangerBar.constraints.addElement("modsButton", _button, Constraints.RIGHT);
+				
+				onResize();
 			}
+			
+			if (alias == Aliases.LOBBY_HANGAR) {
+				onResize();
+			}
+				
 		}
 		
 		public function getTargetButton() : DisplayObject 
