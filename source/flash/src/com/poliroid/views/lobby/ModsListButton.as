@@ -125,7 +125,7 @@
 				_isLobby = true;
 				_messangerBar = ((view as LobbyPage).messengerBar as MessengerBar);
 				
-				assembleButton(858, 9);
+				assembleButton(_messangerBar.vehicleCompareCartBtn.x, 9);
 				
 				// move "vehicle compare butoon" and "vehicle name anim" left
 				_messangerBar.vehicleCompareCartBtn.x -= 77;
