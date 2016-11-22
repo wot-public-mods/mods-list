@@ -8,7 +8,7 @@
 	import scaleform.clik.events.ListEvent;
 	import net.wg.infrastructure.base.SmartPopOverView;
 	import net.wg.infrastructure.interfaces.IWrapper;
-	import net.wg.gui.components.popOvers.PopOver;
+	import net.wg.gui.components.popovers.PopOver;
 	
 	import com.poliroid.components.lobby.ModsListItemRenderer;
 	
@@ -18,7 +18,7 @@
 		public var callModS: Function = null;
 		public var clearAlertS: Function = null;
 		
-		protected var _list: ScrollingList = null;
+		public var _list: ScrollingList = null;
 		
 		public function ModsListPopover() : void 
 		{
@@ -39,7 +39,7 @@
 			width = 280;
 			height = 65;
 			
-			_list = App.utils.classFactory.getComponent("ScrollingList", ScrollingList);
+			
 			_list.x = 0;
 			_list.y = 0;
 			_list.width = 280;
@@ -51,8 +51,6 @@
 			_list.visible = true;
 			_list.scrollBar = "";
 			_list.wrapping = "normal";
-			
-			addChild(_list);
 			
 			getModsListS();
 			

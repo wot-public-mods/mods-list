@@ -37,14 +37,6 @@
 			focusable = false;
 		}
 		
-		override protected function onPopulate() : void 
-		{
-			super.onPopulate();
-			
-			// load popovers.swf for show popup in Login Window
-			App.instance.loaderMgr.loadLibraries(Vector.<String>(["popovers.swf"]));
-		}
-		
 		override protected function onDispose() : void 
 		{
 			if (_button) {

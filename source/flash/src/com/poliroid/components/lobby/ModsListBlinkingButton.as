@@ -1,5 +1,6 @@
 ﻿package com.poliroid.components.lobby
 {
+	
 	import net.wg.gui.components.controls.SoundButtonEx;
 	
 	public class ModsListBlinkingButton extends SoundButtonEx
@@ -9,14 +10,9 @@
 		public function ModsListBlinkingButton()
 		{
 			super();
-			setState("up");
+			setState('up');
 			focusable = false;
 			tabEnabled = false;
-		}
-		
-		override public function set enabled(isEnabled:Boolean) : void
-		{
-			super.enabled = isEnabled;
 		}
 		
 		override protected function canShowTooltipByHover() : Boolean
@@ -39,7 +35,7 @@
 		
 		override protected function getStatePrefixes() : Vector.<String>
 		{
-			return _blinking ? Vector.<String>(["blinking_",""]) : Vector.<String>([""]);
+			return _blinking ? Vector.<String>(['blinking_', '']) : Vector.<String>(['']);
 		}
 	}
 }
