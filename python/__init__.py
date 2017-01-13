@@ -129,20 +129,17 @@ class ModsListPopover(AbstractPopOverView):
 	
 	def _populate(self):
 		super(ModsListPopover, self)._populate()
-		g_modsListApi.onListUpdated += self.__handleListUpdate				   
+		g_modsListApi.onListUpdated += self.__collectModsData				   
 		if self._isDAAPIInited():
 			self.flashObject.as_setTitleText(g_modsListApi.titleText)
 	
 	def _dispose(self):
-		g_modsListApi.onListUpdated -= self.__handleListUpdate  
+		g_modsListApi.onListUpdated -= self.__collectModsData  
 		super(ModsListPopover, self)._dispose()	   
 		
 	def __collectModsData(self):
 		mods = g_modsListApi.getModsList()
 		self.as_setDataS(mods)
-		
-	def __handleListUpdate(self):
-		self.__collectModsData()
 		
 	def clearAlertS(self, id):
 		g_modsListApi.clearAlert(id)
@@ -163,7 +160,5 @@ class ModsListPopover(AbstractPopOverView):
 
 g_modsListApi = ModsListApiController()
 
-g_entitiesFactories.addSettings(ViewSettings('modsListButton', ModsListButton, '../../scripts/client/gui/mods/modsListApi/modsListButton.swf', ViewTypes.WINDOW, None, ScopeTemplates.GLOBAL_SCOPE))
-g_entitiesFactories.addSettings(GroupedViewSettings('modsListPopover', ModsListPopover, '../../scripts/client/gui/mods/modsListApi/modsListPopover.swf', ViewTypes.WINDOW, 'modsListPopover', 'modsListPopover', ScopeTemplates.DEFAULT_SCOPE))
-
-print '[NOTE] package loaded: mod_modsListAPI'
+g_entitiesFactories.addSettings(ViewSettings('modsListButton', ModsListButton, 'modsListButton.swf', ViewTypes.WINDOW, None, ScopeTemplates.GLOBAL_SCOPE))
+g_entitiesFactories.addSettings(GroupedViewSettings('modsListPopover', ModsListPopover, 'modsListPopover.swf', ViewTypes.WINDOW, 'modsListPopover', 'modsListPopover', ScopeTemplates.DEFAULT_SCOPE))
