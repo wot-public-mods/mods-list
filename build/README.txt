@@ -1,1 +1,0 @@
-﻿put to ingame gui/mods folder
