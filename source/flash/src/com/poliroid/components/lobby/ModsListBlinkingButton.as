@@ -11,8 +11,6 @@
 		{
 			super();
 			setState('up');
-			focusable = false;
-			tabEnabled = false;
 		}
 		
 		override protected function canShowTooltipByHover() : Boolean
