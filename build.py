@@ -3,14 +3,13 @@ import compileall
 import os
 import shutil
 import zipfile
-
+import datetime
 
 ANIMATE_PATH = 'C:\\Program Files\\Adobe\\Adobe Animate CC 2015\\Animate.exe'
+MODIFICATION_VERSION = '1.0.0'
 GAME_VERSION = '0.9.17.0.2'
 BUILD_RESMODS = True
 BUILD_PACKAGE = True
-
-
 
 
 # clean
@@ -53,24 +52,29 @@ for dirname, _, files in os.walk('python'):
 
 # build binaries
 if BUILD_PACKAGE:
-	zipobj = zipfile.ZipFile('_build/modsListApi' + '.wotmod', 'w', zipfile.ZIP_STORED)
-	rootlen = len('temp/res') + 1
-	for dirname, _, files in os.walk('temp/res'):
-		for filename in files:
-			path = os.path.join(dirname, filename)
-			zipobj.write(path, 'res/' + path[rootlen:])
-	with open('temp/res/meta.xml', 'wb') as fh:
-		fh.write("<root>\r\n\t<!-- Techical MOD ID -->\r\n\t<id>{modID}</id>\r\n\t<!-- Package version -->\r\n\t<version>{version}</version>\r\n\t"\
-				"<!-- Human readable name -->\r\n\t<name>{modName}</name>\r\n\t<!-- Human readable description -->\r\n\t"\
-				"<description>{modDescription}</description>\r\n</root>".format(
+	
+	with open('temp/meta.xml', 'wb') as fh:
+		fh.write("<root>\r\n\t<!-- Techical MOD ID -->\r\n\t<id>{modID}</id>\r\n\t<!-- Package version -->\r\n\t<version>{version}</version>\r\n\t<!-- Human readable "\
+		 "name -->\r\n\t<name>{modName}</name>\r\n\t<!-- Human readable description -->\r\n\t<description>{modDescription}</description>\r\n</root>".format(
 			modID = "modsListApi",
 			modName = "Modifications list",
 			modDescription = "Modifications list: comfortable run, setup and alert",
-			version = "1.0.0"
+			version = MODIFICATION_VERSION
 		))
-	zipobj.write('temp/res/meta.xml', 'meta.xml')
+	
+	zipobj = zipfile.ZipFile('_build/modsListApi_{version}.wotmod'.format(version = MODIFICATION_VERSION), 'w', zipfile.ZIP_STORED)
+	build_time = tuple(datetime.datetime.now().timetuple())[:6]
+	rootlen = len('temp/res') + 1
+	for dirname, _, files in os.walk('temp/res'):
+		zi = zipfile.ZipInfo(dirname, build_time)
+		zi.filename = zi.filename.replace("temp/", "") + "/"
+		zipobj.writestr(zi, '')
+		for filename in files:
+			path = os.path.join(dirname, filename)
+			zipobj.write(path, 'res/' + path[rootlen:])
+	zipobj.write('temp/meta.xml', 'meta.xml')
 	zipobj.close()
-
+	
 if BUILD_RESMODS:
 	zipobj = zipfile.ZipFile('_build/modsListApi' + '.zip', 'w', zipfile.ZIP_DEFLATED)
 	rootlen = len('temp/res_mods') + 1
