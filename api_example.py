@@ -1,6 +1,6 @@
 
 """
-	method addMod
+	method addModification
 		:param id: Uniq modification ID - required
 		:param name: Modification name - required
 		:param description: Modification hint (mouse over) - required
@@ -10,7 +10,7 @@
 		:param lobby: Show modification in Lobby - required
 		:param callback: Called on modification click - required
 	
-	method updateMod
+	method updateModification
 		:param id: Uniq modification ID - required
 		:param name: Modification name - not necessary
 		:param description: Modification hint (mouse over) - not necessary
@@ -20,21 +20,21 @@
 		:param lobby: Show modification in Lobby - not necessary
 		:param callback: Called on modification click - not necessary
 		
-	method alertMod
+	method alertModification
 		:param id: Uniq modification ID - required
 	
-	method clearAlert
+	method clearModificationAlert
 		:param id: Uniq modification ID - required
 """
 
 
 
-from gui.mods.modsListApi import g_modsListApi
+from gui.modsListApi import g_modsListApi
 
 def test1_callback():
 	print 'test1_callback'
 
-g_modsListApi.addMod(
+g_modsListApi.addModification(
 	id = "test1", 
 	name = 'test1 mod name', 
 	description = 'test1 hint', 
@@ -57,7 +57,7 @@ ru_realm = True if AUTH_REALM in ['RU', 'CT'] else False
 def test2_callback():
 	print 'test2 кнопка нажата' if ru_realm else 'test2 button clicked'
 
-g_modsListApi.addMod(
+g_modsListApi.addModification(
 	id = "test2", 
 	name = 'test2 название мода' if ru_realm else 'test2 mod name', 
 	description = 'test2 подсказка' if ru_realm else 'test2 hint', 
@@ -74,7 +74,7 @@ g_modsListApi.addMod(
 	Passing of all parameters is not necessary
 """
 
-g_modsListApi.updateMod(
+g_modsListApi.updateModification(
 	id = 'test2', 
 	icon = 'scripts/client/gui/mods/test2.png', 
 	login = True
@@ -86,5 +86,5 @@ g_modsListApi.updateMod(
 	Managing mod_item state (orange ticket + button blinking) (test1 in the example)
 """
 
-g_modsListApi.alertMod("test1")
-g_modsListApi.clearAlert("test1")
+g_modsListApi.alertModification("test1")
+g_modsListApi.clearModificationAlert("test1")
