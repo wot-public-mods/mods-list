@@ -7,6 +7,7 @@
 	
 	import com.poliroid.gui.lobby.modsList.data.ModsListModsVO;
 	import com.poliroid.gui.lobby.modsList.data.ModsListStaticDataVO;
+	import net.wg.data.constants.Linkages;
 	
 	public class ModsListPopoverMeta extends SmartPopOverView
 	{
@@ -18,6 +19,12 @@
 		public function ModsListPopoverMeta() 
 		{	
 			super();
+		}
+		
+		// bcs SWC in very good condition
+		public function get wrapperLinkage() : String 
+		{
+			return Linkages.SMART_POPOVER;
 		}
 		
 		public function invokeModificationS(id:Number) : void
