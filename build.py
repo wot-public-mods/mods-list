@@ -5,12 +5,14 @@ import os
 import shutil
 import zipfile
 
+MODIFICATION_VERSION = '1.0.2'
+MODIFICATION_NAME = 'modslistapi'
+MODIFICATION_AUTHOR = 'poliroid'
+
 ANIMATE_PATH = 'C:\\Program Files\\Adobe\\Adobe Animate CC 2015\\Animate.exe'
-MODIFICATION_VERSION = '1.0.1'
-GAME_VERSION = '0.9.17.1'
-GAME_FOLDER = 'X:/wot_ct' #'X:/wot_9.17.1'
-BUILD_RESMODS = False
-BUILD_PACKAGE = True
+
+GAME_VERSION = '0.9.18'
+GAME_FOLDER = 'X:/wot_ct' #'X:/wot'
 COPY_INTO_GAME_FOLDER = True
 
 # use this bcs shutil.copytree sometimes throw error on folders create
@@ -81,7 +83,7 @@ with open('temp/build.jsfl', 'wb') as fh:
 			fh.write('fl.publishDocument("file:///{path}/as3/{fileName}", "Default");\r\n'.format(path = os.getcwd().replace('\\', '/').replace(':', '|'), fileName = fileName))
 	fh.write('fl.quit(false);')
 os.system('"{animate}" -e temp/build.jsfl'.format(animate = ANIMATE_PATH))
-
+os.remove('temp/build.jsfl')
 
 # build python
 for dirName, _, files in os.walk('python'):
@@ -92,12 +94,9 @@ for dirName, _, files in os.walk('python'):
 
 
 # copy all staff
-copytree('resources', 'temp/standart/res_mods/{version}'.format(version = GAME_VERSION))
-copytree('resources', 'temp/wgpackage/res')
-copytree('as3/bin/', 'temp/standart/res_mods/{version}/gui/flash'.format(version = GAME_VERSION))
-copytree('as3/bin/', 'temp/wgpackage/res/gui/flash')
-copytree('python', 'temp/standart/res_mods/{version}/scripts/client'.format(version = GAME_VERSION), ignore=shutil.ignore_patterns('*.py'))
-copytree('python', 'temp/wgpackage/res/scripts/client', ignore=shutil.ignore_patterns('*.py'))
+copytree('resources', 'temp/res')
+copytree('as3/bin/', 'temp/res/gui/flash')
+copytree('python', 'temp/res/scripts/client', ignore=shutil.ignore_patterns('*.py'))
 
 
 # build binaries
@@ -113,27 +112,23 @@ META = """<root>
 	<description>{modDescription}</description>
 </root>"""
 
-if BUILD_PACKAGE:
-	with open('temp/wgpackage/meta.xml', 'wb') as fh:
-		fh.write(
-			META.format(
-				modID = "modsListApi",
-				modName = "Modifications list",
-				modDescription = "Modifications list: comfortable run, setup and alert",
-				version = MODIFICATION_VERSION
-			)
-		)
-	zipFolder('temp/wgpackage', 'build/modsListApi.wotmod')
+PACKAGE_NAME = 'build/{author}.{name}.{version}.wotmod'.format( author = MODIFICATION_AUTHOR, \
+				name = MODIFICATION_NAME, version = MODIFICATION_VERSION )
 
-if BUILD_RESMODS:
-	zipFolder('temp/standart', 'build/modsListApi.zip', compression=zipfile.ZIP_DEFLATED)
+with open('temp/meta.xml', 'wb') as fh:
+	fh.write(
+		META.format(
+			modID = "modsListApi",
+			modName = "Modifications list",
+			modDescription = "Modifications list: comfortable run, setup and alert",
+			version = MODIFICATION_VERSION
+		)
+	)
+zipFolder('temp', PACKAGE_NAME)
 
 if COPY_INTO_GAME_FOLDER:
-	if BUILD_PACKAGE:
-		shutil.copy2('build/modsListApi.wotmod', '{wot}/mods/{version}/'.format(wot = GAME_FOLDER, version =GAME_VERSION))
-	elif BUILD_RESMODS:
-		copytree('temp/standart', GAME_FOLDER)
-	
+	shutil.copy2(PACKAGE_NAME, '{wot}/mods/{version}/'.format(wot = GAME_FOLDER, version =GAME_VERSION))
+
 	
 # clean up
 shutil.rmtree('temp')
