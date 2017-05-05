@@ -2,8 +2,8 @@
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, GroupedViewSettings, ViewTypes, ScopeTemplates
 
 from gui.modsListApi.modslist_constants import MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_POPOVER_ALIAS
-from gui.modsListApi.view.buttonView import ModsListButtonView
-from gui.modsListApi.view.popoverView import ModsListPopoverView
+from gui.modsListApi.views.buttonView import ModsListButtonView
+from gui.modsListApi.views.popoverView import ModsListPopoverView
 
 def getViewSettings():
 	return (ViewSettings(MODS_LIST_API_BUTTON_ALIAS, ModsListButtonView, 'modsListButton.swf', ViewTypes.WINDOW, None, ScopeTemplates.GLOBAL_SCOPE) ,
