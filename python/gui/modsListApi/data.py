@@ -33,8 +33,8 @@ class _DataProvider(object):
 	def __generateStaticData(self):
 		"""return value Represented by ModsListModsVO (AS)"""
 		return {
-			'titleLabel' : l10n('#title'),
-			'descriptionLabel' : l10n('#description'),
+			'titleLabel' : l10n('title'),
+			'descriptionLabel' : l10n('description'),
 			'closeButtonVisible' : True
 		}
 	
