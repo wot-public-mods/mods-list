@@ -19,5 +19,5 @@
 
 
 
-Code license: GNU GPL v3
+Code license: CC BY-NC-SA 4.0
 P0LIR0ID 2015-2017

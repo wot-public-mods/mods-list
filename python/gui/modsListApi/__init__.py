@@ -1,10 +1,19 @@
 ﻿
+__author__ = "Andruschyshyn Andrey"
+__copyright__ = "Copyright 2017, Wargaming"
+__credits__ = ["Andruschyshyn Andrey"]
+__license__ = "CC BY-NC-SA 4.0"
+__version__ = "1.0.3"
+__maintainer__ = "Andruschyshyn Andrey"
+__email__ = "p0lir0id@yandex.ru"
+__status__ = "Production"
+
 from gui.modsListApi.controller import *
 from gui.modsListApi.data import *
 from gui.modsListApi.events import *
 from gui.modsListApi.hooks import *
 from gui.modsListApi.lang import *
-from gui.modsListApi.view import *
+from gui.modsListApi.views import *
 
 __all__ = ('g_modsListApi', )
 
