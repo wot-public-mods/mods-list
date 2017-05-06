@@ -1,4 +1,4 @@
-package com.poliroid.gui.lobby.modsList.data 
+﻿package com.poliroid.gui.lobby.modsList.data 
 {
 	import net.wg.data.daapi.base.DAAPIDataClass;
 	

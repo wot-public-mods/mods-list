@@ -1,7 +1,5 @@
 ﻿package com.poliroid.gui.lobby.modsList 
 {
-	
-	
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.events.Event;
@@ -97,7 +95,6 @@
 			super.onDispose();
 		}
 		
-		
 		override protected function draw() : void
 		{
 			super.draw();
@@ -131,18 +128,13 @@
 			return DisplayObject(modsButton);
 		}
 		
-		// this needs for valid Focus snd Position in Login Window 
+		// this needs for valid Focus and Position in Login Window 
 		override protected function nextFrameAfterPopulateHandler() : void 
 		{
 			if (parent != App.instance) {
 				(App.instance as MovieClip).addChild(this);
 			}
 		}
-		
-		
-		
-		
-		
 		
 		private function onViewLoaded(event:LoaderEvent) : void
 		{
@@ -169,7 +161,6 @@
 				// in case whan hangar loaded faster then nextFrameAfterPopulateHandler fire
 				if (parent != App.instance)
 					(App.instance as MovieClip).addChild(this);
-				
 				
 				isInLobby = true;
 				messangerBar = ((view as LobbyPage).messengerBar as MessengerBar);
@@ -199,9 +190,6 @@
 			modsButton.y = posY;
 		}
 		
-		
-		
-		
 		private function handleModsButtonClick(event:ButtonEvent) : void 
 		{
 			onButtonClickS(isInLobby);
@@ -209,12 +197,6 @@
 			App.toolTipMgr.hide();
 			App.popoverMgr.show(this, POPOVER_ALIAS);
 		}
-		
-		
-		
-		
-		
-		
 		
 		override protected function setStaticData(data:ModsListStaticDataVO) : void 
 		{

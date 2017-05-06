@@ -1,6 +1,5 @@
-package com.poliroid.gui.lobby.modsList.interfaces.impl 
+﻿package com.poliroid.gui.lobby.modsList.interfaces.impl 
 {
-	
 	import flash.display.DisplayObject;
 	
 	import net.wg.data.constants.Errors;

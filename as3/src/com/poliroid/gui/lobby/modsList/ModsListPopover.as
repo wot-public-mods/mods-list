@@ -1,16 +1,12 @@
 ﻿package com.poliroid.gui.lobby.modsList 
 {
-	import flash.display.MovieClip;;
-
 	import scaleform.clik.constants.InvalidationType;
 	import scaleform.clik.data.DataProvider;
 	import scaleform.clik.events.ListEvent;
-	import scaleform.clik.utils.Padding;
 	import scaleform.clik.controls.ScrollingList;
 	
 	import net.wg.infrastructure.interfaces.IWrapper;
 	import net.wg.gui.components.popovers.PopOver;
-	import net.wg.gui.components.controls.ScrollingListEx;
 	
 	import com.poliroid.gui.lobby.modsList.data.ModsListModsVO;
 	import com.poliroid.gui.lobby.modsList.data.ModsListItemRendererVO;
@@ -74,7 +70,7 @@
 		{
 			var modID:Number = (event.itemData as ModsListItemRendererVO).id;
 			invokeModificationS(modID);
-			App.popoverMgr.hide();			
+			App.popoverMgr.hide();
 		}
 	}
 }
