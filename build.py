@@ -9,16 +9,16 @@ import zipfile
 ANIMATE_PATH = 'C:\\Program Files\\Adobe\\Adobe Animate CC 2015\\Animate.exe'
 
 # game data
-COPY_INTO_GAME = False
-GAME_VERSION = '0.9.19.1'
-GAME_FOLDER = 'X:/wot'
+COPY_INTO_GAME = True
+GAME_VERSION = '0.9.19.1.1'
+GAME_FOLDER = 'Z:/wot'
 
 # modification data
 MODIFICATION_AUTHOR = 'poliroid'
 MODIFICATION_DESCRIPTION = 'Modifications list - comfortable run, setup and alert'
 MODIFICATION_IDENTIFICATOR = 'modslistapi'
 MODIFICATION_NAME = 'Modifications list'
-MODIFICATION_VERSION = '1.0.4'
+MODIFICATION_VERSION = '1.0.5'
 
 # result package name
 PACKAGE_NAME = '{author}.{name}_{version}.wotmod'.format( author = MODIFICATION_AUTHOR, \
