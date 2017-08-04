@@ -3,6 +3,7 @@ import BigWorld
 from gui.app_loader.loader import g_appLoader
 from gui.app_loader.settings import APP_NAME_SPACE
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import _CompareBasketListener
+from gui.Scaleform.framework.managers.loaders import ViewLoadParams
 from gui.shared import events, EVENT_BUS_SCOPE, g_eventBus
 
 from gui.modsListApi.modslist_constants import MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_POPOVER_ALIAS
@@ -16,7 +17,7 @@ def showPopover():
 	app = g_appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
 	if not app:
 		return
-	app.loadView(MODS_LIST_API_POPOVER_ALIAS)
+	app.loadView(ViewLoadParams(MODS_LIST_API_POPOVER_ALIAS, MODS_LIST_API_POPOVER_ALIAS), {})
 
 g_eventsManager.showPopover += showPopover
 
@@ -27,7 +28,8 @@ def onAppInitialized(event):
 		app = g_appLoader.getApp(event.ns)
 		if not app:
 			return
-		BigWorld.callback(0.0, lambda: app.loadView(MODS_LIST_API_BUTTON_ALIAS))
+		BigWorld.callback(0.0, lambda: app.loadView(ViewLoadParams(MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_BUTTON_ALIAS), {}))
+		
 
 g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, onAppInitialized, scope=EVENT_BUS_SCOPE.GLOBAL)
 
