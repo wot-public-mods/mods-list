@@ -1,8 +1,9 @@
 ﻿
-__all__ = ('byteify', 'override', 'readFromVFS', 'parseLangFields')
+__all__ = ('byteify', 'override', 'readFromVFS', 'parseLangFields', 'prepereDescription')
 
 import types
 import ResMgr
+from gui.shared.utils.functions import makeTooltip
 
 def overrider(target, holder, name):
 	"""override any staff"""
@@ -51,3 +52,9 @@ def parseLangFields(langFile):
 			key, value = item.split(": ", 1)
 			result[key] = value
 	return result
+
+def prepereDescription(descText):
+	"""prepere Description for showComplex"""
+	if '{HEADER}' and '{BODY}' not in descText:
+		return makeTooltip(body = descText)
+	return descText

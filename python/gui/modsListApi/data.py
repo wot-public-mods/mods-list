@@ -5,6 +5,7 @@ from ids_generators import SequenceIDGenerator
 from gui.modsListApi.controller import g_controller
 from gui.modsListApi.lang import l10n
 from gui.modsListApi.events import g_eventsManager
+from gui.modsListApi.utils import prepereDescription
 
 __all__ = ('g_dataProvider', 'ModificationItem', )
 
@@ -79,7 +80,7 @@ class ModificationItem(object):
 			self.__name = name
 		
 		if description is not None:
-			self.__description = description
+			self.__description = prepereDescription(description)
 		
 		if callback is not None:
 			self.__callback = callback

@@ -37,13 +37,14 @@
 			super.handleMouseRollOver(event);
 			
 			if(StringUtils.isNotEmpty(model.descriptionLabel))
-				App.toolTipMgr.show(model.descriptionLabel);
+				App.toolTipMgr.showComplex(model.descriptionLabel);
 		}
 		
 		override protected function handleMouseRollOut(event:MouseEvent) : void 
 		{
 			super.handleMouseRollOut(event);
 			App.toolTipMgr.hide();
+			
 		}
 		
 		override public function setData(data:Object) : void 
