@@ -22,7 +22,7 @@
 		
 		private static const BOTTOM_OFFSET:int = 10;
 		
-		private static const MAX_ITEMS_IN_LIST:int = 5;
+		private static const MAX_ITEMS_IN_LIST:int = 8;
 		
 		public var modsList:ScrollingList = null;
 		
