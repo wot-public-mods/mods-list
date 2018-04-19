@@ -21,7 +21,7 @@ else:
 	_LANGUAGE = _LANGUAGES[DEFAULT_UI_LANGUAGE]
 
 def l10n(key):
-	'''returns localized value relative to key'''
+	"""returns localized value relative to key"""
 	if key in _LANGUAGE:
 		return _LANGUAGE[key]
 	elif key in _LANGUAGES[DEFAULT_UI_LANGUAGE]:
