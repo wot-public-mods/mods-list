@@ -10,7 +10,7 @@
 	
 	import net.wg.infrastructure.managers.impl.ContainerManagerBase;
 	import net.wg.gui.components.containers.MainViewContainer;
-	import net.wg.infrastructure.interfaces.IManagedContainer;
+	import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
 	import net.wg.data.Aliases;
 	import net.wg.gui.lobby.messengerBar.MessengerBar;
 	import net.wg.infrastructure.interfaces.IView;
@@ -57,7 +57,7 @@
 			
 			// process already loaded views
 			var containerMgr:ContainerManagerBase = App.containerMgr as ContainerManagerBase;
-			for each (var container:IManagedContainer in containerMgr.containersMap)
+			for each (var container:ISimpleManagedContainer in containerMgr.containersMap)
 			{
 				var viewContainer:MainViewContainer = container as MainViewContainer;
 				if (viewContainer != null)
