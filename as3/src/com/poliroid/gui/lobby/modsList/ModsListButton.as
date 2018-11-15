@@ -117,18 +117,6 @@
 			}
 		}
 		
-		// this needs for correct smart popover work
-		override public function getTargetButton() : DisplayObject 
-		{
-			return DisplayObject(modsButton);
-		}
-		
-		// this needs for correct smart popover work
-		override public function getHitArea() : DisplayObject 
-		{
-			return DisplayObject(modsButton);
-		}
-		
 		// this needs for valid Focus and Position in Login Window 
 		override protected function nextFrameAfterPopulateHandler() : void 
 		{
@@ -196,7 +184,7 @@
 			onButtonClickS(isInLobby);
 			modsButton.blinking = false;
 			App.toolTipMgr.hide();
-			App.popoverMgr.show(this, POPOVER_ALIAS);
+			App.popoverMgr.show(modsButton, POPOVER_ALIAS);
 		}
 		
 		override protected function setStaticData(data:ModsListStaticDataVO) : void 

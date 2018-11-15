@@ -1,15 +1,12 @@
 ﻿package com.poliroid.gui.lobby.modsList.interfaces.impl 
 {
-	import flash.display.DisplayObject;
-	
 	import net.wg.data.constants.Errors;
 	import net.wg.infrastructure.base.AbstractView;
-	import net.wg.infrastructure.interfaces.IPopOverCaller;
 	import net.wg.infrastructure.exceptions.AbstractException;
 	
 	import com.poliroid.gui.lobby.modsList.data.ModsListStaticDataVO;
 	
-	public class ModsListButtonMeta extends AbstractView implements IPopOverCaller 
+	public class ModsListButtonMeta extends AbstractView
 	{
 		
 		public var onButtonClick:Function;
@@ -59,16 +56,6 @@
 			var message:String = "as_setStaticData" + Errors.ABSTRACT_INVOKE;
 			DebugUtils.LOG_ERROR(message);
 			throw new AbstractException(message);
-		}
-		
-		public function getTargetButton() : DisplayObject 
-		{
-			return this;
-		}
-		
-		public function getHitArea() : DisplayObject 
-		{
-			return this;
 		}
 	}
 }
