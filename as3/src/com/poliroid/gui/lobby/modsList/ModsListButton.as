@@ -105,11 +105,6 @@
 		{
 			super.draw();
 			
-			if(isInvalid(InvalidationType.SIZE))
-			{
-				invalidate(INVALIDATE_BUTTON);
-			}
-
 			if(isInvalid(INVALIDATE_BUTTON))
 			{
 				if (isInLobby) 
@@ -186,7 +181,7 @@
 				
 			}
 
-			if (alias in INVALIDATE_ALIASES) 
+			if (INVALIDATE_ALIASES.indexOf(alias) >= 0) 
 			{
 				invalidate(INVALIDATE_BUTTON);
 			}
