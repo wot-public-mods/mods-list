@@ -28,7 +28,7 @@ def onAppInitialized(event):
 		app = g_appLoader.getApp(event.ns)
 		if not app:
 			return
-		BigWorld.callback(0.0, lambda: app.loadView(SFViewLoadParams(MODS_LIST_API_BUTTON_ALIAS), {}))
+		app.loadView(SFViewLoadParams(MODS_LIST_API_BUTTON_ALIAS))
 		
 
 g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, onAppInitialized, scope=EVENT_BUS_SCOPE.GLOBAL)

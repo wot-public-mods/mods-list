@@ -69,6 +69,7 @@
 						if (view != null)
 							processView(view, true);
 					}
+					viewContainer.setFocusedView(viewContainer.getTopmostView());
 				}
 			}
 			
