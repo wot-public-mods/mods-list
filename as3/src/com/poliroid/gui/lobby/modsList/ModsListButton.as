@@ -69,7 +69,11 @@
 						if (view != null)
 							processView(view, true);
 					}
-					viewContainer.setFocusedView(viewContainer.getTopmostView());
+					var topmostView:IManagedContent = viewContainer.getTopmostView();
+					if (topmostView != null)
+					{
+						viewContainer.setFocusedView(topmostView);
+					}
 				}
 			}
 			
