@@ -11,6 +11,8 @@
 	import net.wg.infrastructure.managers.impl.ContainerManagerBase;
 	import net.wg.gui.components.containers.MainViewContainer;
 	import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
+	import net.wg.infrastructure.interfaces.IManagedContent;
+	
 	import net.wg.data.Aliases;
 	import net.wg.gui.lobby.messengerBar.MessengerBar;
 	import net.wg.infrastructure.interfaces.IView;
@@ -32,6 +34,10 @@
 		
 		private static const POPOVER_ALIAS:String = 'ModsListApiPopover';
 		
+		private static const INVALIDATE_ALIASES:Array = [Aliases.LOGIN, Aliases.LOBBY, Aliases.LOBBY_HANGAR, Aliases.LOBBY_TRAINING_ROOM];
+
+		private static const INVALIDATE_BUTTON:String = 'invalidateButton';
+
 		public var modsButton:ModsListBlinkingButton = null;
 		
 		private var messangerBar:MessengerBar = null;
@@ -41,11 +47,6 @@
 		public function ModsListButton() 
 		{
 			super();
-		}
-		
-		private function onResize(e:Event = null) : void 
-		{
-			invalidateSize();
 		}
 		
 		override protected function configUI() : void 
@@ -103,15 +104,26 @@
 		override protected function draw() : void
 		{
 			super.draw();
+			
 			if(isInvalid(InvalidationType.SIZE))
+			{
+				invalidate(INVALIDATE_BUTTON);
+			}
+
+			if(isInvalid(INVALIDATE_BUTTON))
 			{
 				if (isInLobby) 
 				{
-					if (messangerBar) {
-						var rightNext:DisplayObject = messangerBar.vehicleCompareCartBtn.visible ? messangerBar.vehicleCompareCartBtn : DisplayObject(modsButton);
-						var validWidth:Number = rightNext.x - messangerBar.channelCarousel.x - 1;
-						if (messangerBar.channelCarousel.width != validWidth)
-							messangerBar.channelCarousel.width = validWidth;
+					if (messangerBar)
+					{
+						var mostLeftButton:DisplayObject = DisplayObject(modsButton);
+						
+						if (messangerBar.vehicleCompareCartBtn.visible)
+						{
+							mostLeftButton = DisplayObject(messangerBar.vehicleCompareCartBtn);
+						}
+						
+						messangerBar.channelCarousel.width = mostLeftButton.x - messangerBar.channelCarousel.x - 1;
 					}
 				}
 				else 
@@ -129,6 +141,11 @@
 			}
 		}
 		
+		private function onResize(e:Event) : void
+		{
+			invalidate(INVALIDATE_BUTTON);
+		}
+		
 		private function onViewLoaded(event:LoaderEvent) : void
 		{
 			var view:IView = event.view as IView;
@@ -144,11 +161,10 @@
 				messangerBar = null;
 				isInLobby = false;
 				
-				invalidateSize();
-				
 				(view as LoginPage).addChild(DisplayObject(modsButton));
 			}
-			else if (alias == Aliases.LOBBY) 
+			
+			if (alias == Aliases.LOBBY) 
 			{
 				
 				// in case whan hangar loaded faster then nextFrameAfterPopulateHandler fire
@@ -168,13 +184,12 @@
 				messangerBar.addChild(DisplayObject(modsButton));
 				messangerBar.constraints.addElement("modsButton", DisplayObject(modsButton), Constraints.RIGHT);
 				
-				invalidateSize();
 			}
-			else if (alias == Aliases.LOBBY_HANGAR) 
+
+			if (alias in INVALIDATE_ALIASES) 
 			{
-				invalidateSize();
+				invalidate(INVALIDATE_BUTTON);
 			}
-				
 		}
 		
 		private function moveButton(posX:Number, posY:Number) : void
@@ -203,7 +218,7 @@
 		
 		override protected function compareBasketVisibility() : void 
 		{
-			invalidateSize();
+			invalidate(INVALIDATE_BUTTON);
 		}
 	}
 }
