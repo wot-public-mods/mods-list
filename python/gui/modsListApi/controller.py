@@ -5,7 +5,17 @@ __all__ = ('g_controller', )
 
 class ApiLogicController(object):
 	
-	modifications = property(lambda self: self.__modifications)
+	@property
+	def modifications(self):
+		return self.__modifications
+	
+	@property
+	def isInLobby(self):
+		return self.__isInLobby
+	
+	@isInLobby.setter
+	def isInLobby(self, isInLobby):
+		self.__isInLobby = isInLobby
 	
 	def __init__(self):
 		self.__modifications = dict()
@@ -45,9 +55,4 @@ class ApiLogicController(object):
 		modification = self.__modifications[id]
 		modification.setAlerting(False)
 
-	def __set_isInLobby(self, isInLobby):
-		self.__isInLobby = isInLobby
-	
-	isInLobby = property(lambda self: self.__isInLobby, __set_isInLobby)
-	
 g_controller = ApiLogicController()
