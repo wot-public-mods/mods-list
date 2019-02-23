@@ -1,17 +1,16 @@
-﻿
-from gui.Scaleform.framework.entities.abstract.AbstractPopOverView import AbstractPopOverView
+﻿from gui.Scaleform.framework.entities.abstract.AbstractPopOverView import AbstractPopOverView
 
 from gui.modsListApi.data import g_dataProvider
 from gui.modsListApi.events import g_eventsManager
 
 class ModsListPopoverViewMeta(AbstractPopOverView):
-	
+
 	def getModsList(self):
 		self._printOverrideError('getModsList')
-		
+
 	def invokeMod(self, modificationID):
 		self._printOverrideError('invokeMod')
-	
+
 	def as_setModsDataS(self, data):
 		# :param data: Represented by ModsListModsVO (AS)
 		if self._isDAAPIInited():
@@ -23,22 +22,21 @@ class ModsListPopoverViewMeta(AbstractPopOverView):
 			return self.flashObject.as_setStaticData(data)
 
 class ModsListPopoverView(ModsListPopoverViewMeta):
-	
+
 	def _populate(self):
 		super(ModsListPopoverView, self)._populate()
-		g_eventsManager.onListUpdated += self.__collectModsData				   
+		g_eventsManager.onListUpdated += self.__collectModsData
 		self.as_setStaticDataS(g_dataProvider.staticData)
-	
+
 	def _dispose(self):
-		g_eventsManager.onListUpdated -= self.__collectModsData  
-		super(ModsListPopoverView, self)._dispose()	   
-		
+		g_eventsManager.onListUpdated -= self.__collectModsData
+		super(ModsListPopoverView, self)._dispose()
+
 	def __collectModsData(self):
 		self.as_setModsDataS(g_dataProvider.modsData)
-		
+
 	def getModsList(self):
-		self.__collectModsData()  
-		
+		self.__collectModsData()
+
 	def invokeModification(self, modificationID):
 		g_eventsManager.invokeModification(modificationID)
-	

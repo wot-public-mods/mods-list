@@ -1,5 +1,4 @@
 ﻿
-import BigWorld
 from gui.app_loader.loader import g_appLoader
 from gui.app_loader.settings import APP_NAME_SPACE
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import _CompareBasketListener
@@ -29,7 +28,7 @@ def onAppInitialized(event):
 		if not app:
 			return
 		app.loadView(SFViewLoadParams(MODS_LIST_API_BUTTON_ALIAS))
-		
+
 
 g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, onAppInitialized, scope=EVENT_BUS_SCOPE.GLOBAL)
 
@@ -37,6 +36,8 @@ g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, onAppInitialized, s
 def updateBtnVisibility(baseMethod, baseObject):
 	"""try move button on compareCartButton visibility"""
 	baseMethod(baseObject)
-	isButtonVisible = baseObject._CompareBasketListener__currentCartPopover is not None or baseObject.comparisonBasket.getVehiclesCount() > 0
-	if not baseObject.comparisonBasket.isEnabled() or not isButtonVisible:
+	cartPopover = baseObject._CompareBasketListener__currentCartPopover
+	vehiclesCount = baseObject.comparisonBasket.getVehiclesCount()
+	buttonIsVisible = cartPopover is not None or vehiclesCount > 0
+	if not baseObject.comparisonBasket.isEnabled() or not buttonIsVisible:
 		g_eventsManager.onCompareBasketVisibility()

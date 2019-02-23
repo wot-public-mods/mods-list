@@ -78,26 +78,27 @@
 		override protected function draw() : void 
 		{
 			super.draw();
-			if(model != null)
+			
+			if(model == null)
+				return;
+			
+			if (isInvalid(InvalidationType.SIZE)) 
 			{
-				if (isInvalid(InvalidationType.SIZE)) 
-				{
-					// this wont work correctly
-					enabled = model.isEnabled;
-					
-					// use instead 
-					// enabled = model.isEnabled
-					// and dosnt working setState(state)
-					if (!model.isEnabled)
-						gotoAndPlay('disabled');
-					
-					modNameTF.text = model.nameLabel;
-					
-					if (StringUtils.isNotEmpty(model.icon))
-						modIcon.source = model.icon;
-					
-					alertMC.visible = model.isAlerting;
-				}
+				// this wont work correctly
+				enabled = model.isEnabled;
+				
+				// use instead 
+				// enabled = model.isEnabled
+				// and dosnt working setState(state)
+				if (!model.isEnabled)
+					gotoAndPlay('disabled');
+				
+				modNameTF.text = model.nameLabel;
+				
+				if (StringUtils.isNotEmpty(model.icon))
+					modIcon.source = model.icon;
+				
+				alertMC.visible = model.isAlerting;
 			}
 		}
 	}

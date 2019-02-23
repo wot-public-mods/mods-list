@@ -4,14 +4,14 @@
 		"animate": "C:\\Program Files\\Adobe\\Adobe Animate CC 2019\\Animate.exe"
 	},
 	"game": {
-		"folder": "E:\\wot\\ct",
-		"version": "1.4.0.0 Common Test"
+		"folder": "E:\\wot\\cis",
+		"version": "1.4.0.1"
 	},
 	"info": {
 		"id": "modslistapi",
 		"author": "poliroid",
 		"name": "Modifications list",
 		"description": "Modifications list - comfortable run, setup and alert",
-		"version": "1.1.5"
+		"version": "1.1.6"
 	}
 }

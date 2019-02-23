@@ -22,13 +22,10 @@
 			
 			if(name == MODSLIST_FIELD_NAME)
 			{
-				var mod:Object = null;
 				var mods:Array = data as Array;
-				
 				App.utils.asserter.assertNotNull(mods, data + Errors.CANT_NULL);
-				
 				modsList = [];
-				for each(mod in mods)
+				for each(var mod:Object in mods)
 				{
 					modsList.push(new ModsListItemRendererVO(mod));
 				}
@@ -39,10 +36,9 @@
 		
 		override protected function onDispose() : void
 		{
-			var mod:IDisposable = null;
 			if(modsList != null)
 			{
-				for each(mod in modsList)
+				for each(var mod:IDisposable in modsList)
 				{
 					mod.dispose();
 				}

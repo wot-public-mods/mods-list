@@ -68,7 +68,7 @@
 					{
 						var view:IView = viewContainer.getChildAt(idx) as IView;
 						if (view != null)
-							processView(view, true);
+							processView(view);
 					}
 					var topmostView:IManagedContent = viewContainer.getTopmostView();
 					if (topmostView != null)
@@ -147,7 +147,7 @@
 			processView(view);
 		}
 		
-		private function processView(view:IView, populated:Boolean = false) : void
+		private function processView(view:IView) : void
 		{
 			var alias:String = view.as_config.alias;
 			

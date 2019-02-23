@@ -4,54 +4,59 @@ from debug_utils import LOG_ERROR
 __all__ = ('g_controller', )
 
 class ApiLogicController(object):
-	
+
 	@property
 	def modifications(self):
 		return self.__modifications
-	
+
 	@property
 	def isInLobby(self):
 		return self.__isInLobby
-	
+
 	@isInLobby.setter
 	def isInLobby(self, isInLobby):
 		self.__isInLobby = isInLobby
-	
+
 	def __init__(self):
 		self.__modifications = dict()
 		self.__isInLobby = False
-	
-	def addModification(self, id, name = None, description = None, icon = None, enabled = None, login = None, lobby = None, callback = None):
-		if id in self.__modifications.keys(): 
-			self.updateModification(id, name, description, icon, enabled, login, lobby, callback)
-			return
+
+	def addModification(self, id, name=None, description=None, icon=None, enabled=None, \
+						login=None, lobby=None, callback=None):
+		# use updateModification instead addModification if modification already exist
+		if id in self.__modifications.keys():
+			return self.updateModification(id, name, description, icon, enabled, login, lobby, callback)
+
 		if name is None or description is None or enabled is None or login is None or lobby is None or callback is None:
-			LOG_ERROR('method @addModification required mandatory parameters [name, description, enabled, login, lobby, callback]')
-			return
-		
+			return LOG_ERROR('method @addModification required mandatory parameters [name, description, ' + \
+						'enabled, login, lobby, callback]')
+
 		from gui.modsListApi.data import ModificationItem
 		modification = ModificationItem()
 		modification.setData(id, name, description, icon, enabled, login, lobby, callback)
 		self.__modifications[id] = modification
-	
-	def updateModification(self, id, name = None, description = None, icon = None, enabled = None, login = None, lobby = None, callback = None):
-		if id not in self.__modifications.keys(): 
-			LOG_ERROR('method @updateModification required ModificationItem instance, use @addModification instead updateModification')
-			return
+
+	def updateModification(self, id, name=None, description=None, icon=None, enabled=None, \
+						login=None, lobby=None, callback=None):
+
+		if id not in self.__modifications.keys():
+			return LOG_ERROR('method @updateModification required ModificationItem instance, use ' + \
+						'@addModification instead updateModification')
+
 		modification = self.__modifications[id]
 		modification.setData(id, name, description, icon, enabled, login, lobby, callback)
-	
+
 	def alertModification(self, id):
-		if id not in self.__modifications.keys(): 
-			LOG_ERROR('method @alertModification required ModificationItem instance, check the id argument')
-			return
+		if id not in self.__modifications.keys():
+			return LOG_ERROR('method @alertModification required ModificationItem instance, check ' + \
+							'the id argument')
 		modification = self.__modifications[id]
 		modification.setAlerting(True)
 
 	def clearModificationAlert(self, id):
-		if id not in self.__modifications.keys(): 
-			LOG_ERROR('method @clearModificationAlert required ModificationItem instance, check the id argument')
-			return
+		if id not in self.__modifications.keys():
+			return LOG_ERROR('method @clearModificationAlert required ModificationItem instance, ' + \
+							'check the id argument')
 		modification = self.__modifications[id]
 		modification.setAlerting(False)
 

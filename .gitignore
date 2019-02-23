@@ -1,4 +1,6 @@
+.scannerwork
 *.wotmod
 *.vscode
 *.swf
 *.pyc
+*.cmd
