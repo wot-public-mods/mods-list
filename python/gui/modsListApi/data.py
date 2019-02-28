@@ -27,7 +27,7 @@ class _DataProvider(object):
 			if item.available:
 				result.append(item.dpData)
 		if result:
-			result = sorted(result, key=lambda item: item['id'])
+			result = sorted(result, key=lambda item: item.get('id'))
 		if not result:
 			result.append({})
 		return {'mods' : result}
@@ -50,7 +50,7 @@ class ModificationItem(object):
 
 	@property
 	def available(self):
-		return self.__checkAvailability()
+		return self.__availabilityCheck()
 
 	@property
 	def dpData(self):
@@ -85,7 +85,7 @@ class ModificationItem(object):
 		if callback is not None:
 			self.__callback = callback
 		# use '../../' to premature up from "gui/flash" directory
-		if icon:
+		if icon is not None:
 			self.__icon = '../../%s' % icon
 		g_eventsManager.onListUpdated()
 
@@ -95,8 +95,13 @@ class ModificationItem(object):
 		if isAlerting:
 			g_eventsManager.onButtonBlinking()
 
-	def __checkAvailability(self):
-		return g_controller.isInLobby and self.__availableInLobby or not g_controller.isInLobby and self.__availableInLogin
+	def __availabilityCheck(self):
+		result = False
+		if g_controller.isInLobby and self.__availableInLobby:
+			result = True
+		if not g_controller.isInLobby and self.__availableInLogin:
+			result = True
+		return result
 
 	def __genDataForDP(self):
 		return {'id': self.__numID, 'isEnabled': self.__enabled, 'isAlerting': self.__alerting, \
@@ -109,5 +114,6 @@ class ModificationItem(object):
 			try:
 				func()
 			except Exception: #NOSONAR
-				LOG_ERROR('Failed invoke modification ID={id} CALLBACK={cb}'.format(id=self.__stringID, cb=self.__callback))
+				LOG_ERROR('Failed invoke modification ID={id} CALLBACK={cb}'.format(id=self.__stringID, \
+						cb=self.__callback))
 				LOG_CURRENT_EXCEPTION()

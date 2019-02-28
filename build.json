@@ -5,14 +5,14 @@
 		"sonar": "sonar.cmd"
 	},
 	"game": {
-		"folder": "E:\\wot\\cis",
-		"version": "1.4.0.1"
+		"folder": "E:\\wot\\ct",
+		"version": "1.4.1.0 Common Test"
 	},
 	"info": {
 		"id": "modslistapi",
 		"author": "poliroid",
 		"name": "Modifications list",
 		"description": "Modifications list - comfortable run, setup and alert",
-		"version": "1.1.6"
+		"version": "1.1.7"
 	}
 }
