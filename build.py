@@ -3,7 +3,6 @@ import compileall
 import datetime
 import json
 import os
-import shlex
 import shutil
 import subprocess
 import sys
@@ -68,6 +67,8 @@ def zipFolder(source, destination, mode='w', compression=zipfile.ZIP_STORED):
 # handle args from command line
 BUILD_FLASH = 'flash' in sys.argv
 COPY_INTO_GAME = 'ingame' in sys.argv
+CREATE_DISTRIBUTE = 'distribute' in sys.argv
+RUN_SONAR = 'sonar' in sys.argv
 
 # load config
 assert os.path.isfile('./build.json'), 'Config not found'
@@ -106,6 +107,8 @@ if os.path.isdir('./build'):
 os.makedirs('./build')
 if not os.path.isdir('./resources'):
 	os.makedirs('./resources')
+	os.makedirs('./resources/in')
+	os.makedirs('./resources/out')
 if not os.path.isdir('./as3/bin'):
 	os.makedirs('./as3/bin')
 
@@ -118,7 +121,7 @@ if BUILD_FLASH:
 				publishDocument = 'fl.publishDocument("file:///{path}/as3/{fileName}", "Default");\r\n'
 				fh.write(publishDocument.format(path=flashWorkDir, fileName=fileName))
 		fh.write('fl.quit(false);')
-	subprocess.call(shlex.split('"{animate}" -e build.jsfl -AlwaysRunJSFL'.format(animate=CONFIG.software.animate)))
+	subprocess.call([CONFIG.software.animate, '-e', 'build.jsfl', '-AlwaysRunJSFL'])
 
 # build python
 for dirName, _, files in os.walk('python'):
@@ -130,7 +133,7 @@ for dirName, _, files in os.walk('python'):
 # copy all staff
 copytree('./as3/bin/', './temp/res/gui/flash')
 copytree('./python', './temp/res/scripts/client', ignore=shutil.ignore_patterns('*.py'))
-copytree('./resources', './temp/res')
+copytree('./resources/in', './temp/res')
 with open('temp/meta.xml', 'wb') as fh:
 	fh.write(META)
 
@@ -141,7 +144,15 @@ zipFolder('./temp', './build/%s' % PACKAGE_NAME)
 if COPY_INTO_GAME:
 	shutil.copy2('./build/%s' % PACKAGE_NAME, WOT_PACKAGES_DIR)
 
-# clean up temp files
+# create distribution
+if CREATE_DISTRIBUTE:
+	os.makedirs('./temp/distribute/mods/%s' % CONFIG.game.version)
+	shutil.copy2('./build/%s' % PACKAGE_NAME, './temp/distribute/mods/%s' % CONFIG.game.version)
+	copytree('./resources/out', './temp/distribute')
+	zipFolder('./temp/distribute', './build/{name}_{version}.zip'.format(name=CONFIG.info.id, \
+				version=CONFIG.info.version))
+
+# clean up build files
 shutil.rmtree('temp')
 
 # clean python build files
@@ -153,3 +164,7 @@ for dirName, _, files in os.walk('./python'):
 # clean flash build files
 if BUILD_FLASH:
 	os.remove('build.jsfl')
+
+# run sonar
+if RUN_SONAR:
+	subprocess.call([CONFIG.software.sonar])
