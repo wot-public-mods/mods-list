@@ -1,6 +1,6 @@
 
 import BigWorld
-from debug_utils import LOG_ERROR, LOG_CURRENT_EXCEPTION
+from debug_utils import LOG_WARNING
 from ids_generators import SequenceIDGenerator
 
 from gui.modsListApi.controller import g_controller
@@ -36,8 +36,12 @@ class _DataProvider(object):
 	@staticmethod
 	def _generateStaticData():
 		"""return value Represented by ModsListModsVO (AS)"""
-		return {'titleLabel' : l10n('title'), 'descriptionLabel' : l10n('description'), \
-				'closeButtonVisible' : True}
+		result = { \
+			'titleLabel': l10n('title'), \
+			'descriptionLabel': l10n('description'), \
+			'closeButtonVisible': True \
+		}
+		return result
 
 g_dataProvider = _DataProvider()
 
@@ -61,7 +65,7 @@ class ModificationItem(object):
 		self.__numID = IDGenerator.next()
 		self.__stringID = ''
 		self.__alerting = False
-		self.__callback = lambda: LOG_ERROR('handler for "%s" not installed' % self.__stringID)
+		self.__callback = lambda: LOG_WARNING('handler for "%s" not installed' % self.__stringID)
 		self.__enabled = False
 		self.__availableInLobby = False
 		self.__availableInLogin = False
