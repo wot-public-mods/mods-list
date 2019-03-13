@@ -1,4 +1,5 @@
 
+import BigWorld
 from debug_utils import LOG_ERROR, LOG_CURRENT_EXCEPTION
 from ids_generators import SequenceIDGenerator
 
@@ -104,16 +105,23 @@ class ModificationItem(object):
 		return result
 
 	def __genDataForDP(self):
-		return {'id': self.__numID, 'isEnabled': self.__enabled, 'isAlerting': self.__alerting, \
-				'nameLabel': self.__name, 'descriptionLabel': self.__description, 'icon': self.__icon}
+		result = { \
+			'id': self.__numID, \
+			'isEnabled': self.__enabled, \
+			'isAlerting': self.__alerting, \
+			'nameLabel': self.__name, \
+			'descriptionLabel': self.__description, \
+			'icon': self.__icon \
+		}
+		return result
 
 	def __invokeModification(self, modificationID):
-		func = self.__callback
-		if modificationID == self.__numID and func:
+		if modificationID != self.__numID:
+			return
+		if callable(self.__callback):
 			self.__alerting = False
-			try:
-				func()
-			except Exception: #NOSONAR
-				LOG_ERROR('Failed invoke modification ID={id} CALLBACK={cb}'.format(id=self.__stringID, \
-						cb=self.__callback))
-				LOG_CURRENT_EXCEPTION()
+
+			# call handler on next frame
+			# * fix menu freezes on call handler
+			# * fix stuck trace if handler cause error
+			BigWorld.callback(0, self.__callback)
