@@ -1,5 +1,5 @@
 ﻿
-from gui.app_loader.loader import g_appLoader
+from gui.shared.personality import ServicesLocator
 from gui.app_loader.settings import APP_NAME_SPACE
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import _CompareBasketListener
 from gui.Scaleform.framework.managers.loaders import SFViewLoadParams
@@ -13,7 +13,7 @@ __all__ = ()
 
 def showPopover():
 	"""fire load popover view on button click"""
-	app = g_appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
+	app = ServicesLocator.appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
 	if not app:
 		return
 	app.loadView(SFViewLoadParams(MODS_LIST_API_POPOVER_ALIAS), {})
@@ -24,7 +24,7 @@ g_eventsManager.showPopover += showPopover
 def onAppInitialized(event):
 	"""fire load button view on application initialized"""
 	if event.ns == APP_NAME_SPACE.SF_LOBBY:
-		app = g_appLoader.getApp(event.ns)
+		app = ServicesLocator.appLoader.getApp(event.ns)
 		if not app:
 			return
 		app.loadView(SFViewLoadParams(MODS_LIST_API_BUTTON_ALIAS))
