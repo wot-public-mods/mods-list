@@ -5,8 +5,10 @@ import types
 import ResMgr
 from gui.shared.utils.functions import makeTooltip
 
-def overrider(target, holder, name):
-	"""override any staff"""
+def override(holder, name, target=None):
+	"""using for override any staff"""
+	if target is None:
+		return lambda target: override(holder, name, target)
 	original = getattr(holder, name)
 	overrided = lambda *a, **kw: target(original, *a, **kw)
 	if not isinstance(holder, types.ModuleType) and isinstance(original, types.FunctionType):
@@ -15,22 +17,16 @@ def overrider(target, holder, name):
 		setattr(holder, name, property(overrided))
 	else:
 		setattr(holder, name, overrided)
-def decorator(function):
-	def wrapper(*args, **kwargs):
-		def decorate(handler):
-			function(handler, *args, **kwargs)
-		return decorate
-	return wrapper
-override = decorator(overrider)
 
 def byteify(data):
-	"""convert dict unicode key/value to utf-8"""
+	"""Encodes data with UTF-8
+	:param data: Data to encode"""
 	result = data
-	if isinstance(data, types.DictType):
+	if isinstance(data, dict):
 		result = {byteify(key): byteify(value) for key, value in data.iteritems()}
-	elif isinstance(data, (types.ListType, tuple, set)):
+	elif isinstance(data, (list, tuple, set)):
 		result = [byteify(element) for element in data]
-	elif isinstance(data, types.UnicodeType):
+	elif isinstance(data, unicode):
 		result = data.encode('utf-8')
 	return result
 

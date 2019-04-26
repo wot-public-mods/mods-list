@@ -21,7 +21,7 @@ class ApiLogicController(object):
 		self.__modifications = dict()
 		self.__isInLobby = False
 
-	def addModification(self, id, name=None, description=None, icon=None, enabled=None, \
+	def addModification(self, id, name=None, description=None, icon=None, enabled=None,
 						login=None, lobby=None, callback=None):
 		# use updateModification instead addModification if modification already exist
 		if id in self.__modifications.keys():
@@ -36,7 +36,7 @@ class ApiLogicController(object):
 		modification.setData(id, name, description, icon, enabled, login, lobby, callback)
 		self.__modifications[id] = modification
 
-	def updateModification(self, id, name=None, description=None, icon=None, enabled=None, \
+	def updateModification(self, id, name=None, description=None, icon=None, enabled=None,
 						login=None, lobby=None, callback=None):
 
 		if id not in self.__modifications.keys():

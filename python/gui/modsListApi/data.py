@@ -36,10 +36,10 @@ class _DataProvider(object):
 	@staticmethod
 	def _generateStaticData():
 		"""return value Represented by ModsListModsVO (AS)"""
-		result = { \
-			'titleLabel': l10n('title'), \
-			'descriptionLabel': l10n('description'), \
-			'closeButtonVisible': True \
+		result = {
+			'titleLabel': l10n('title'),
+			'descriptionLabel': l10n('description'),
+			'closeButtonVisible': True
 		}
 		return result
 
@@ -109,13 +109,13 @@ class ModificationItem(object):
 		return result
 
 	def __genDataForDP(self):
-		result = { \
-			'id': self.__numID, \
-			'isEnabled': self.__enabled, \
-			'isAlerting': self.__alerting, \
-			'nameLabel': self.__name, \
-			'descriptionLabel': self.__description, \
-			'icon': self.__icon \
+		result = {
+			'id': self.__numID,
+			'isEnabled': self.__enabled,
+			'isAlerting': self.__alerting,
+			'nameLabel': self.__name,
+			'descriptionLabel': self.__description,
+			'icon': self.__icon
 		}
 		return result
 
