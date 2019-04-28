@@ -6,7 +6,7 @@ from ids_generators import SequenceIDGenerator
 from gui.modsListApi.controller import g_controller
 from gui.modsListApi.lang import l10n
 from gui.modsListApi.events import g_eventsManager
-from gui.modsListApi.utils import prepereDescription
+from gui.modsListApi.utils import prepareDescription
 
 __all__ = ('g_dataProvider', 'ModificationItem', )
 
@@ -86,7 +86,7 @@ class ModificationItem(object):
 		if name is not None:
 			self.__name = name
 		if description is not None:
-			self.__description = prepereDescription(description)
+			self.__description = prepareDescription(description)
 		if callback is not None:
 			self.__callback = callback
 		# use '../../' to premature up from "gui/flash" directory

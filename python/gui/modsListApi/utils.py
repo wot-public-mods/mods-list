@@ -1,5 +1,5 @@
 ﻿
-__all__ = ('byteify', 'override', 'readFromVFS', 'parseLangFields', 'prepereDescription')
+__all__ = ('byteify', 'override', 'readFromVFS', 'parseLangFields', 'prepareDescription')
 
 import types
 import ResMgr
@@ -50,7 +50,7 @@ def parseLangFields(langFile):
 			result[key] = value
 	return result
 
-def prepereDescription(descText):
+def prepareDescription(descText):
 	"""prepere Description for showComplex"""
 	if '{HEADER}' and '{BODY}' not in descText:
 		return makeTooltip(body=descText)
