@@ -139,6 +139,7 @@
 		private function onResize(e:Event) : void
 		{
 			invalidate(INVALIDATE_BUTTON);
+			validateNow();
 		}
 		
 		private function onViewLoaded(event:LoaderEvent) : void
