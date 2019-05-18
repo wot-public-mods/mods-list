@@ -29,7 +29,6 @@ def onAppInitialized(event):
 			return
 		app.loadView(SFViewLoadParams(MODS_LIST_API_BUTTON_ALIAS))
 
-
 g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, onAppInitialized, scope=EVENT_BUS_SCOPE.GLOBAL)
 
 @override(_CompareBasketListener, "_CompareBasketListener__updateBtnVisibility")

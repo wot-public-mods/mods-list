@@ -13,6 +13,5 @@ def getViewSettings():
 										ScopeTemplates.DEFAULT_SCOPE)
 	return buttonSettings, popoverSettings
 
-
 for item in getViewSettings():
 	g_entitiesFactories.addSettings(item)
