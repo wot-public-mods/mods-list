@@ -40,7 +40,7 @@
 
 		public var modsButton:ModsListBlinkingButton = null;
 		
-		private var messangerBar:MessengerBar = null;
+		private var messengerBar:MessengerBar = null;
 		
 		private var isInLobby:Boolean = false;
 		
@@ -92,7 +92,7 @@
 			}
 			
 			modsButton = null;
-			messangerBar = null;
+			messengerBar = null;
 			
 			(App.containerMgr as ContainerManagerBase).loader.removeEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded);
 			
@@ -109,16 +109,18 @@
 			{
 				if (isInLobby) 
 				{
-					if (messangerBar)
+					if (messengerBar)
 					{
 						var mostLeftButton:DisplayObject = DisplayObject(modsButton);
-						
-						if (messangerBar.vehicleCompareCartBtn.visible)
+						if (messengerBar.sessionStatsBtn.visible)
 						{
-							mostLeftButton = DisplayObject(messangerBar.vehicleCompareCartBtn);
+							mostLeftButton = DisplayObject(messengerBar.sessionStatsBtn);
 						}
-						
-						messangerBar.channelCarousel.width = mostLeftButton.x - messangerBar.channelCarousel.x - 1;
+						if (messengerBar.vehicleCompareCartBtn.visible)
+						{
+							mostLeftButton = DisplayObject(messengerBar.vehicleCompareCartBtn);
+						}
+						messengerBar.channelCarousel.width = mostLeftButton.x - messengerBar.channelCarousel.x - 1;
 					}
 				}
 				else 
@@ -152,9 +154,9 @@
 		{
 			var alias:String = view.as_config.alias;
 			
-			if (alias == Aliases.LOGIN) 
+			if (alias == Aliases.LOGIN)
 			{
-				messangerBar = null;
+				messengerBar = null;
 				isInLobby = false;
 				
 				(view as LoginPage).addChild(DisplayObject(modsButton));
@@ -168,18 +170,20 @@
 					(App.instance as MovieClip).addChild(this);
 				
 				isInLobby = true;
-				messangerBar = ((view as LobbyPage).messengerBar as MessengerBar);
+				messengerBar = ((view as LobbyPage).messengerBar as MessengerBar);
 				
-				moveButton(messangerBar.vehicleCompareCartBtn.x, 9);
+				moveButton(messengerBar.sessionStatsBtn.x, 9);
 				
+				// move "sessionstats button" left
+				messengerBar.sessionStatsBtn.x -= 77;
+
 				// move "vehicle compare button" and "vehicle name anim" left
-				messangerBar.vehicleCompareCartBtn.x -= 77;
-				messangerBar.animPlacer.x -= 77;
+				messengerBar.vehicleCompareCartBtn.x -= 77;
+				messengerBar.animPlacer.x -= 77;
 				
-				// append modsButton to messangerBar.constraints (all bottom buttons position manager)
-				messangerBar.addChild(DisplayObject(modsButton));
-				messangerBar.constraints.addElement("modsButton", DisplayObject(modsButton), Constraints.RIGHT);
-				
+				// append modsButton to messengerBar.constraints (all bottom buttons position manager)
+				messengerBar.addChild(DisplayObject(modsButton));
+				messengerBar.constraints.addElement("modsButton", DisplayObject(modsButton), Constraints.RIGHT);
 			}
 
 			if (INVALIDATE_ALIASES.indexOf(alias) >= 0) 
