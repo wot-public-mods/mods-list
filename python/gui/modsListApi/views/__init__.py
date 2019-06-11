@@ -1,7 +1,7 @@
 ﻿
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, GroupedViewSettings, ViewTypes, ScopeTemplates
 
-from gui.modsListApi.modslist_constants import MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_POPOVER_ALIAS
+from gui.modsListApi._constants import MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_POPOVER_ALIAS
 from gui.modsListApi.views.buttonView import ModsListButtonView
 from gui.modsListApi.views.popoverView import ModsListPopoverView
 

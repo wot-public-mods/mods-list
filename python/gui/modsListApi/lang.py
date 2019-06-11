@@ -2,7 +2,7 @@
 from constants import DEFAULT_LANGUAGE
 from helpers import getClientLanguage
 
-from gui.modsListApi.modslist_constants import DEFAULT_UI_LANGUAGE, LANGUAGE_CODES, LANGUAGE_FILE_PATH
+from gui.modsListApi._constants import DEFAULT_UI_LANGUAGE, LANGUAGE_CODES, LANGUAGE_FILE_PATH
 from gui.modsListApi.utils import parseLangFields
 
 __all__ = ('l10n', )
