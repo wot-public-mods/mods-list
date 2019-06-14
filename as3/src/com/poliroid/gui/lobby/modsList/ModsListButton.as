@@ -217,7 +217,7 @@
 			modsButton.blinking = true;
 		}
 		
-		override protected function compareBasketVisibility() : void 
+		override protected function onButtonInvalid() : void 
 		{
 			invalidate(INVALIDATE_BUTTON);
 		}
