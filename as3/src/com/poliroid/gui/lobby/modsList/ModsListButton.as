@@ -172,7 +172,8 @@
 				isInLobby = true;
 				messengerBar = ((view as LobbyPage).messengerBar as MessengerBar);
 				
-				moveButton(messengerBar.sessionStatsBtn.x, 9);
+				var targetPosX:int = Math.max(messengerBar.sessionStatsBtn.x, messengerBar.vehicleCompareCartBtn.x);
+				moveButton(targetPosX, 9);
 				
 				// move "sessionstats button" left
 				messengerBar.sessionStatsBtn.x -= 77;
