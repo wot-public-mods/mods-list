@@ -35,9 +35,9 @@
 		private static const POPOVER_ALIAS:String = 'ModsListApiPopover';
 		
 		private static const INVALIDATE_ALIASES:Array = [Aliases.LOGIN, Aliases.LOBBY, Aliases.LOBBY_HANGAR, Aliases.LOBBY_TRAINING_ROOM];
-
+		
 		private static const INVALIDATE_BUTTON:String = 'invalidateButton';
-
+		
 		public var modsButton:ModsListBlinkingButton = null;
 		
 		private var messengerBar:MessengerBar = null;
@@ -68,7 +68,9 @@
 					{
 						var view:IView = viewContainer.getChildAt(idx) as IView;
 						if (view != null)
+						{
 							processView(view);
+						}
 					}
 					var topmostView:IManagedContent = viewContainer.getTopmostView();
 					if (topmostView != null)
@@ -86,9 +88,10 @@
 		
 		override protected function onDispose() : void 
 		{
-			if (modsButton) {
+			if (modsButton)
+			{
 				modsButton.removeEventListener(ButtonEvent.CLICK, handleModsButtonClick);
-				modsButton.dispose();	
+				modsButton.dispose();
 			}
 			
 			modsButton = null;
@@ -101,13 +104,13 @@
 			super.onDispose();
 		}
 		
-		override protected function draw() : void
+		override protected function draw() : void 
 		{
 			super.draw();
 			
 			if(isInvalid(INVALIDATE_BUTTON))
 			{
-				if (isInLobby) 
+				if (isInLobby)
 				{
 					if (messengerBar)
 					{
@@ -123,7 +126,7 @@
 						messengerBar.channelCarousel.width = mostLeftButton.x - messengerBar.channelCarousel.x - 1;
 					}
 				}
-				else 
+				else
 				{
 					moveButton(App.appWidth - RIGHT_MARGIN, App.appHeight - BOTTOM_MARGIN);
 				}
@@ -133,24 +136,25 @@
 		// this needs for valid Focus and Position in Login Window 
 		override protected function nextFrameAfterPopulateHandler() : void 
 		{
-			if (parent != App.instance) {
+			if (parent != App.instance)
+			{
 				(App.instance as MovieClip).addChild(this);
 			}
 		}
 		
-		private function onResize(e:Event) : void
+		private function onResize(e:Event) : void 
 		{
 			invalidate(INVALIDATE_BUTTON);
 			validateNow();
 		}
 		
-		private function onViewLoaded(event:LoaderEvent) : void
+		private function onViewLoaded(event:LoaderEvent) : void 
 		{
 			var view:IView = event.view as IView;
 			processView(view);
 		}
 		
-		private function processView(view:IView) : void
+		private function processView(view:IView) : void 
 		{
 			var alias:String = view.as_config.alias;
 			
@@ -162,7 +166,7 @@
 				(view as LoginPage).addChild(DisplayObject(modsButton));
 			}
 			
-			if (alias == Aliases.LOBBY) 
+			if (alias == Aliases.LOBBY)
 			{
 				
 				// in case whan hangar loaded faster then nextFrameAfterPopulateHandler fire
@@ -172,7 +176,8 @@
 				isInLobby = true;
 				messengerBar = ((view as LobbyPage).messengerBar as MessengerBar);
 				
-				moveButton(messengerBar.sessionStatsBtn.x, 9);
+				var targetPosX:int = Math.max(messengerBar.sessionStatsBtn.x, messengerBar.vehicleCompareCartBtn.x);
+				moveButton(targetPosX, 9);
 				
 				// move "sessionstats button" left
 				messengerBar.sessionStatsBtn.x -= 77;
@@ -186,13 +191,13 @@
 				messengerBar.constraints.addElement("modsButton", DisplayObject(modsButton), Constraints.RIGHT);
 			}
 
-			if (INVALIDATE_ALIASES.indexOf(alias) >= 0) 
+			if (INVALIDATE_ALIASES.indexOf(alias) >= 0)
 			{
 				invalidate(INVALIDATE_BUTTON);
 			}
 		}
 		
-		private function moveButton(posX:Number, posY:Number) : void
+		private function moveButton(posX:Number, posY:Number) : void 
 		{
 			modsButton.x = posX;
 			modsButton.y = posY;
@@ -216,7 +221,7 @@
 			modsButton.blinking = true;
 		}
 		
-		override protected function compareBasketVisibility() : void 
+		override protected function onButtonInvalid() : void 
 		{
 			invalidate(INVALIDATE_BUTTON);
 		}

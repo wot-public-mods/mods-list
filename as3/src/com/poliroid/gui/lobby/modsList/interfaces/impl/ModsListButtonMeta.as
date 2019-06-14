@@ -27,9 +27,9 @@
 			buttonBlinking();
 		}
 		
-		public final function as_compareBasketVisibility() : void
+		public final function as_onButtonInvalid() : void
 		{
-			compareBasketVisibility();
+			onButtonInvalid();
 		}
 		
 		public final function as_setStaticData(data:Object) : void
@@ -44,9 +44,9 @@
 			throw new AbstractException(message);
 		}
 		
-		protected function compareBasketVisibility() : void
+		protected function onButtonInvalid() : void
 		{
-			var message:String = "as_compareBasketVisibility" + Errors.ABSTRACT_INVOKE;
+			var message:String = "as_onButtonInvalid" + Errors.ABSTRACT_INVOKE;
 			DebugUtils.LOG_ERROR(message);
 			throw new AbstractException(message);
 		}
