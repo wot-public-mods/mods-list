@@ -20,7 +20,6 @@ def showPopover():
 
 g_eventsManager.showPopover += showPopover
 
-
 def onAppInitialized(event):
 	"""fire load button view on application initialized"""
 	if event.ns == APP_NAME_SPACE.SF_LOBBY:
