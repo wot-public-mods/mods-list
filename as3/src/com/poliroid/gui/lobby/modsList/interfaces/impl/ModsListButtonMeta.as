@@ -12,7 +12,7 @@
 		public var onButtonClick:Function;
 		
 		public function ModsListButtonMeta() 
-		{	
+		{
 			super();
 		}
 		

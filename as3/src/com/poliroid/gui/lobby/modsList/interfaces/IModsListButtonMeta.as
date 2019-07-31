@@ -6,5 +6,6 @@
 	{
 		
 		function onButtonClickS(isInLobby:Boolean) : void;
+		
 	}
 }

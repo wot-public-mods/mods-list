@@ -37,7 +37,9 @@
 			super.handleMouseRollOver(event);
 			
 			if(StringUtils.isNotEmpty(model.descriptionLabel))
+			{
 				App.toolTipMgr.showComplex(model.descriptionLabel);
+			}
 		}
 		
 		override protected function handleMouseRollOut(event:MouseEvent) : void 
@@ -49,8 +51,10 @@
 		
 		override public function setData(data:Object) : void 
 		{
-			if (data == null) 
+			if (data == null)
+			{
 				return;
+			}
 			
 			super.setData(data);
 			
@@ -62,11 +66,15 @@
 		{
 			
 			if (alertMC)
+			{
 				alertMC.dispose()
+			}
 			
-			if (modIcon) 
+			if (modIcon)
+			{
 				modIcon.dispose();
-				
+			}
+			
 			modNameTF = null;
 			alertMC = null;
 			modIcon = null;
@@ -80,7 +88,9 @@
 			super.draw();
 			
 			if(model == null)
+			{
 				return;
+			}
 			
 			if (isInvalid(InvalidationType.SIZE)) 
 			{
@@ -91,12 +101,16 @@
 				// enabled = model.isEnabled
 				// and dosnt working setState(state)
 				if (!model.isEnabled)
+				{
 					gotoAndPlay('disabled');
+				}
 				
 				modNameTF.text = model.nameLabel;
 				
 				if (StringUtils.isNotEmpty(model.icon))
+				{
 					modIcon.source = model.icon;
+				}
 				
 				alertMC.visible = model.isAlerting;
 			}
