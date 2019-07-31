@@ -4,8 +4,10 @@
 	
 	public interface IModsListPopoverMeta extends IEventDispatcher
 	{
+		
 		function getModsListS() : void;
 		
 		function invokeModificationS(id:Number) : void;
+		
 	}
 }
