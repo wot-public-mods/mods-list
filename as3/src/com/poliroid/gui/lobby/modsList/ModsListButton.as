@@ -4,7 +4,6 @@
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import scaleform.clik.constants.InvalidationType;
 
 	import scaleform.clik.events.ButtonEvent;
 	import scaleform.clik.utils.Constraints;

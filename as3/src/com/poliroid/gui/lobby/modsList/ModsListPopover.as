@@ -5,7 +5,6 @@
 	import scaleform.clik.data.DataProvider;
 	import scaleform.clik.events.ListEvent;
 	import scaleform.clik.controls.ScrollingList;
-	import net.wg.infrastructure.interfaces.IWrapper;
 
 	import net.wg.gui.components.controls.ScrollBar;
 	import net.wg.gui.components.popovers.PopOver;

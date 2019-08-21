@@ -1,6 +1,5 @@
 ﻿package com.poliroid.gui.lobby.modsList.controls 
 {
-	import flash.display.MovieClip;
 
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
