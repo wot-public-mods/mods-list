@@ -93,12 +93,12 @@
 
 			if (isInvalid(InvalidationType.SIZE)) 
 			{
-				// this wont work correctly
+				// this won't work correctly
 				enabled = model.isEnabled;
-				// use instead 
 
+				// this using instead 
 				// enabled = model.isEnabled
-				// and dosnt working setState(state)
+				// and does not working setState(state)
 				if (!model.isEnabled)
 				{
 					gotoAndPlay('disabled');

@@ -5,11 +5,13 @@
 	import flash.display.MovieClip;
 	import flash.events.Event;
 
+	import scaleform.clik.constants.InvalidationType;
 	import scaleform.clik.events.ButtonEvent;
 	import scaleform.clik.utils.Constraints;
 
 	import net.wg.infrastructure.managers.impl.ContainerManagerBase;
 	import net.wg.gui.components.containers.MainViewContainer;
+	import net.wg.infrastructure.events.LifeCycleEvent;
 	import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
 	import net.wg.infrastructure.interfaces.IManagedContent;
 
@@ -27,35 +29,35 @@
 
 	public class ModsListButton extends ModsListButtonMeta implements IModsListButtonMeta 
 	{
-		
-		private static const BOTTOM_MARGIN:int = 36;
-		
-		private static const RIGHT_MARGIN:Number = 86;
-		
+
+		private static const BUTTON_LOGIN_BOTTOM_MARGIN:int = 36;
+
+		private static const BUTTON_LOGIN_RIGHT_MARGIN:int = 86;
+
+		private static const BUTTON_LOBBY_TOP_MARGIN:int = 9;
+
+		private static const BUTTON_LOBBY_GAP:int = 5;
+
 		private static const POPOVER_ALIAS:String = 'ModsListApiPopover';
-		
+
+		private static const BUTTON_ALIAS:String = 'ModsListBlinkingButtonUI';
+
 		private static const INVALIDATE_ALIASES:Array = [Aliases.LOGIN, Aliases.LOBBY, Aliases.LOBBY_HANGAR, Aliases.LOBBY_TRAINING_ROOM];
-		
-		private static const INVALIDATE_BUTTON:String = 'invalidateButton';
-		
+
 		public var modsButton:ModsListBlinkingButton = null;
-		
-		private var messengerBar:MessengerBar = null;
-		
-		private var isInLobby:Boolean = false;
-		
-		public function ModsListButton() 
-		{
-			super();
-		}
+
+		public var messengerBar:MessengerBar = null;
+
+		public var isInLobby:Boolean = false;
+
+		private var _tooltip:String = '';
+
+		private var _blinking:Boolean = false;
 
 		override protected function configUI() : void 
 		{
 			super.configUI();
 
-			// subscribe to stage resize
-			App.instance.stage.addEventListener(Event.RESIZE, onResize);
-			
 			// process already loaded views
 			var containerMgr:ContainerManagerBase = App.containerMgr as ContainerManagerBase;
 			for each (var container:ISimpleManagedContainer in containerMgr.containersMap)
@@ -80,27 +82,26 @@
 				}
 			}
 
+			// subscribe to stage resize
+			App.instance.stage.addEventListener(Event.RESIZE, onResize);
+
 			// subscribe to container manager loader
 			(App.containerMgr as ContainerManagerBase).loader.addEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded, false, 0, true);
-			
-			modsButton.addEventListener(ButtonEvent.CLICK, handleModsButtonClick);
 		}
 
 		override protected function onDispose() : void 
 		{
-			if (modsButton)
-			{
-				modsButton.removeEventListener(ButtonEvent.CLICK, handleModsButtonClick);
-				modsButton.dispose();
-			}
-			
-			modsButton = null;
+			buttonDestroy();
+
+			// remove links
 			messengerBar = null;
-			
+
+			// unsubscribe from container manager loader
 			(App.containerMgr as ContainerManagerBase).loader.removeEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded);
-			
+
+			// unsubscribe from stage resize
 			App.instance.stage.removeEventListener(Event.RESIZE, onResize);
-			
+
 			super.onDispose();
 		}
 
@@ -108,33 +109,44 @@
 		{
 			super.draw();
 
-			if(isInvalid(INVALIDATE_BUTTON))
+			if(isInvalid(InvalidationType.SIZE) && modsButton)
 			{
-				if (isInLobby)
+				if (isInLobby && messengerBar)
 				{
-					if (messengerBar)
+					var mostLeftButton:DisplayObject = DisplayObject(modsButton);
+					if (messengerBar.sessionStatsBtn.visible)
 					{
-						var mostLeftButton:DisplayObject = DisplayObject(modsButton);
-						if (messengerBar.sessionStatsBtn.visible)
-						{
-							mostLeftButton = DisplayObject(messengerBar.sessionStatsBtn);
-						}
-						if (messengerBar.vehicleCompareCartBtn.visible)
-						{
-							mostLeftButton = DisplayObject(messengerBar.vehicleCompareCartBtn);
-						}
-						messengerBar.channelCarousel.width = mostLeftButton.x - messengerBar.channelCarousel.x - 1;
+						mostLeftButton = DisplayObject(messengerBar.sessionStatsBtn);
 					}
+					if (messengerBar.vehicleCompareCartBtn.visible)
+					{
+						mostLeftButton = DisplayObject(messengerBar.vehicleCompareCartBtn);
+					}
+					messengerBar.channelCarousel.width = mostLeftButton.x - messengerBar.channelCarousel.x - 1;
 				}
 				else
 				{
-					moveButton(App.appWidth - RIGHT_MARGIN, App.appHeight - BOTTOM_MARGIN);
+					modsButton.x = App.appWidth - BUTTON_LOGIN_RIGHT_MARGIN
+					modsButton.y = App.appHeight - BUTTON_LOGIN_BOTTOM_MARGIN;
 				}
 			}
+
+			if(isInvalid(InvalidationType.DATA) && modsButton)
+			{
+				modsButton.tooltip = _tooltip;
+				modsButton.blinking = _blinking;
+			}
+
 		}
-		
-		// this needs for valid Focus and Position in Login Window 
+
 		override protected function nextFrameAfterPopulateHandler() : void 
+		{
+			super.nextFrameAfterPopulateHandler();
+			addAsChildToApp();
+		}
+
+		// this needs for valid Focus and Position in Login Window 
+		public function addAsChildToApp() : void 
 		{
 			if (parent != App.instance)
 			{
@@ -144,7 +156,7 @@
 
 		private function onResize(e:Event) : void 
 		{
-			invalidate(INVALIDATE_BUTTON);
+			invalidateSize();
 			validateNow();
 		}
 
@@ -160,32 +172,32 @@
 
 			if (alias == Aliases.LOGIN)
 			{
-				messengerBar = null;
 				isInLobby = false;
-				
+
+				buttonCreate();
+
 				(view as LoginPage).addChild(DisplayObject(modsButton));
 			}
 
 			if (alias == Aliases.LOBBY)
 			{
-				
-				// in case whan hangar loaded faster then nextFrameAfterPopulateHandler fire
-				if (parent != App.instance)
-					(App.instance as MovieClip).addChild(this);
-				
+				addAsChildToApp();
 				isInLobby = true;
-				messengerBar = ((view as LobbyPage).messengerBar as MessengerBar);
-				
-				var targetPosX:int = Math.max(messengerBar.sessionStatsBtn.x, messengerBar.vehicleCompareCartBtn.x);
-				moveButton(targetPosX, 9);
-				
+				messengerBar = (view as LobbyPage).messengerBar as MessengerBar;
+
+				buttonCreate();
+				modsButton.x = Math.max(messengerBar.sessionStatsBtn.x, messengerBar.vehicleCompareCartBtn.x);
+				modsButton.y = BUTTON_LOBBY_TOP_MARGIN;
+
+				var positionOffset:int = BUTTON_LOBBY_GAP + modsButton.width;
+
 				// move "sessionstats button" left
-				messengerBar.sessionStatsBtn.x -= 77;
+				messengerBar.sessionStatsBtn.x -= positionOffset;
 
 				// move "vehicle compare button" and "vehicle name anim" left
-				messengerBar.vehicleCompareCartBtn.x -= 77;
-				messengerBar.animPlacer.x -= 77;
-				
+				messengerBar.vehicleCompareCartBtn.x -= positionOffset;
+				messengerBar.animPlacer.x -= positionOffset;
+
 				// append modsButton to messengerBar.constraints (all bottom buttons position manager)
 				messengerBar.addChild(DisplayObject(modsButton));
 				messengerBar.constraints.addElement("modsButton", DisplayObject(modsButton), Constraints.RIGHT);
@@ -195,43 +207,61 @@
 
 			if (INVALIDATE_ALIASES.indexOf(alias) >= 0)
 			{
-				invalidate(INVALIDATE_BUTTON);
+				invalidateSize();
 			}
-		}
-
-		private function moveButton(posX:Number, posY:Number) : void 
-		{
-			modsButton.x = posX;
-			modsButton.y = posY;
 		}
 
 		private function handleModsButtonClick(event:ButtonEvent) : void 
 		{
 			onButtonClickS(isInLobby);
-			modsButton.blinking = false;
+			_blinking = false;
 			App.toolTipMgr.hide();
 			App.popoverMgr.show(modsButton, POPOVER_ALIAS);
 		}
-		
 
 		private function handleMessangerBarDispose() : void
 		{
 			messengerBar = null;
 		}
 
+		private function buttonCreate() : void
+		{
+			buttonDestroy();
+			modsButton = App.utils.classFactory.getComponent(BUTTON_ALIAS, ModsListBlinkingButton);
+			modsButton.addEventListener(ButtonEvent.CLICK, handleModsButtonClick);
+			invalidateData();
+			invalidateSize();
+		}
+
+		private function buttonDestroy() : void
+		{
+			if (modsButton)
+			{
+				if (modsButton.parent)
+				{
+					modsButton.parent.removeChild(modsButton);
+				}
+				modsButton.removeEventListener(ButtonEvent.CLICK, handleModsButtonClick);
+				modsButton.dispose();
+			}
+			modsButton = null;
+		}
+
 		override protected function setStaticData(data:ModsListStaticDataVO) : void 
 		{
-			modsButton.tooltip = data.descriptionLabel;
+			_tooltip = data.descriptionLabel;
+			invalidateData();
 		}
 
 		override protected function buttonBlinking() : void 
 		{
-			modsButton.blinking = true;
+			_blinking = true;
+			invalidateData();
 		}
 
 		override protected function onButtonInvalid() : void 
 		{
-			invalidate(INVALIDATE_BUTTON);
+			invalidateSize();
 		}
 	}
 }
