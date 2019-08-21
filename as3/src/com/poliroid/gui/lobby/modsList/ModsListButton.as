@@ -189,6 +189,8 @@
 				// append modsButton to messengerBar.constraints (all bottom buttons position manager)
 				messengerBar.addChild(DisplayObject(modsButton));
 				messengerBar.constraints.addElement("modsButton", DisplayObject(modsButton), Constraints.RIGHT);
+
+				messengerBar.addEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE, handleMessangerBarDispose);
 			}
 
 			if (INVALIDATE_ALIASES.indexOf(alias) >= 0)
@@ -211,6 +213,12 @@
 			App.popoverMgr.show(modsButton, POPOVER_ALIAS);
 		}
 		
+
+		private function handleMessangerBarDispose() : void
+		{
+			messengerBar = null;
+		}
+
 		override protected function setStaticData(data:ModsListStaticDataVO) : void 
 		{
 			modsButton.tooltip = data.descriptionLabel;
