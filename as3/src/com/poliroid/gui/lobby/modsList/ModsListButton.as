@@ -1,30 +1,31 @@
 ﻿package com.poliroid.gui.lobby.modsList 
 {
+
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	
 	import scaleform.clik.constants.InvalidationType;
+
 	import scaleform.clik.events.ButtonEvent;
 	import scaleform.clik.utils.Constraints;
-	
+
 	import net.wg.infrastructure.managers.impl.ContainerManagerBase;
 	import net.wg.gui.components.containers.MainViewContainer;
 	import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
 	import net.wg.infrastructure.interfaces.IManagedContent;
-	
+
 	import net.wg.data.Aliases;
 	import net.wg.gui.lobby.messengerBar.MessengerBar;
 	import net.wg.infrastructure.interfaces.IView;
 	import net.wg.infrastructure.events.LoaderEvent;
 	import net.wg.gui.lobby.LobbyPage;
 	import net.wg.gui.login.impl.LoginPage;
-	
+
 	import com.poliroid.gui.lobby.modsList.controls.ModsListBlinkingButton;
 	import com.poliroid.gui.lobby.modsList.data.ModsListStaticDataVO;
 	import com.poliroid.gui.lobby.modsList.interfaces.IModsListButtonMeta;
 	import com.poliroid.gui.lobby.modsList.interfaces.impl.ModsListButtonMeta;
-	
+
 	public class ModsListButton extends ModsListButtonMeta implements IModsListButtonMeta 
 	{
 		
@@ -48,11 +49,11 @@
 		{
 			super();
 		}
-		
+
 		override protected function configUI() : void 
 		{
 			super.configUI();
-			
+
 			// subscribe to stage resize
 			App.instance.stage.addEventListener(Event.RESIZE, onResize);
 			
@@ -79,13 +80,13 @@
 					}
 				}
 			}
-			
+
 			// subscribe to container manager loader
 			(App.containerMgr as ContainerManagerBase).loader.addEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded, false, 0, true);
 			
 			modsButton.addEventListener(ButtonEvent.CLICK, handleModsButtonClick);
 		}
-		
+
 		override protected function onDispose() : void 
 		{
 			if (modsButton)
@@ -103,11 +104,11 @@
 			
 			super.onDispose();
 		}
-		
+
 		override protected function draw() : void 
 		{
 			super.draw();
-			
+
 			if(isInvalid(INVALIDATE_BUTTON))
 			{
 				if (isInLobby)
@@ -141,23 +142,23 @@
 				(App.instance as MovieClip).addChild(this);
 			}
 		}
-		
+
 		private function onResize(e:Event) : void 
 		{
 			invalidate(INVALIDATE_BUTTON);
 			validateNow();
 		}
-		
+
 		private function onViewLoaded(event:LoaderEvent) : void 
 		{
 			var view:IView = event.view as IView;
 			processView(view);
 		}
-		
+
 		private function processView(view:IView) : void 
 		{
 			var alias:String = view.as_config.alias;
-			
+
 			if (alias == Aliases.LOGIN)
 			{
 				messengerBar = null;
@@ -165,7 +166,7 @@
 				
 				(view as LoginPage).addChild(DisplayObject(modsButton));
 			}
-			
+
 			if (alias == Aliases.LOBBY)
 			{
 				
@@ -196,13 +197,13 @@
 				invalidate(INVALIDATE_BUTTON);
 			}
 		}
-		
+
 		private function moveButton(posX:Number, posY:Number) : void 
 		{
 			modsButton.x = posX;
 			modsButton.y = posY;
 		}
-		
+
 		private function handleModsButtonClick(event:ButtonEvent) : void 
 		{
 			onButtonClickS(isInLobby);
@@ -215,12 +216,12 @@
 		{
 			modsButton.tooltip = data.descriptionLabel;
 		}
-		
+
 		override protected function buttonBlinking() : void 
 		{
 			modsButton.blinking = true;
 		}
-		
+
 		override protected function onButtonInvalid() : void 
 		{
 			invalidate(INVALIDATE_BUTTON);

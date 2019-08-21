@@ -1,25 +1,25 @@
 ﻿package com.poliroid.gui.lobby.modsList.data 
 {
+
 	import net.wg.data.constants.Errors;
 	import net.wg.data.daapi.base.DAAPIDataClass;
 	import net.wg.infrastructure.interfaces.entity.IDisposable;
-	
+
 	import com.poliroid.gui.lobby.modsList.data.ModsListItemRendererVO;
-	
+
 	public class ModsListModsVO extends DAAPIDataClass
 	{
 		private static const MODSLIST_FIELD_NAME:String = "mods";
-		
+
 		public var modsList:Array = null;
-		
+
 		public function ModsListModsVO(data:Object) 
 		{
 			super(data);
 		}
-		
+
 		override protected function onDataWrite(name:String, data:Object) : Boolean
 		{
-			
 			if(name == MODSLIST_FIELD_NAME)
 			{
 				var mods:Array = data as Array;
@@ -33,7 +33,7 @@
 			}
 			return super.onDataWrite(name, data);
 		}
-		
+
 		override protected function onDispose() : void
 		{
 			if(modsList != null)
