@@ -58,6 +58,6 @@ def parseLangFields(langFile):
 
 def prepareDescription(descText):
 	"""prepere Description for showComplex"""
-	if '{HEADER}' and '{BODY}' not in descText:
+	if '{BODY}' not in descText:
 		return makeTooltip(body=descText)
 	return descText
