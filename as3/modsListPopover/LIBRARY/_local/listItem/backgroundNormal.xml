@@ -1,0 +1,17 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="_local/listItem/backgroundNormal" itemID="5e7d41ab-000000d3" lastModified="1585267115">
+  <timeline>
+    <DOMTimeline name="backgroundNormal">
+      <layers>
+        <DOMLayer name="Layer 1" color="#AECB44" current="true" isSelected="true" heightLiteral="24">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="_local/listItem/backgroundNormal.png"/>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

@@ -1,0 +1,77 @@
+<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#999999" frameRate="50" currentTimeline="1" xflVersion="2.971" creatorInfo="Adobe Animate" platform="Windows" versionInfo="Saved by Animate Windows 20.0 build 19255" majorVersion="20" buildNumber="19255" viewAngle3D="31.2421376975057" vanishingPoint3DX="512" vanishingPoint3DY="384" nextSceneIdentifier="3" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false" filetypeGUID="DD0DDBBF-5BEF-45B2-9F24-A3048D2A676F" fileGUID="E38458F718BEF34CBD52AB06FAE31CC3">
+     <folders>
+          <DOMFolderItem name="_imports" itemID="5cf8dca1-00000026" isExpanded="true"/>
+          <DOMFolderItem name="_local" itemID="5875450d-0000015c" isExpanded="true"/>
+          <DOMFolderItem name="_local/listItem" itemID="5e7d40be-000000b1" isExpanded="true"/>
+     </folders>
+     <fonts>
+          <DOMFontItem name="_imports/$TitleFont" itemID="4aeab54f-0000030c" linkageImportForRS="true" linkageExportInFirstFrame="false" linkageClassName="$TitleFont" linkageURL="gfxfontlib.swf" font="ZurichCondBold" size="0" id="1" sourceLastImported="1484257096"/>
+     </fonts>
+     <media>
+          <DOMBitmapItem name="_local/listItem/backgroundDisabled.png" itemID="5e7d4196-000000c9" sourceExternalFilepath="./LIBRARY/_local/bgDisabled.png" sourceLastImported="1585267094" externalFileSize="12487" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="_local/listItem/backgroundDisabled.png" bitmapDataHRef="M 5 1585266832.dat" frameRight="5600" frameBottom="1400"/>
+          <DOMBitmapItem name="_local/listItem/backgroundHovered.png" itemID="5e7d4199-000000cb" sourceExternalFilepath="./LIBRARY/_local/bgHovered.png" sourceLastImported="1585267097" externalFileSize="5814" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="_local/listItem/backgroundHovered.png" bitmapDataHRef="M 6 1585266835.dat" frameRight="5600" frameBottom="1400"/>
+          <DOMBitmapItem name="_local/listItem/backgroundNormal.png" itemID="5e7d419b-000000cd" sourceExternalFilepath="./LIBRARY/_local/bgNormal.png" sourceLastImported="1585267099" externalFileSize="4930" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="_local/listItem/backgroundNormal.png" bitmapDataHRef="M 7 1585266836.dat" frameRight="5600" frameBottom="1400"/>
+     </media>
+     <symbols>
+          <Include href="_imports/Image.xml" itemID="588a83c1-0000018b" lastModified="1585266965"/>
+          <Include href="_imports/NewIndicator_UI.xml" itemID="588a821c-0000015b" lastModified="1585266979"/>
+          <Include href="_imports/ScrollBar.xml" itemID="587c01aa-00000149" lastModified="1517621251"/>
+          <Include href="_imports/ScrollingList.xml" itemID="587522f8-00000131" lastModified="1517621014"/>
+          <Include href="_local/listItem/backgroundDisabled.xml" loadImmediate="false" itemID="5e7d41a2-000000cf" lastModified="1585267106"/>
+          <Include href="_local/listItem/backgroundHovered.xml" loadImmediate="false" itemID="5e7d41a7-000000d1" lastModified="1585267111"/>
+          <Include href="_local/listItem/backgroundNormal.xml" loadImmediate="false" itemID="5e7d41ab-000000d3" lastModified="1585267115"/>
+          <Include href="_local/listItem/hitMC.xml" loadImmediate="false" itemID="588ae58a-0000014c" lastModified="1585267140"/>
+          <Include href="_local/ModsListItemRendererUI.xml" itemID="58754565-00000198" lastModified="1585267206"/>
+          <Include href="ModsListPopoverUI.xml" itemID="58754027-00000196" lastModified="1585266988"/>
+     </symbols>
+     <timelines>
+          <DOMTimeline name="Scene 1">
+               <layers>
+                    <DOMLayer name="Layer 1" color="#9933CC" current="true" isSelected="true" autoNamed="false" heightLiteral="24">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements>
+                                        <DOMComponentInstance libraryItemName="ModsListPopoverUI" name="main" uniqueID="1">
+                                             <transformationPoint>
+                                                  <Point x="140" y="35"/>
+                                             </transformationPoint>
+                                             <parametersAsXML><![CDATA[   <property id="visible">
+      <Inspectable name="visible" unlocalizedName="visible" variable="visible" category="" verbose="0" defaultValue="true" type="Boolean"/>
+   </property>
+   <property id="width">
+      <Inspectable name="width" unlocalizedName="width" variable="width" category="" verbose="0" defaultValue="280" type="Number"/>
+   </property>
+]]></parametersAsXML>
+                                        </DOMComponentInstance>
+                                   </elements>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+               </layers>
+          </DOMTimeline>
+     </timelines>
+     <scripts/>
+     <PrinterSettings/>
+     <publishHistory>
+          <PublishItem publishSize="22344" publishTime="1585267220"/>
+          <PublishItem publishSize="22350" publishTime="1585267081"/>
+          <PublishItem publishSize="22349" publishTime="1585267081"/>
+          <PublishItem publishSize="22350" publishTime="1585267080"/>
+          <PublishItem publishSize="22349" publishTime="1585267079"/>
+          <PublishItem publishSize="22396" publishTime="1585267029"/>
+          <PublishItem publishSize="22394" publishTime="1585267029"/>
+          <PublishItem publishSize="22394" publishTime="1585267022"/>
+          <PublishItem publishSize="22394" publishTime="1585267022"/>
+          <PublishItem publishSize="22394" publishTime="1585266982"/>
+          <PublishItem publishSize="22394" publishTime="1585266981"/>
+          <PublishItem publishSize="22398" publishTime="1585266860"/>
+          <PublishItem publishSize="22403" publishTime="1559813272"/>
+          <PublishItem publishSize="22403" publishTime="1559813271"/>
+          <PublishItem publishSize="22403" publishTime="1559813270"/>
+          <PublishItem publishSize="22396" publishTime="1517622179"/>
+          <PublishItem publishSize="22396" publishTime="1517622153"/>
+          <PublishItem publishSize="22396" publishTime="1517622081"/>
+          <PublishItem publishSize="22398" publishTime="1517621312"/>
+          <PublishItem publishSize="22401" publishTime="1517621312"/>
+     </publishHistory>
+</DOMDocument>
