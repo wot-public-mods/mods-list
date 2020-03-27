@@ -1,0 +1,26 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="_local/button/blinker" itemID="5e7d3ff9-00000077" lastModified="1585266681">
+  <timeline>
+    <DOMTimeline name="blinker">
+      <layers>
+        <DOMLayer name="Layer 1" color="#9FE08C" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMShape>
+                  <fills>
+                    <FillStyle index="1">
+                      <SolidColor color="#FFAE35"/>
+                    </FillStyle>
+                  </fills>
+                  <edges>
+                    <Edge fillStyle0="1" edges="!1420 581|1420 80!1420 80[1420 20 1376 20!1376 20|64 20!64 20[20 20 20 80!20 80|20 581!20 581[20 640 64 640!64 640|1376 640!1376 640[1420 640 1420 581"/>
+                  </edges>
+                </DOMShape>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

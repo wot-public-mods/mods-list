@@ -1,0 +1,288 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="_local/ModsListItemRendererUI" itemID="58754565-00000198" linkageExportForAS="true" linkageBaseClass="com.poliroid.gui.lobby.modsList.controls.ModsListItemRenderer" linkageClassName="ModsListItemRendererUI" lastModified="1585267206" lastUniqueIdentifier="5">
+  <timeline>
+    <DOMTimeline name="ModsListItemRendererUI">
+      <layers>
+        <DOMLayer name="Layer 9" color="#4F80FF" locked="true" heightLiteral="24">
+          <frames>
+            <DOMFrame index="0" duration="9" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="9" duration="10" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[stop();
+]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="19" duration="10" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[stop();
+]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="29" duration="10" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[stop();
+]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="39" duration="10" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[stop();
+]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="49" duration="10" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[stop();
+]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="59" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[stop();
+]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="Labels Layer" color="#B16AAD" locked="true" heightLiteral="24">
+          <frames>
+            <DOMFrame index="0" duration="10" name="up" labelType="name" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="10" duration="10" name="over" labelType="name" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="20" duration="10" name="down" labelType="name" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="30" duration="10" name="release" labelType="name" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="40" duration="10" name="out" labelType="name" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="50" duration="10" name="disabled" labelType="name" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="elements" color="#FF800A" autoNamed="false" layerType="folder"/>
+        <DOMLayer name="alert icon" color="#D4A0A9" parentLayerIndex="2" locked="true" current="true" isSelected="true" autoNamed="false" heightLiteral="24">
+          <frames>
+            <DOMFrame index="0" duration="50" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_imports/NewIndicator_UI" name="alertMC" isVisible="false">
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="50" duration="10" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_imports/NewIndicator_UI" name="alertMC" centerPoint3DX="50" centerPoint3DY="35" isVisible="false">
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="mod icon" color="#FF4F4F" parentLayerIndex="2" locked="true" autoNamed="false" heightLiteral="24">
+          <frames>
+            <DOMFrame index="0" duration="50" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_imports/Image" name="modIcon" selected="true">
+                  <matrix>
+                    <Matrix tx="15" ty="12"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="50" duration="10" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_imports/Image" name="modIcon" centerPoint3DX="40" centerPoint3DY="37">
+                  <matrix>
+                    <Matrix tx="15" ty="12"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                  <filters>
+                    <AdjustColorFilter saturation="-90"/>
+                  </filters>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="mod name" color="#BDD3F1" parentLayerIndex="2" locked="true" autoNamed="false" heightLiteral="24">
+          <frames>
+            <DOMFrame index="0" duration="50" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="modNameTF" width="186" height="20.1" isSelectable="false" lineType="multiline">
+                  <matrix>
+                    <Matrix tx="72" ty="26"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>modNameTF</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" lineHeight="20.1" size="16" bitmapSize="320" face="$TitleFont*" fillColor="#DDDDD0"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="50" duration="10" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="modNameTF" width="186" height="20.1" isSelectable="false" lineType="multiline">
+                  <matrix>
+                    <Matrix tx="72" ty="26"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>modNameTF</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" lineHeight="20.1" size="16" bitmapSize="320" face="$TitleFont*" fillColor="#999999"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="background" color="#9933CC" autoNamed="false" layerType="folder"/>
+        <DOMLayer name="animated" color="#F55D7C" parentLayerIndex="6" locked="true" autoNamed="false" heightLiteral="24">
+          <frames>
+            <DOMFrame index="0" duration="10" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="10" duration="9" tweenType="motion" motionTweenSnap="true" keyMode="22017">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_local/listItem/backgroundHovered" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix a="0.99993896484375" d="1.07142639160156"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                  <color>
+                    <Color alphaMultiplier="0"/>
+                  </color>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="19" tweenType="motion" motionTweenSnap="true" keyMode="22017">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_local/listItem/backgroundHovered" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix a="0.99993896484375" d="1.07142639160156"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="20" duration="20" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_local/listItem/backgroundHovered" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix a="0.99993896484375" d="1.07142639160156"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="40" duration="9" tweenType="motion" motionTweenSnap="true" keyMode="22017">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_local/listItem/backgroundHovered" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix a="0.99993896484375" d="1.07142639160156"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="49" tweenType="motion" motionTweenSnap="true" keyMode="22017">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_local/listItem/backgroundHovered" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix d="1.07142639160156"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                  <color>
+                    <Color alphaMultiplier="0"/>
+                  </color>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="50" duration="10" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_local/listItem/backgroundHovered" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix d="1.07142639160156"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                  <color>
+                    <Color alphaMultiplier="0"/>
+                  </color>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="static" color="#09BDC1" parentLayerIndex="6" locked="true" autoNamed="false" heightLiteral="24">
+          <frames>
+            <DOMFrame index="0" duration="50" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_local/listItem/backgroundNormal" selected="true" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix a="0.99993896484375" d="1.07142639160156"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="50" duration="10" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="_local/listItem/backgroundDisabled" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix d="1.07142639160156"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="140" y="35"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>
