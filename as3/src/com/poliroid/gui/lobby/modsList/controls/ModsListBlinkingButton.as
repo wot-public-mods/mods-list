@@ -3,7 +3,7 @@
 
 	import flash.display.DisplayObject;
 
-    import net.wg.data.constants.SoundTypes;
+	import net.wg.data.constants.SoundTypes;
 	import net.wg.gui.components.controls.SoundButtonEx;
 	import net.wg.infrastructure.interfaces.IPopOverCaller;
 
@@ -23,7 +23,7 @@
 			{
 				return Vector.<String>(['blinking_', '']);
 			}
-			else 
+			else
 			{
 				return Vector.<String>(['']);
 			}
