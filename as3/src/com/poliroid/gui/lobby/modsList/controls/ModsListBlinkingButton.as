@@ -3,6 +3,7 @@
 
 	import flash.display.DisplayObject;
 
+    import net.wg.data.constants.SoundTypes;
 	import net.wg.gui.components.controls.SoundButtonEx;
 	import net.wg.infrastructure.interfaces.IPopOverCaller;
 
@@ -10,9 +11,10 @@
 	{
 		private var _blinking:Boolean = false;
 
-		public function ModsListBlinkingButton()
+		override protected function configUI() : void
 		{
-			super();
+			super.configUI();
+			soundType = SoundTypes.MESSANGER_BTN;
 		}
 
 		override protected function getStatePrefixes() : Vector.<String>
