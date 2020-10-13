@@ -16,6 +16,7 @@
 	import net.wg.infrastructure.interfaces.IManagedContent;
 
 	import net.wg.data.Aliases;
+	import net.wg.data.constants.generated.LAYER_NAMES;
 	import net.wg.gui.lobby.messengerBar.MessengerBar;
 	import net.wg.infrastructure.interfaces.IView;
 	import net.wg.infrastructure.events.LoaderEvent;
@@ -59,26 +60,22 @@
 			super.configUI();
 
 			// process already loaded views
-			var containerMgr:ContainerManagerBase = App.containerMgr as ContainerManagerBase;
-			for each (var container:ISimpleManagedContainer in containerMgr.containersMap)
+			var viewContainer:MainViewContainer = _getContainer(LAYER_NAMES.VIEWS) as MainViewContainer;
+			if (viewContainer != null)
 			{
-				var viewContainer:MainViewContainer = container as MainViewContainer;
-				if (viewContainer != null)
+				var num:int = viewContainer.numChildren;
+				for (var idx:int = 0; idx < num; ++idx)
 				{
-					var num:int = viewContainer.numChildren;
-					for (var idx:int = 0; idx < num; ++idx)
+					var view:IView = viewContainer.getChildAt(idx) as IView;
+					if (view != null)
 					{
-						var view:IView = viewContainer.getChildAt(idx) as IView;
-						if (view != null)
-						{
-							processView(view);
-						}
+						processView(view);
 					}
-					var topmostView:IManagedContent = viewContainer.getTopmostView();
-					if (topmostView != null)
-					{
-						viewContainer.setFocusedView(topmostView);
-					}
+				}
+				var topmostView:IManagedContent = viewContainer.getTopmostView();
+				if (topmostView != null)
+				{
+					viewContainer.setFocusedView(topmostView);
 				}
 			}
 
@@ -152,6 +149,11 @@
 			{
 				(App.instance as MovieClip).addChild(this);
 			}
+		}
+
+		private function _getContainer(containerName:String) : ISimpleManagedContainer
+		{
+			return App.containerMgr.getContainer(LAYER_NAMES.LAYER_ORDER.indexOf(containerName))
 		}
 
 		private function onResize(e:Event) : void 
