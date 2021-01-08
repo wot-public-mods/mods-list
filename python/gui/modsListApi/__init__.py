@@ -29,10 +29,10 @@ ModsListApi
 """
 
 __author__ = "Andruschyshyn Andrey"
-__copyright__ = "Copyright 2020, poliroid"
+__copyright__ = "Copyright 2021, poliroid"
 __credits__ = ["Andruschyshyn Andrey"]
 __license__ = "CC BY-NC-SA 4.0"
-__version__ = "1.3.5"
+__version__ = "1.3.6"
 __maintainer__ = "Andruschyshyn Andrey"
 __email__ = "p0lir0id@yandex.ru"
 __status__ = "Production"
