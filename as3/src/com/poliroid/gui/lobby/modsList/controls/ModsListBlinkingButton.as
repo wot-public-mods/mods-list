@@ -11,6 +11,17 @@
 	{
 		private var _blinking:Boolean = false;
 
+		public function ModsListBlinkingButton()
+		{
+			super();
+			setState("up");
+		}
+
+		override protected function canShowTooltipByHover() : Boolean
+		{
+			return enabled;
+		}
+
 		override protected function configUI() : void
 		{
 			super.configUI();
@@ -19,7 +30,7 @@
 
 		override protected function getStatePrefixes() : Vector.<String>
 		{
-			if (blinking)
+			if (_blinking)
 			{
 				return Vector.<String>(['blinking_', '']);
 			}
