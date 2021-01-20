@@ -217,6 +217,7 @@
 		{
 			onButtonClickS(isInLobby);
 			_blinking = false;
+			invalidateData();
 			App.toolTipMgr.hide();
 			App.popoverMgr.show(modsButton, POPOVER_ALIAS);
 		}
