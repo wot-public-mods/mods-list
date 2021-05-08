@@ -11,9 +11,8 @@
 * Add a distribution to your mod
 * Send information about your modification using the API
 
-Code license: CC BY-NC-SA 4.0
-
-P0LIR0ID 2015-2020
+SPDX-License-Identifier: LGPL-3.0-or-later  
+Copyright(c) 2021 Andrey Andruschyshyn. All rights reserved.  
 
 ### Example of what a menu looks like in a hangar
 ![Example of what a menu looks like in a hangar](https://static.poliroid.ru/modsListApi_lobby.jpg)
