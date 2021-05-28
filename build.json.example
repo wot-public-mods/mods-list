@@ -1,13 +1,13 @@
 {
 	"version": 3,
 	"software": {
-		"animate": "C:\\Program Files\\Adobe\\Adobe Animate 2020\\Animate.exe",
+		"animate": "C:\\Program Files\\Adobe\\Adobe Animate 2021\\Animate.exe",
 		"python": "C:\\Program Files\\Python-2.7.17\\python.exe",
 		"sonar": "sonar.cmd"
 	},
 	"game": {
 		"folder": "E:\\wot\\ct",
-		"version": "1.12.1.1"
+		"version": "1.12.1.2"
 	},
 	"info": {
 		"id": "modslistapi",
