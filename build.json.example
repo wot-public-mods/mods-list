@@ -1,19 +1,19 @@
 {
 	"version": 3,
 	"software": {
-		"animate": "C:\\Program Files\\Adobe\\Adobe Animate 2021\\Animate.exe",
-		"python": "C:\\Program Files\\Python-2.7.17\\python.exe",
-		"sonar": "sonar.cmd"
+		"animate": "/path/to/adobe_animate",
+		"python": "/path/to/python_27",
+		"sonar": ""
 	},
 	"game": {
-		"folder": "E:\\wot\\ct",
-		"version": "1.12.1.2"
+		"folder": "/path/to/wot_dir",
+		"version": "wot_version"
 	},
 	"info": {
 		"id": "modslistapi",
 		"author": "poliroid",
 		"name": "Modifications list",
 		"description": "Modifications list - comfortable run, setup and alert",
-		"version": "1.3.8"
+		"version": "mod_version"
 	}
 }
