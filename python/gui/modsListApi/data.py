@@ -1,8 +1,10 @@
 
 import BigWorld
+import ResMgr
 from debug_utils import LOG_WARNING
 from ids_generators import SequenceIDGenerator
 
+from gui.modsListApi._constants import DEFAULT_MOD_ICON
 from gui.modsListApi.controller import g_controller
 from gui.modsListApi.lang import l10n
 from gui.modsListApi.events import g_eventsManager
@@ -89,10 +91,17 @@ class ModificationItem(object):
 			self.__description = prepareDescription(description)
 		if callback is not None:
 			self.__callback = callback
-		# use '../../' to premature up from "gui/flash" directory
 		if icon is not None:
-			self.__icon = '../../%s' % icon
+			self.__icon = self.__fixModIcon(icon)
 		g_eventsManager.onListUpdated()
+
+	def __fixModIcon(self, path):
+		if not path:
+			return DEFAULT_MOD_ICON
+		# use '../../' to premature up from "gui/flash" directory
+		if ResMgr.isFile(path):
+			return '../../%s' % path
+		return path
 
 	def setAlerting(self, isAlerting):
 		self.__alerting = isAlerting

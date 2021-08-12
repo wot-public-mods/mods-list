@@ -11,3 +11,5 @@ LANGUAGE_CODES = ('ru', 'uk', 'be', 'en', 'de', 'et', 'bg', 'da', 'fi', 'fil', '
 LANGUAGE_FILE_PATH = 'mods/poliroid.modslistapi/text/%s.yml'
 
 DEFAULT_UI_LANGUAGE = 'ru'
+
+DEFAULT_MOD_ICON = '../../gui/maps/modslist/default-mod-icon.png'
