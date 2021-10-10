@@ -96,12 +96,10 @@ class ModificationItem(object):
 		g_eventsManager.onListUpdated()
 
 	def __fixModIcon(self, path):
-		if not path:
+		if not path or not ResMgr.isFile(path):
 			return DEFAULT_MOD_ICON
 		# use '../../' to premature up from "gui/flash" directory
-		if ResMgr.isFile(path):
-			return '../../%s' % path
-		return path
+		return '../../%s' % path
 
 	def setAlerting(self, isAlerting):
 		self.__alerting = isAlerting
