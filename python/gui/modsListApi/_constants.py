@@ -8,7 +8,7 @@ LANGUAGE_CODES = ('ru', 'uk', 'be', 'en', 'de', 'et', 'bg', 'da', 'fi', 'fil', '
 	'it', 'ja', 'ms', 'nl', 'no', 'pl', 'pt', 'pt_br', 'ro', 'sr', 'vi', 'zh_sg', 'zh_tw', 'hr', 'th',
 	'lv', 'lt', 'cs', 'es_ar', 'tr', 'zh_cn', 'es', 'kk', 'sv', )
 
-LANGUAGE_FILE_PATH = 'mods/poliroid.modslistapi/text/%s.yml'
+LANGUAGE_FILE_MASK = 'mods/poliroid.modslistapi/text/%s.yml'
 
 DEFAULT_UI_LANGUAGE = 'ru'
 

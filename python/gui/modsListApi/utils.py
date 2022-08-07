@@ -1,9 +1,10 @@
 ﻿
-__all__ = ('byteify', 'override', 'readFromVFS', 'parseLangFields', 'prepareDescription')
-
+import functools
 import types
 import ResMgr
 from gui.shared.utils.functions import makeTooltip
+
+__all__ = ('byteify', 'override', 'readFromVFS', 'parseLangFields', 'prepareDescription', 'cacheResult')
 
 def override(holder, name, wrapper=None, setter=None):
 	"""Override methods, properties, functions, attributes
@@ -61,3 +62,15 @@ def prepareDescription(descText):
 	if '{BODY}' not in descText:
 		return makeTooltip(body=descText)
 	return descText
+
+def cacheResult(function):
+	memo = {}
+	@functools.wraps(function)
+	def wrapper(cache_key):
+		try:
+			return memo[cache_key]
+		except KeyError:
+			rv = function(cache_key)
+			memo[cache_key] = rv
+			return rv
+	return wrapper
