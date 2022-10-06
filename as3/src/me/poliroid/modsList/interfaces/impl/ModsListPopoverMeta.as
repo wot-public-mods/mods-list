@@ -1,12 +1,12 @@
-﻿package com.poliroid.gui.lobby.modsList.interfaces.impl 
+﻿package me.poliroid.modsList.interfaces.impl 
 {
 
 	import net.wg.data.constants.Errors;
 	import net.wg.infrastructure.base.SmartPopOverView;
 	import net.wg.infrastructure.exceptions.AbstractException;
 
-	import com.poliroid.gui.lobby.modsList.data.ModsListModsVO;
-	import com.poliroid.gui.lobby.modsList.data.ModsListStaticDataVO;
+	import me.poliroid.modsList.data.ModsListModsVO;
+	import me.poliroid.modsList.data.ModsListStaticDataVO;
 	import net.wg.data.constants.Linkages;
 
 	public class ModsListPopoverMeta extends SmartPopOverView

@@ -1,4 +1,4 @@
-﻿package com.poliroid.gui.lobby.modsList 
+﻿package me.poliroid.modsList 
 {
 
 	import scaleform.clik.constants.InvalidationType;
@@ -9,11 +9,11 @@
 	import net.wg.gui.components.controls.ScrollBar;
 	import net.wg.gui.components.popovers.PopOver;
 
-	import com.poliroid.gui.lobby.modsList.data.ModsListModsVO;
-	import com.poliroid.gui.lobby.modsList.data.ModsListItemRendererVO;
-	import com.poliroid.gui.lobby.modsList.data.ModsListStaticDataVO;
-	import com.poliroid.gui.lobby.modsList.interfaces.IModsListPopoverMeta
-	import com.poliroid.gui.lobby.modsList.interfaces.impl.ModsListPopoverMeta
+	import me.poliroid.modsList.data.ModsListModsVO;
+	import me.poliroid.modsList.data.ModsListItemRendererVO;
+	import me.poliroid.modsList.data.ModsListStaticDataVO;
+	import me.poliroid.modsList.interfaces.IModsListPopoverMeta
+	import me.poliroid.modsList.interfaces.impl.ModsListPopoverMeta
 
 	public class ModsListPopover extends ModsListPopoverMeta implements IModsListPopoverMeta 
 	{
@@ -27,11 +27,6 @@
 		public var modsList:ScrollingList = null;
 
 		public var scrollBar:ScrollBar = null;
-
-		public function ModsListPopover() 
-		{
-			super();
-		}
 
 		override protected function onDispose() : void 
 		{

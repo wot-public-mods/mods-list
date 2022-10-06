@@ -1,4 +1,4 @@
-﻿package com.poliroid.gui.lobby.modsList.interfaces 
+﻿package me.poliroid.modsList.interfaces 
 {
 
 	import flash.events.IEventDispatcher;

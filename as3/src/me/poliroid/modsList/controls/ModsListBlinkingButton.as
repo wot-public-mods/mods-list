@@ -1,4 +1,4 @@
-﻿package com.poliroid.gui.lobby.modsList.controls
+﻿package me.poliroid.modsList.controls
 {
 
 	import flash.display.DisplayObject;

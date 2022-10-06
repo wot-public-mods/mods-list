@@ -1,4 +1,4 @@
-﻿package com.poliroid.gui.lobby.modsList.controls 
+﻿package me.poliroid.modsList.controls 
 {
 
 	import flash.events.MouseEvent;
@@ -12,7 +12,7 @@
 	import net.wg.gui.components.controls.Image;
 	import net.wg.gui.components.controls.SoundListItemRenderer;
 
-	import com.poliroid.gui.lobby.modsList.data.ModsListItemRendererVO;
+	import me.poliroid.modsList.data.ModsListItemRendererVO;
 
 	public class ModsListItemRenderer extends SoundListItemRenderer
 	{

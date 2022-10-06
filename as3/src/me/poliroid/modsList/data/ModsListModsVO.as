@@ -1,11 +1,11 @@
-﻿package com.poliroid.gui.lobby.modsList.data 
+﻿package me.poliroid.modsList.data 
 {
 
 	import net.wg.data.constants.Errors;
 	import net.wg.data.daapi.base.DAAPIDataClass;
 	import net.wg.infrastructure.interfaces.entity.IDisposable;
 
-	import com.poliroid.gui.lobby.modsList.data.ModsListItemRendererVO;
+	import me.poliroid.modsList.data.ModsListItemRendererVO;
 
 	public class ModsListModsVO extends DAAPIDataClass
 	{

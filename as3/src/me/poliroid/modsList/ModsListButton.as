@@ -1,4 +1,4 @@
-﻿package com.poliroid.gui.lobby.modsList 
+﻿package me.poliroid.modsList 
 {
 
 	import flash.display.DisplayObject;
@@ -23,10 +23,10 @@
 	import net.wg.gui.lobby.LobbyPage;
 	import net.wg.gui.login.impl.LoginPage;
 
-	import com.poliroid.gui.lobby.modsList.controls.ModsListBlinkingButton;
-	import com.poliroid.gui.lobby.modsList.data.ModsListStaticDataVO;
-	import com.poliroid.gui.lobby.modsList.interfaces.IModsListButtonMeta;
-	import com.poliroid.gui.lobby.modsList.interfaces.impl.ModsListButtonMeta;
+	import me.poliroid.modsList.controls.ModsListBlinkingButton;
+	import me.poliroid.modsList.data.ModsListStaticDataVO;
+	import me.poliroid.modsList.interfaces.IModsListButtonMeta;
+	import me.poliroid.modsList.interfaces.impl.ModsListButtonMeta;
 
 	public class ModsListButton extends ModsListButtonMeta implements IModsListButtonMeta 
 	{

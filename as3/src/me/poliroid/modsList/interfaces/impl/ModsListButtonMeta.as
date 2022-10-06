@@ -1,11 +1,11 @@
-﻿package com.poliroid.gui.lobby.modsList.interfaces.impl 
+﻿package me.poliroid.modsList.interfaces.impl 
 {
 
 	import net.wg.data.constants.Errors;
 	import net.wg.infrastructure.base.AbstractView;
 	import net.wg.infrastructure.exceptions.AbstractException;
 
-	import com.poliroid.gui.lobby.modsList.data.ModsListStaticDataVO;
+	import me.poliroid.modsList.data.ModsListStaticDataVO;
 
 	public class ModsListButtonMeta extends AbstractView
 	{
