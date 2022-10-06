@@ -4,11 +4,11 @@ import ResMgr
 from debug_utils import LOG_WARNING
 from ids_generators import SequenceIDGenerator
 
-from gui.modsListApi._constants import DEFAULT_MOD_ICON
-from gui.modsListApi.controller import g_controller
-from gui.modsListApi.lang import l10n
-from gui.modsListApi.events import g_eventsManager
-from gui.modsListApi.utils import prepareDescription
+from ._constants import DEFAULT_MOD_ICON
+from .controller import g_controller
+from .lang import l10n
+from .events import g_eventsManager
+from .utils import prepareDescription
 
 __all__ = ('g_dataProvider', 'ModificationItem', )
 

@@ -5,9 +5,9 @@ from gui.Scaleform.daapi.view.lobby.messengerBar import messenger_bar
 from gui.Scaleform.framework.managers.loaders import SFViewLoadParams
 from gui.shared import events, EVENT_BUS_SCOPE, g_eventBus
 
-from gui.modsListApi._constants import MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_POPOVER_ALIAS
-from gui.modsListApi.utils import override
-from gui.modsListApi.events import g_eventsManager
+from ._constants import MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_POPOVER_ALIAS
+from .utils import override
+from .events import g_eventsManager
 
 __all__ = ()
 

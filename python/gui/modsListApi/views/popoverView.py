@@ -1,7 +1,7 @@
 ﻿from gui.Scaleform.framework.entities.abstract.AbstractPopOverView import AbstractPopOverView
 
-from gui.modsListApi.data import g_dataProvider
-from gui.modsListApi.events import g_eventsManager
+from ..data import g_dataProvider
+from ..events import g_eventsManager
 
 class ModsListPopoverViewMeta(AbstractPopOverView):
 

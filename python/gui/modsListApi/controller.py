@@ -31,7 +31,7 @@ class ApiLogicController(object):
 			return LOG_ERROR('method @addModification required mandatory parameters [name, description, ' + \
 						'enabled, login, lobby, callback]')
 
-		from gui.modsListApi.data import ModificationItem
+		from .data import ModificationItem
 		modification = ModificationItem()
 		modification.setData(id, name, description, icon, enabled, login, lobby, callback)
 		self.__modifications[id] = modification

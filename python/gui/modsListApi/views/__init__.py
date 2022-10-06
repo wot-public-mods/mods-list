@@ -2,9 +2,9 @@
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, GroupedViewSettings, ScopeTemplates
 from frameworks.wulf import WindowLayer
 
-from gui.modsListApi._constants import MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_POPOVER_ALIAS
-from gui.modsListApi.views.buttonView import ModsListButtonView
-from gui.modsListApi.views.popoverView import ModsListPopoverView
+from .._constants import MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_POPOVER_ALIAS
+from ..views.buttonView import ModsListButtonView
+from ..views.popoverView import ModsListPopoverView
 
 def getViewSettings():
 	buttonSettings = ViewSettings(MODS_LIST_API_BUTTON_ALIAS, ModsListButtonView, 'modsListButton.swf',

@@ -1,8 +1,8 @@
 ﻿from gui.Scaleform.framework.entities.View import View
 
-from gui.modsListApi.controller import g_controller
-from gui.modsListApi.data import g_dataProvider
-from gui.modsListApi.events import g_eventsManager
+from ..controller import g_controller
+from ..data import g_dataProvider
+from ..events import g_eventsManager
 
 class ModsListButtonViewMeta(View):
 

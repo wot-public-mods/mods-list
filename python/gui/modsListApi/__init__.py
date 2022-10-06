@@ -37,9 +37,9 @@ __maintainer__ = "Andrii Andrushchyshyn"
 __email__ = "contact@poliroid.me"
 __status__ = "Production"
 
-from gui.modsListApi.controller import g_controller
-from gui.modsListApi.hooks import *
-from gui.modsListApi.views import *
+from .controller import g_controller
+from .hooks import *
+from .views import *
 
 __all__ = ('g_modsListApi', )
 
