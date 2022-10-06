@@ -245,7 +245,10 @@
 					modsButton.parent.removeChild(modsButton);
 				}
 				modsButton.removeEventListener(ButtonEvent.CLICK, handleModsButtonClick);
-				modsButton.dispose();
+				if (!modsButton.isDisposed())
+				{
+					modsButton.dispose();
+				}
 			}
 			modsButton = null;
 		}
