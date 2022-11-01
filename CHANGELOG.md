@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.2
+
+* dispose only if needed
+
 ## v1.4.1
 
 * improved localization
