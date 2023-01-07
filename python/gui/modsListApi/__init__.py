@@ -29,7 +29,7 @@ ModsListApi
 """
 
 __author__ = "Andrii Andrushchyshyn"
-__copyright__ = "Copyright 2022, poliroid"
+__copyright__ = "Copyright 2023, poliroid"
 __credits__ = ["Andrii Andrushchyshyn"]
 __license__ = "LGPL-3.0-or-later"
 __version__ = "1.4.3"
