@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.4
+
+* use logging instead of debug_utils
+
 ## v1.4.3
 
 * Chinese Simplified translation update by lokisonl@qq.com

@@ -1,7 +1,9 @@
 ﻿
-from debug_utils import LOG_ERROR
+import logging
 
 __all__ = ('g_controller', )
+
+logger = logging.getLogger(__name__)
 
 class ApiLogicController(object):
 
@@ -28,7 +30,7 @@ class ApiLogicController(object):
 			return self.updateModification(id, name, description, icon, enabled, login, lobby, callback)
 
 		if name is None or description is None or enabled is None or login is None or lobby is None or callback is None:
-			return LOG_ERROR('method @addModification required mandatory parameters [name, description, ' + \
+			return logger.error('method @addModification required mandatory parameters [name, description, ' + \
 						'enabled, login, lobby, callback]')
 
 		from .data import ModificationItem
@@ -40,7 +42,7 @@ class ApiLogicController(object):
 						login=None, lobby=None, callback=None):
 
 		if id not in self.__modifications.keys():
-			return LOG_ERROR('method @updateModification required ModificationItem instance, use ' + \
+			return logger.error('method @updateModification required ModificationItem instance, use ' + \
 						'@addModification instead updateModification')
 
 		modification = self.__modifications[id]
@@ -48,14 +50,14 @@ class ApiLogicController(object):
 
 	def alertModification(self, id):
 		if id not in self.__modifications.keys():
-			return LOG_ERROR('method @alertModification required ModificationItem instance, check ' + \
+			return logger.error('method @alertModification required ModificationItem instance, check ' + \
 							'the id argument')
 		modification = self.__modifications[id]
 		modification.setAlerting(True)
 
 	def clearModificationAlert(self, id):
 		if id not in self.__modifications.keys():
-			return LOG_ERROR('method @clearModificationAlert required ModificationItem instance, ' + \
+			return logger.error('method @clearModificationAlert required ModificationItem instance, ' + \
 							'check the id argument')
 		modification = self.__modifications[id]
 		modification.setAlerting(False)

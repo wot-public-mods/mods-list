@@ -1,7 +1,8 @@
 
 import BigWorld
 import ResMgr
-from debug_utils import LOG_WARNING
+import logging
+
 from ids_generators import SequenceIDGenerator
 
 from ._constants import DEFAULT_MOD_ICON
@@ -11,6 +12,8 @@ from .events import g_eventsManager
 from .utils import prepareDescription
 
 __all__ = ('g_dataProvider', 'ModificationItem', )
+
+logger = logging.getLogger(__name__)
 
 class _DataProvider(object):
 
@@ -67,7 +70,7 @@ class ModificationItem(object):
 		self.__numID = IDGenerator.next()
 		self.__stringID = ''
 		self.__alerting = False
-		self.__callback = lambda: LOG_WARNING('handler for "%s" not installed' % self.__stringID)
+		self.__callback = lambda: logger.warning('handler for "%s" not installed' % self.__stringID)
 		self.__enabled = False
 		self.__availableInLobby = False
 		self.__availableInLogin = False
