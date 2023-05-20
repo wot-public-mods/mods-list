@@ -2,6 +2,10 @@
 
 ## v1.4.4
 
+* wot 1.21 fixes
+
+## v1.4.4
+
 * use logging instead of debug_utils
 
 ## v1.4.3
