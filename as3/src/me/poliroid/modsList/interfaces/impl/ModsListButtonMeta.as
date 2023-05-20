@@ -28,11 +28,6 @@
 			buttonBlinking();
 		}
 
-		public final function as_onButtonInvalid() : void
-		{
-			onButtonInvalid();
-		}
-
 		public final function as_setStaticData(data:Object) : void
 		{
 			setStaticData(new ModsListStaticDataVO(data));
@@ -41,13 +36,6 @@
 		protected function buttonBlinking() : void
 		{
 			var message:String = "as_buttonBlinking" + Errors.ABSTRACT_INVOKE;
-			DebugUtils.LOG_ERROR(message);
-			throw new AbstractException(message);
-		}
-
-		protected function onButtonInvalid() : void
-		{
-			var message:String = "as_onButtonInvalid" + Errors.ABSTRACT_INVOKE;
 			DebugUtils.LOG_ERROR(message);
 			throw new AbstractException(message);
 		}

@@ -265,9 +265,5 @@
 			invalidateData();
 		}
 
-		override protected function onButtonInvalid() : void 
-		{
-			invalidateSize();
-		}
 	}
 }
