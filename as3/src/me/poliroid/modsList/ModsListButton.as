@@ -14,6 +14,7 @@
 	import net.wg.infrastructure.events.LifeCycleEvent;
 	import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
 	import net.wg.infrastructure.interfaces.IManagedContent;
+	import net.wg.infrastructure.interfaces.IDisplayObject;
 
 	import net.wg.data.Aliases;
 	import net.wg.data.constants.generated.LAYER_NAMES;
@@ -31,9 +32,9 @@
 	public class ModsListButton extends ModsListButtonMeta implements IModsListButtonMeta 
 	{
 
-		private static const BUTTON_LOGIN_BOTTOM_MARGIN:int = 36;
+		private static const BUTTON_LOGIN_BOTTOM_MARGIN:int = 40;
 
-		private static const BUTTON_LOGIN_RIGHT_MARGIN:int = 86;
+		private static const BUTTON_LOGIN_RIGHT_MARGIN:int = 80;
 
 		private static const BUTTON_LOBBY_TOP_MARGIN:int = 9;
 
@@ -108,18 +109,13 @@
 
 			if(isInvalid(InvalidationType.SIZE) && modsButton)
 			{
-				if (isInLobby && messengerBar)
+				if (isInLobby)
 				{
-					var mostLeftButton:DisplayObject = DisplayObject(modsButton);
-					if (messengerBar.sessionStatsBtn.visible)
+					if (messengerBar)
 					{
-						mostLeftButton = DisplayObject(messengerBar.sessionStatsBtn);
+						fixRightSideBtnsOrder();
+						messengerBar['updateChannelCarouselWidth']();
 					}
-					if (messengerBar.vehicleCompareCartBtn.visible)
-					{
-						mostLeftButton = DisplayObject(messengerBar.vehicleCompareCartBtn);
-					}
-					messengerBar.channelCarousel.width = mostLeftButton.x - messengerBar.channelCarousel.x - 1;
 				}
 				else
 				{
@@ -188,22 +184,13 @@
 				messengerBar = (view as LobbyPage).messengerBar as MessengerBar;
 
 				buttonCreate();
-				modsButton.x = Math.max(messengerBar.sessionStatsBtn.x, messengerBar.vehicleCompareCartBtn.x);
+
 				modsButton.y = BUTTON_LOBBY_TOP_MARGIN;
 
-				var positionOffset:int = BUTTON_LOBBY_GAP + modsButton.width;
-
-				// move "sessionstats button" left
-				messengerBar.sessionStatsBtn.x -= positionOffset;
-
-				// move "vehicle compare button" and "vehicle name anim" left
-				messengerBar.vehicleCompareCartBtn.x -= positionOffset;
-				messengerBar.animPlacer.x -= positionOffset;
-
-				// append modsButton to messengerBar.constraints (all bottom buttons position manager)
 				messengerBar.addChild(DisplayObject(modsButton));
 				messengerBar.constraints.addElement("modsButton", DisplayObject(modsButton), Constraints.RIGHT);
 
+				messengerBar.addEventListener(LifeCycleEvent.ON_AFTER_POPULATE, handleMessangerBarPopulate);
 				messengerBar.addEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE, handleMessangerBarDispose);
 			}
 
@@ -220,6 +207,12 @@
 			invalidateData();
 			App.toolTipMgr.hide();
 			App.popoverMgr.show(modsButton, POPOVER_ALIAS);
+		}
+
+		private function handleMessangerBarPopulate() : void
+		{
+			fixRightSideBtnsOrder();
+			App.utils.scheduler.scheduleOnNextFrame(fixRightSideBtnsOrder);
 		}
 
 		private function handleMessangerBarDispose() : void
@@ -259,15 +252,24 @@
 			invalidateData();
 		}
 
+		private function fixRightSideBtnsOrder() : void
+		{
+			// just skip if not initialized
+			if (!messengerBar || !modsButton)
+				return;
+
+			// try insert our button in order if it not in it
+			// insert after notifications and before others
+			var rightSideBtnsOrder:Vector.<IDisplayObject> = messengerBar['_rightSideBtnsOrder'];
+			if (rightSideBtnsOrder && rightSideBtnsOrder.indexOf(modsButton) == -1)
+				rightSideBtnsOrder.splice(1, 0, modsButton);
+		}
+
 		override protected function buttonBlinking() : void 
 		{
 			_blinking = true;
 			invalidateData();
 		}
 
-		override protected function onButtonInvalid() : void 
-		{
-			invalidateSize();
-		}
 	}
 }
