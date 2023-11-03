@@ -3,6 +3,8 @@ import functools
 import types
 import ResMgr
 from gui.shared.utils.functions import makeTooltip
+from helpers import dependency
+from skeletons.gui.impl import IGuiLoader
 
 __all__ = ('byteify', 'override', 'readFromVFS', 'parseLangFields', 'prepareDescription', 'cacheResult')
 
@@ -74,3 +76,8 @@ def cacheResult(function):
 			memo[cache_key] = rv
 			return rv
 	return wrapper
+
+def getParentWindow():
+	uiLoader = dependency.instance(IGuiLoader)
+	if uiLoader and uiLoader.windowsManager:
+		return uiLoader.windowsManager.getMainWindow()

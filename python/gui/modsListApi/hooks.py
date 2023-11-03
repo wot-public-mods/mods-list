@@ -6,6 +6,7 @@ from gui.shared import events, EVENT_BUS_SCOPE, g_eventBus
 
 from ._constants import MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_POPOVER_ALIAS
 from .events import g_eventsManager
+from .utils import getParentWindow
 
 __all__ = ()
 
@@ -14,7 +15,7 @@ def showPopover():
 	app = ServicesLocator.appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
 	if not app:
 		return
-	app.loadView(SFViewLoadParams(MODS_LIST_API_POPOVER_ALIAS), {})
+	app.loadView(SFViewLoadParams(MODS_LIST_API_POPOVER_ALIAS, parent=getParentWindow()))
 
 g_eventsManager.showPopover += showPopover
 
@@ -24,6 +25,6 @@ def onAppInitialized(event):
 		app = ServicesLocator.appLoader.getApp(event.ns)
 		if not app:
 			return
-		app.loadView(SFViewLoadParams(MODS_LIST_API_BUTTON_ALIAS))
+		app.loadView(SFViewLoadParams(MODS_LIST_API_BUTTON_ALIAS, parent=getParentWindow()))
 
 g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, onAppInitialized, scope=EVENT_BUS_SCOPE.GLOBAL)
