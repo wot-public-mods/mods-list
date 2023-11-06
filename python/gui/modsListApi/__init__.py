@@ -21,6 +21,9 @@ ModsListApi
 		:param lobby: Show modification in Lobby - not necessary
 		:param callback: Called on modification click - not necessary
 
+	method removeModification
+		:param id: Uniq modification ID - required
+
 	method alertModification
 		:param id: Uniq modification ID - required
 
@@ -32,7 +35,7 @@ __author__ = "Andrii Andrushchyshyn"
 __copyright__ = "Copyright 2023, poliroid"
 __credits__ = ["Andrii Andrushchyshyn"]
 __license__ = "LGPL-3.0-or-later"
-__version__ = "1.4.5"
+__version__ = "1.4.6"
 __maintainer__ = "Andrii Andrushchyshyn"
 __email__ = "contact@poliroid.me"
 __status__ = "Production"
@@ -52,6 +55,10 @@ class ModsListApiRepresentation(object):
 	@staticmethod
 	def updateModification(*args, **kwargs):
 		g_controller.updateModification(*args, **kwargs)
+
+	@staticmethod
+	def removeModification(*args, **kwargs):
+		g_controller.removeModification(*args, **kwargs)
 
 	@staticmethod
 	def alertModification(*args, **kwargs):

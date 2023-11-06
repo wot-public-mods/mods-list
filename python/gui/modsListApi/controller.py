@@ -1,6 +1,8 @@
 ﻿
 import logging
 
+from .events import g_eventsManager
+
 __all__ = ('g_controller', )
 
 logger = logging.getLogger(__name__)
@@ -47,6 +49,12 @@ class ApiLogicController(object):
 
 		modification = self.__modifications[id]
 		modification.setData(id, name, description, icon, enabled, login, lobby, callback)
+
+	def removeModification(self, id):
+		if id not in self.__modifications.keys():
+			return logger.error('method @removeModification required ModificationItem instance')
+		del self.__modifications[id]
+		g_eventsManager.onListUpdated()
 
 	def alertModification(self, id):
 		if id not in self.__modifications.keys():

@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.4.6
+
+* added possibility to remove the modification
+* improved views loading
+
 ## v1.4.5
 
 * wot 1.21 fixes
