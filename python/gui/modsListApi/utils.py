@@ -6,7 +6,7 @@ from gui.shared.utils.functions import makeTooltip
 from helpers import dependency
 from skeletons.gui.impl import IGuiLoader
 
-__all__ = ('byteify', 'override', 'readFromVFS', 'parseLangFields', 'prepareDescription', 'cacheResult')
+__all__ = ('byteify', 'override', 'readFromVFS', 'parse_lang_fields', 'prepareDescription', 'cache_result')
 
 def override(holder, name, wrapper=None, setter=None):
 	"""Override methods, properties, functions, attributes
@@ -46,7 +46,7 @@ def readFromVFS(path):
 		return str(fileInst.asBinary)
 	return None
 
-def parseLangFields(langFile):
+def parse_lang_fields(langFile):
 	"""split items by lines and key value by ':'
 	like yaml format"""
 	result = {}
@@ -56,7 +56,7 @@ def parseLangFields(langFile):
 			if ': ' not in item:
 				continue
 			key, value = item.split(": ", 1)
-			result[key] = value
+			result[key] = value.replace('\\n', '\n')
 	return result
 
 def prepareDescription(descText):
@@ -65,15 +65,15 @@ def prepareDescription(descText):
 		return makeTooltip(body=descText)
 	return descText
 
-def cacheResult(function):
+def cache_result(function):
 	memo = {}
 	@functools.wraps(function)
-	def wrapper(cache_key):
+	def wrapper(*args):
 		try:
-			return memo[cache_key]
+			return memo[args]
 		except KeyError:
-			rv = function(cache_key)
-			memo[cache_key] = rv
+			rv = function(*args)
+			memo[args] = rv
 			return rv
 	return wrapper
 

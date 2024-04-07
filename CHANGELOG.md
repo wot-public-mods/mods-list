@@ -2,6 +2,7 @@
 
 ## v1.4.7
 
+* localization fallback implementation
 * update credentials & license
 
 ## v1.4.6
