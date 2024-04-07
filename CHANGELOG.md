@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.7
+
+* update credentials & license
+
 ## v1.4.6
 
 * added possibility to remove the modification

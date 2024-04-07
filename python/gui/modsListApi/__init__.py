@@ -1,4 +1,39 @@
-﻿"""
+﻿# SPDX-License-Identifier: MIT
+# Copyright (c) 2015-2024 Andrii Andrushchyshyn
+
+__version__ = "1.4.6"
+
+from .controller import g_controller
+from .hooks import *
+from .views import *
+
+__all__ = ('g_modsListApi', )
+
+class ModsListApiRepresentation(object):
+
+	@staticmethod
+	def addModification(*args, **kwargs):
+		g_controller.addModification(*args, **kwargs)
+
+	@staticmethod
+	def updateModification(*args, **kwargs):
+		g_controller.updateModification(*args, **kwargs)
+
+	@staticmethod
+	def removeModification(*args, **kwargs):
+		g_controller.removeModification(*args, **kwargs)
+
+	@staticmethod
+	def alertModification(*args, **kwargs):
+		g_controller.alertModification(*args, **kwargs)
+
+	@staticmethod
+	def clearModificationAlert(*args, **kwargs):
+		g_controller.clearModificationAlert(*args, **kwargs)
+
+g_modsListApi = ModsListApiRepresentation()
+
+"""
 ModsListApi
 
 	method addModification
@@ -30,42 +65,3 @@ ModsListApi
 	method clearModificationAlert
 		:param id: Uniq modification ID - required
 """
-
-__author__ = "Andrii Andrushchyshyn"
-__copyright__ = "Copyright 2023, poliroid"
-__credits__ = ["Andrii Andrushchyshyn"]
-__license__ = "LGPL-3.0-or-later"
-__version__ = "1.4.6"
-__maintainer__ = "Andrii Andrushchyshyn"
-__email__ = "contact@poliroid.me"
-__status__ = "Production"
-
-from .controller import g_controller
-from .hooks import *
-from .views import *
-
-__all__ = ('g_modsListApi', )
-
-class ModsListApiRepresentation(object):
-
-	@staticmethod
-	def addModification(*args, **kwargs):
-		g_controller.addModification(*args, **kwargs)
-
-	@staticmethod
-	def updateModification(*args, **kwargs):
-		g_controller.updateModification(*args, **kwargs)
-
-	@staticmethod
-	def removeModification(*args, **kwargs):
-		g_controller.removeModification(*args, **kwargs)
-
-	@staticmethod
-	def alertModification(*args, **kwargs):
-		g_controller.alertModification(*args, **kwargs)
-
-	@staticmethod
-	def clearModificationAlert(*args, **kwargs):
-		g_controller.clearModificationAlert(*args, **kwargs)
-
-g_modsListApi = ModsListApiRepresentation()
