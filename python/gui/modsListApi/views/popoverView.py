@@ -1,4 +1,7 @@
-﻿from gui.Scaleform.framework.entities.abstract.AbstractPopOverView import AbstractPopOverView
+﻿# SPDX-License-Identifier: MIT
+# Copyright (c) 2015-2024 Andrii Andrushchyshyn
+
+from gui.Scaleform.framework.entities.abstract.AbstractPopOverView import AbstractPopOverView
 
 from ..data import g_dataProvider
 from ..events import g_eventsManager

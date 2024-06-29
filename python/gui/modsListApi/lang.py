@@ -1,4 +1,6 @@
-﻿
+﻿# SPDX-License-Identifier: MIT
+# Copyright (c) 2015-2024 Andrii Andrushchyshyn
+
 from helpers import getClientLanguage
 
 from ._constants import LANGUAGE_DEFAULT_UI, LANGUAGE_CODES, LANGUAGE_FILE_MASK, LANGUAGE_RU_FALLBACK

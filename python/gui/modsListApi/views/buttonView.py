@@ -1,4 +1,7 @@
-﻿from gui.Scaleform.framework.entities.View import View
+﻿# SPDX-License-Identifier: MIT
+# Copyright (c) 2015-2024 Andrii Andrushchyshyn
+
+from gui.Scaleform.framework.entities.View import View
 
 from ..controller import g_controller
 from ..data import g_dataProvider

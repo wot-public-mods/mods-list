@@ -1,4 +1,6 @@
-﻿
+﻿# SPDX-License-Identifier: MIT
+# Copyright (c) 2015-2024 Andrii Andrushchyshyn
+
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, GroupedViewSettings, ScopeTemplates
 from frameworks.wulf import WindowLayer
 

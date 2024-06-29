@@ -1,4 +1,6 @@
-﻿
+﻿# SPDX-License-Identifier: MIT
+# Copyright (c) 2015-2024 Andrii Andrushchyshyn
+
 from gui.shared.personality import ServicesLocator
 from gui.app_loader.settings import APP_NAME_SPACE
 from gui.Scaleform.framework.managers.loaders import SFViewLoadParams

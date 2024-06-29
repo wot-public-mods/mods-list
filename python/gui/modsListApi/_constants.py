@@ -1,4 +1,6 @@
-﻿
+﻿# SPDX-License-Identifier: MIT
+# Copyright (c) 2015-2024 Andrii Andrushchyshyn
+
 # UI linkages
 MODS_LIST_API_BUTTON_ALIAS = 'ModsListApiButton'
 MODS_LIST_API_POPOVER_ALIAS = 'ModsListApiPopover'
