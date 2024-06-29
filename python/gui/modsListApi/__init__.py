@@ -1,7 +1,7 @@
 ﻿# SPDX-License-Identifier: MIT
 # Copyright (c) 2015-2024 Andrii Andrushchyshyn
 
-__version__ = "1.4.7"
+__version__ = "1.4.8"
 
 from .controller import g_controller
 from .hooks import *

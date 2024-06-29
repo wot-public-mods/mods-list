@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.4.8
+
+* fix logging
+* update license
+
 ## v1.4.7
 
 * localization fallback implementation
