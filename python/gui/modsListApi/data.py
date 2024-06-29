@@ -3,7 +3,6 @@
 
 import BigWorld
 import ResMgr
-import logging
 
 from ids_generators import SequenceIDGenerator
 
@@ -11,11 +10,11 @@ from ._constants import DEFAULT_MOD_ICON
 from .controller import g_controller
 from .lang import l10n
 from .events import g_eventsManager
-from .utils import prepareDescription
+from .utils import prepareDescription, getLogger
 
 __all__ = ('g_dataProvider', 'ModificationItem', )
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 class _DataProvider(object):
 

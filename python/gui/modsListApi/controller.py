@@ -1,12 +1,12 @@
-import logging
 ﻿# SPDX-License-Identifier: MIT
 # Copyright (c) 2015-2024 Andrii Andrushchyshyn
 
 from .events import g_eventsManager
+from .utils import getLogger
 
 __all__ = ('g_controller', )
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 class ApiLogicController(object):
 

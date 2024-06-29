@@ -2,13 +2,16 @@
 # Copyright (c) 2015-2024 Andrii Andrushchyshyn
 
 import functools
-import types
+import logging
+import os
 import ResMgr
+import types
 from gui.shared.utils.functions import makeTooltip
 from helpers import dependency
 from skeletons.gui.impl import IGuiLoader
 
-__all__ = ('byteify', 'override', 'readFromVFS', 'parse_lang_fields', 'prepareDescription', 'cache_result')
+__all__ = ('byteify', 'override', 'readFromVFS', 'parse_lang_fields', 'prepareDescription', 
+			'cache_result', 'getLogger', )
 
 def override(holder, name, wrapper=None, setter=None):
 	"""Override methods, properties, functions, attributes
@@ -83,3 +86,8 @@ def getParentWindow():
 	uiLoader = dependency.instance(IGuiLoader)
 	if uiLoader and uiLoader.windowsManager:
 		return uiLoader.windowsManager.getMainWindow()
+
+def getLogger(name):
+	logger = logging.getLogger(name)
+	logger.setLevel(logging.DEBUG if os.path.isfile('.debug_mods') else logging.ERROR)
+	return logger
