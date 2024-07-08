@@ -23,9 +23,12 @@ class ElapsedFormatter():
 
 	def format(self, record):
 		elapsed_seconds = record.created - self.start_time
-		#using timedelta here for convenient default formatting
 		elapsed = datetime.timedelta(seconds = elapsed_seconds)
-		return "{} {}".format(elapsed, record.getMessage())
+		return "{}.{} {}".format(
+			str(elapsed.seconds).zfill(3), # seconds
+			str(elapsed.microseconds).zfill(6), # microseconds
+			record.getMessage() # message
+		)
 
 handler = logging.StreamHandler()
 handler.setFormatter(ElapsedFormatter())
