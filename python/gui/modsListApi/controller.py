@@ -22,6 +22,10 @@ class ApiLogicController(object):
 	def isInLobby(self, isInLobby):
 		self.__isInLobby = isInLobby
 
+	@property
+	def isModsExist(self):
+		return len(self.__modifications)
+
 	def __init__(self):
 		self.__modifications = dict()
 		self.__isInLobby = False
@@ -37,9 +41,8 @@ class ApiLogicController(object):
 						'enabled, login, lobby, callback]')
 
 		from .data import ModificationItem
-		modification = ModificationItem()
+		modification = self.__modifications[id] = ModificationItem()
 		modification.setData(id, name, description, icon, enabled, login, lobby, callback)
-		self.__modifications[id] = modification
 
 	def updateModification(self, id, name=None, description=None, icon=None, enabled=None,
 						login=None, lobby=None, callback=None):

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.9
+
+* fix button display bug on dynamic mod add to empty list
+
 ## v1.4.8
 
 * fix logging
