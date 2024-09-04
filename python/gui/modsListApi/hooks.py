@@ -43,6 +43,9 @@ def onListUpdated():
 	app = ServicesLocator.appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
 	if not app:
 		return
+	# if manager not exist skip
+	if not app.containerManager:
+		return
 	# get view target container
 	container = app.containerManager.getContainer(WindowLayer.WINDOW)
 	if not container:

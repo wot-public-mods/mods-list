@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.5.00
+
+* fix errors in log on dynamic mod register with unavailable container manager
+
 ## v1.4.9
 
 * fix button display bug on dynamic mod add to empty list
