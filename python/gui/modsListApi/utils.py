@@ -10,8 +10,8 @@ from gui.shared.utils.functions import makeTooltip
 from helpers import dependency
 from skeletons.gui.impl import IGuiLoader
 
-__all__ = ('byteify', 'override', 'readFromVFS', 'parse_lang_fields', 'prepareDescription', 
-			'cache_result', 'getLogger', )
+__all__ = ('byteify', 'override', 'vfs_file_read', 'vfs_dir_list_files', 'parse_localization_file', 
+			'prepareDescription', 'cache_result', 'getLogger', )
 
 def override(holder, name, wrapper=None, setter=None):
 	"""Override methods, properties, functions, attributes
@@ -44,24 +44,35 @@ def byteify(data):
 		result = data.encode('utf-8')
 	return result
 
-def readFromVFS(path):
+def vfs_file_read(path):
 	"""using for read files from VFS"""
 	fileInst = ResMgr.openSection(path)
 	if fileInst is not None and ResMgr.isFile(path):
 		return str(fileInst.asBinary)
 	return None
 
-def parse_lang_fields(langFile):
+def vfs_dir_list_files(folder_path):
+	"""using for list files in VFS dir"""
+	result = []
+	folder = ResMgr.openSection(folder_path)
+	if folder is not None and ResMgr.isDir(folder_path):
+		for item_name in folder.keys():
+			item_path = '%s/%s' % (folder_path, item_name)
+			if item_name not in result and ResMgr.isFile(item_path):
+				result.append(item_name)
+	return result
+
+def parse_localization_file(file_path):
 	"""split items by lines and key value by ':'
 	like yaml format"""
 	result = {}
-	langData = readFromVFS(langFile)
-	if langData:
-		for item in langData.splitlines():
-			if ': ' not in item:
+	file_data = vfs_file_read(file_path)
+	if file_data:
+		for test_line in file_data.splitlines():
+			if ': ' not in test_line:
 				continue
-			key, value = item.split(": ", 1)
-			result[key] = value.replace('\\n', '\n')
+			key, value = test_line.split(': ', 1)
+			result[key] = value.replace('\\n', '\n').strip()
 	return result
 
 def prepareDescription(descText):

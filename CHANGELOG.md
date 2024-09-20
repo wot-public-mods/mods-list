@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.5.01
+
+* improved localization
+
 ## v1.5.00
 
 * fix errors in log on dynamic mod register with unavailable container manager
