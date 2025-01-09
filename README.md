@@ -1,16 +1,44 @@
-﻿**ModsList** This is a modification for the game "World Of Tanks" which allows you to assemble the modifications in one place.
+﻿# ModsList - World of Tanks Mod
 
-### What do you need it for?
-* **ModsList** This is the place where start visual mods (Mods configurator, WGFM Radio, Replays manager, and many more goodies)
-* **ModsList** It is flexible and common for all APIs
+## 🚀 Overview
 
-### Use
-* Add a distribution to your mod
-* Send information about your modification using the API
+**ModsList** is a comprehensive modification for **World of Tanks** that brings together all your visual mods into one convenient place. It serves as a hub for managing mods like Mods Configurator, Battle Hits, Replays Manager, and many more, making the game experience easier.
 
-### Example of what a menu looks like in a hangar
-![Example of what a menu looks like in a hangar](https://gitlab.com/wot-public-mods/mods-list/-/raw/master/resources/ui_preview_lobby.png)
+## 🌟 Features
 
+- 📋 **Centralized Mod Management**: Easily access and manage multiple mods in one place directly from the game.
+- 🔄 **Flexible API Support**: **ModsList** is compatible with various APIs, making it adaptable to different mod configurations and needs.
 
-### Example of how the menu looks in the login window
-![Example of how the menu looks in the login window](https://gitlab.com/wot-public-mods/mods-list/-/raw/master/resources/ui_preview_login.png)
+## 🛠️ Usage
+
+- Add **ModsList** as a distribution to your mod.
+- Add information about your mod using API for smooth integration.
+
+## 🖼️ Screenshots
+
+### Menu in the hangar:
+![Hangar Menu](https://gitlab.com/wot-public-mods/mods-list/-/raw/master/resources/ui_preview_lobby.png)
+
+### Menu in the login window:
+![Login Menu](https://gitlab.com/wot-public-mods/mods-list/-/raw/master/resources/ui_preview_login.png)
+
+## 💖 Donate
+
+If you enjoy **ModsList** and would like to support its development, consider making a donation. Your contributions help improve the mod and keep it updated!
+
+- **Support on Patreon**: [Patreon Link](https://www.patreon.com/poliroid)
+- **Directly donate**: [Donation Methods](https://poliroid.me/donate/)
+
+Thank you for your support!
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](https://gitlab.com/wot-public-mods/mods-list/-/blob/master/LICENSE.md) file for details.
+
+## 🤝 Contributing
+
+Feel free to contribute to the project by submitting issues or pull requests! We welcome all forms of feedback and contributions from the World of Tanks community.
+
+---
+
+Enjoying ModsList? Consider supporting us by sharing this mod with other players!
