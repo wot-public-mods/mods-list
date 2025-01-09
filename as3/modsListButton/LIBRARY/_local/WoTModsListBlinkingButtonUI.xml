@@ -1,8 +1,8 @@
-<DOMComponentItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="_local/ModsListBlinkingButtonUI" itemID="58766a59-00000170" linkageExportForAS="true" linkageBaseClass="me.poliroid.modsList.controls.ModsListBlinkingButton" linkageClassName="ModsListBlinkingButtonUI" lastModified="1585266714" lastUniqueIdentifier="8" displayAsComponent="false" customIconID="0" actionscriptClass="ModsListBlinkingButtonUI" persistLivePreview11="true" editFrameIndex="1" requiredMinimumPlayerVersion="0" requiredMinimumASVersion="0" parametersAreLocked="true">
+<DOMComponentItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="_local/WoTModsListBlinkingButtonUI" itemID="6777ebde-0000033d" linkageExportForAS="true" linkageBaseClass="me.poliroid.modsList.controls.ModsListBlinkingButton" linkageClassName="WoTModsListBlinkingButtonUI" lastModified="1735912608" lastUniqueIdentifier="8" displayAsComponent="false" customIconID="0" actionscriptClass="WoTModsListBlinkingButtonUI" persistLivePreview11="true" editFrameIndex="1" requiredMinimumPlayerVersion="0" requiredMinimumASVersion="0" parametersAreLocked="true">
   <timeline>
-    <DOMTimeline name="ModsListBlinkingButtonUI" currentFrame="89">
+    <DOMTimeline name="WoTModsListBlinkingButtonUI">
       <layers>
-        <DOMLayer name="as" color="#FF4FFF" locked="true" autoNamed="false" heightLiteral="24">
+        <DOMLayer name="as" color="#FF4FFF" locked="true" autoNamed="false">
           <frames>
             <DOMFrame index="0" duration="9" keyMode="9728">
               <elements/>
@@ -72,7 +72,7 @@
             </DOMFrame>
           </frames>
         </DOMLayer>
-        <DOMLayer name="names" color="#943EE8" locked="true" autoNamed="false" heightLiteral="24">
+        <DOMLayer name="names" color="#943EE8" locked="true" current="true" isSelected="true" autoNamed="false">
           <frames>
             <DOMFrame index="0" duration="10" name="up" labelType="name" keyMode="9728">
               <elements/>
@@ -106,7 +106,7 @@
             </DOMFrame>
           </frames>
         </DOMLayer>
-        <DOMLayer name="icon" color="#009999" locked="true" autoNamed="false" heightLiteral="24">
+        <DOMLayer name="icon" color="#009999" locked="true" autoNamed="false">
           <frames>
             <DOMFrame index="0" duration="90" keyMode="9728">
               <elements>
@@ -119,7 +119,7 @@
             </DOMFrame>
           </frames>
         </DOMLayer>
-        <DOMLayer name="blinker" color="#EEDFAD" locked="true" autoNamed="false" heightLiteral="24">
+        <DOMLayer name="blinker" color="#EEDFAD" locked="true" autoNamed="false">
           <frames>
             <DOMFrame index="0" duration="60" keyMode="9728">
               <elements/>
@@ -135,11 +135,11 @@
             </DOMFrame>
           </frames>
         </DOMLayer>
-        <DOMLayer name="background" color="#666FF0" current="true" isSelected="true" autoNamed="false" heightLiteral="24">
+        <DOMLayer name="background" color="#666FF0" autoNamed="false">
           <frames>
             <DOMFrame index="0" duration="10" keyMode="9728">
               <elements>
-                <DOMSymbolInstance libraryItemName="_local/button/background" symbolType="graphic" loop="loop">
+                <DOMSymbolInstance libraryItemName="_local/button/background" selected="true" symbolType="graphic" loop="loop">
                   <transformationPoint>
                     <Point/>
                   </transformationPoint>

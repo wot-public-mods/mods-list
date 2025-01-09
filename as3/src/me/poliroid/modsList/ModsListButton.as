@@ -45,8 +45,6 @@ package me.poliroid.modsList
 
 		private static const POPOVER_ALIAS:String = 'ModsListApiPopover';
 
-		private static const BUTTON_ALIAS:String = 'ModsListBlinkingButtonUI';
-
 		private static const INVALIDATE_ALIASES:Array = [Aliases.LOGIN, Aliases.LOBBY, Aliases.LOBBY_HANGAR, Aliases.LOBBY_TRAINING_ROOM];
 
 		public var modsButton:ModsListBlinkingButton = null;
@@ -54,6 +52,8 @@ package me.poliroid.modsList
 		public var messengerBar:MessengerBar = null;
 
 		public var isInLobby:Boolean = false;
+
+		private var _buttonLinkage:String = 'WoTModsListBlinkingButtonUI';
 
 		private var _tooltip:String = '';
 
@@ -226,7 +226,7 @@ package me.poliroid.modsList
 		private function buttonCreate() : void
 		{
 			buttonDestroy();
-			modsButton = App.utils.classFactory.getComponent(BUTTON_ALIAS, ModsListBlinkingButton);
+			modsButton = App.utils.classFactory.getComponent(_buttonLinkage, ModsListBlinkingButton);
 			modsButton.addEventListener(ButtonEvent.CLICK, handleModsButtonClick);
 			invalidateData();
 			invalidateSize();
@@ -251,6 +251,7 @@ package me.poliroid.modsList
 
 		override protected function setStaticData(data:ModsListStaticDataVO) : void 
 		{
+			_buttonLinkage = data.buttonLinkage;
 			_tooltip = data.descriptionLabel;
 			invalidateData();
 		}

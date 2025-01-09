@@ -8,6 +8,8 @@ package me.poliroid.modsList.data
 
 	public class ModsListStaticDataVO  extends DAAPIDataClass
 	{
+		public var buttonLinkage:String = "";
+
 		public var titleLabel:String = "";
 
 		public var descriptionLabel:String = "";

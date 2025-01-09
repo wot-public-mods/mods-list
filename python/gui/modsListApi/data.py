@@ -10,7 +10,7 @@ from ._constants import DEFAULT_MOD_ICON
 from .controller import g_controller
 from .lang import l10n
 from .events import g_eventsManager
-from .utils import prepareDescription, getLogger
+from .utils import prepareDescription, getLogger, is_mt_client
 
 __all__ = ('g_dataProvider', 'ModificationItem', )
 
@@ -42,7 +42,11 @@ class _DataProvider(object):
 	@staticmethod
 	def _generateStaticData():
 		"""return value Represented by ModsListModsVO (AS)"""
+		linkage = 'WoTModsListBlinkingButtonUI'
+		if is_mt_client():
+			linkage = 'MTModsListBlinkingButtonUI'
 		result = {
+			'buttonLinkage': linkage,
 			'titleLabel': l10n('title'),
 			'descriptionLabel': l10n('description'),
 			'closeButtonVisible': True

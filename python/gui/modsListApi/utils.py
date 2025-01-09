@@ -11,7 +11,7 @@ from helpers import dependency
 from skeletons.gui.impl import IGuiLoader
 
 __all__ = ('byteify', 'override', 'vfs_file_read', 'vfs_dir_list_files', 'parse_localization_file', 
-			'prepareDescription', 'cache_result', 'getLogger', )
+			'prepareDescription', 'cache_result', 'getLogger', 'is_mt_client', )
 
 def override(holder, name, wrapper=None, setter=None):
 	"""Override methods, properties, functions, attributes
@@ -102,3 +102,11 @@ def getLogger(name):
 	logger = logging.getLogger(name)
 	logger.setLevel(logging.DEBUG if os.path.isfile('.debug_mods') else logging.ERROR)
 	return logger
+
+def is_mt_client():
+	try:
+		import version_utils
+		return True
+	except ImportError:
+		pass
+	return False

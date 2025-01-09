@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.6.00
+
+* add custom buttton style for non WoT clients
+* update copyright
+
 ## v1.5.01
 
 * improved localization
