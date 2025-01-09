@@ -1,4 +1,7 @@
-﻿package me.poliroid.modsList.interfaces.impl 
+﻿// SPDX-License-Identifier: MIT
+// Copyright (c) 2015-2025 Andrii Andrushchyshyn
+
+package me.poliroid.modsList.interfaces.impl 
 {
 
 	import net.wg.data.constants.Errors;

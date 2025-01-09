@@ -1,4 +1,7 @@
-﻿package me.poliroid.modsList 
+﻿// SPDX-License-Identifier: MIT
+// Copyright (c) 2015-2025 Andrii Andrushchyshyn
+
+package me.poliroid.modsList 
 {
 
 	import flash.display.DisplayObject;
