@@ -177,6 +177,7 @@ def build_python():
 BUILD_FLASH = 'flash' in sys.argv
 COPY_INTO_GAME = 'ingame' in sys.argv
 CREATE_DISTRIBUTE = 'distribute' in sys.argv
+RUN_GAME = 'run' in sys.argv
 
 # load config
 assert os.path.isfile('build.json'), 'Config not found'
@@ -237,12 +238,13 @@ zipFolder('temp', 'build/{}'.format(PACKAGE_NAME))
 
 # copy package into game
 if COPY_INTO_GAME:
-	for proc in psutil.process_iter():
-		if 'worldoftanks' in proc.name().lower():
-			os.kill(proc.pid, signal.SIGTERM)
-			logger.info('wot client closed (pid: %s)', proc.pid)
-	while process_running('worldoftanks.exe'):
-		time.sleep(.01)
+	for exe_name in ('worldoftanks', 'tanki'):
+		for proc in psutil.process_iter():
+			if exe_name in proc.name().lower():
+				os.kill(proc.pid, signal.SIGTERM)
+				logger.info('wot client closed (pid: %s)', proc.pid)
+		while process_running('%s.exe' % exe_name):
+			time.sleep(.01)
 	logger.info('copied into wot: %s%s', WOT_PACKAGES_DIR, PACKAGE_NAME)
 	shutil.copy2('build/{}'.format(PACKAGE_NAME), WOT_PACKAGES_DIR)
 
@@ -277,3 +279,10 @@ for path in cleanup_list:
 		shutil.rmtree(path)
 	elif os.path.isfile(path):
 		os.remove(path)
+
+# start client on build finish
+if RUN_GAME:
+	for exe_name in ('worldoftanks', 'tanki'):
+		executable_path = '%s/%s.exe' % (GAME_FOLDER, exe_name)
+		if os.path.isfile(executable_path):
+			subprocess.Popen([executable_path])
