@@ -190,6 +190,9 @@ with open('build.json', 'r') as fh:
 
 GAME_FOLDER = os.environ.get('WOT_FOLDER', CONFIG.game.folder)
 GAME_VERSION = os.environ.get('WOT_VERSION', CONFIG.game.version)
+if CONFIG.version > 3 and CONFIG.game.force:
+	GAME_FOLDER = CONFIG.game.folder
+	GAME_VERSION = CONFIG.game.version
 
 # cheek ingame folder
 WOT_PACKAGES_DIR = '{wot}/mods/{version}/'.format(wot=GAME_FOLDER, version=GAME_VERSION)
