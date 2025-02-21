@@ -12,6 +12,7 @@ package me.poliroid.modsList
 	import scaleform.clik.events.ButtonEvent;
 	import scaleform.clik.utils.Constraints;
 
+	import net.wg.app.iml.base.StageResizeEvent;
 	import net.wg.infrastructure.managers.impl.ContainerManagerBase;
 	import net.wg.gui.components.containers.MainViewContainer;
 	import net.wg.infrastructure.events.LifeCycleEvent;
@@ -84,7 +85,7 @@ package me.poliroid.modsList
 			}
 
 			// subscribe to stage resize
-			App.instance.stage.addEventListener(Event.RESIZE, onResize);
+			App.instance.stage.addEventListener(StageResizeEvent.STAGE_RESIZE, onStageResize);
 
 			// subscribe to container manager loader
 			(App.containerMgr as ContainerManagerBase).loader.addEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded, false, 0, true);
@@ -101,7 +102,7 @@ package me.poliroid.modsList
 			(App.containerMgr as ContainerManagerBase).loader.removeEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded);
 
 			// unsubscribe from stage resize
-			App.instance.stage.removeEventListener(Event.RESIZE, onResize);
+			App.instance.stage.removeEventListener(StageResizeEvent.STAGE_RESIZE, onStageResize);
 
 			super.onDispose();
 		}
@@ -155,7 +156,7 @@ package me.poliroid.modsList
 			return App.containerMgr.getContainer(LAYER_NAMES.LAYER_ORDER.indexOf(containerName))
 		}
 
-		private function onResize(e:Event) : void 
+		private function onStageResize(e:StageResizeEvent) : void
 		{
 			invalidateSize();
 			validateNow();
