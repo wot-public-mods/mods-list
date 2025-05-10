@@ -17,10 +17,10 @@
 ## 🖼️ Screenshots
 
 ### Menu in the hangar:
-![Hangar Menu](https://gitlab.com/wot-public-mods/mods-list/-/raw/master/resources/ui_preview_lobby.png)
+![Hangar Menu](./resources/ui_preview_lobby.png)
 
 ### Menu in the login window:
-![Login Menu](https://gitlab.com/wot-public-mods/mods-list/-/raw/master/resources/ui_preview_login.png)
+![Login Menu](./resources/ui_preview_login.png)
 
 ## 💖 Donate
 
@@ -33,7 +33,7 @@ Thank you for your support!
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](https://gitlab.com/wot-public-mods/mods-list/-/blob/master/LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE.md) file for details.
 
 ## 🤝 Contributing
 
