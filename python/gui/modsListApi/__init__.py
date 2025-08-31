@@ -3,11 +3,28 @@
 
 __version__ = "1.7.0"
 
-from .controller import g_controller
-from .hooks import *
-from .views import *
+g_controller = None
 
-__all__ = ('g_modsListApi', )
+try:
+    import openwg_gameface
+    from .controller import g_controller
+    from .hooks import *
+    from .views import *
+except ImportError:
+    # log to handle with sentry
+    import logging
+    logger = logging.getLogger()
+    logger.error('\n' +
+                   '!!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!\n'
+                   '!!!\n'
+                   '!!!   ModsListAPI requires the openwg_gameface module to function.\n'
+                   '!!!   Without it, this and other GF UI mods will not work correctly.\n'
+                   '!!!   Please download and install it from: https://gitlab.com/openwg/wot.gameface/\n'
+                   '!!!\n'
+                   '!!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!\n')
+    # Kill game client
+    import sys
+    sys.exit()
 
 class ModsListApiRepresentation(object):
     """
