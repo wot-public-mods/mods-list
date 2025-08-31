@@ -9,6 +9,9 @@
 - 📋 **Centralized Mod Management**: Easily access and manage multiple mods in one place directly from the game.
 - 🔄 **Flexible API Support**: **ModsList** is compatible with various APIs, making it adaptable to different mod configurations and needs.
 
+## 📦 Dependency
+This project relies on the [OpenWG Gameface](https://gitlab.com/openwg/wot.gameface/) mod. Make sure to include this mod to ensure the proper functionality of **ModsList**.
+
 ## 🛠️ Usage
 
 - Add **ModsList** as a distribution to your mod.

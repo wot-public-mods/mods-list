@@ -4,118 +4,118 @@
 package me.poliroid.modsList.controls 
 {
 
-	import flash.events.MouseEvent;
-	import flash.text.TextField;
+    import flash.events.MouseEvent;
+    import flash.text.TextField;
 
-	import org.idmedia.as3commons.util.StringUtils;
+    import org.idmedia.as3commons.util.StringUtils;
 
-	import scaleform.clik.constants.InvalidationType;
+    import scaleform.clik.constants.InvalidationType;
 
-	import net.wg.gui.components.assets.NewIndicator;
-	import net.wg.gui.components.controls.Image;
-	import net.wg.gui.components.controls.SoundListItemRenderer;
+    import net.wg.gui.components.assets.NewIndicator;
+    import net.wg.gui.components.controls.Image;
+    import net.wg.gui.components.controls.SoundListItemRenderer;
 
-	import me.poliroid.modsList.data.ModsListItemRendererVO;
+    import me.poliroid.modsList.data.ModsListItemRendererVO;
 
-	public class ModsListItemRenderer extends SoundListItemRenderer
-	{
+    public class ModsListItemRenderer extends SoundListItemRenderer
+    {
 
-		public var alertMC:NewIndicator = null;
+        public var alertMC:NewIndicator = null;
 
-		public var modIcon:Image = null;
+        public var modIcon:Image = null;
 
-		public var modNameTF:TextField = null;
+        public var modNameTF:TextField = null;
 
-		private var model:ModsListItemRendererVO = null;
+        private var model:ModsListItemRendererVO = null;
 
-		public function ModsListItemRenderer()
-		{
-			super();
-			mouseEnabledOnDisabled = false;
-		}
+        public function ModsListItemRenderer()
+        {
+            super();
+            mouseEnabledOnDisabled = false;
+        }
 
-		override protected function handleMouseRollOver(event:MouseEvent) : void 
-		{
-			super.handleMouseRollOver(event);
+        override protected function handleMouseRollOver(event:MouseEvent) : void 
+        {
+            super.handleMouseRollOver(event);
 
-			if(StringUtils.isNotEmpty(model.tooltipLabel))
-			{
-				App.toolTipMgr.showComplex(model.tooltipLabel);
-			}
-		}
+            if(StringUtils.isNotEmpty(model.tooltipLabel))
+            {
+                App.toolTipMgr.showComplex(model.tooltipLabel);
+            }
+        }
 
-		override protected function handleMouseRollOut(event:MouseEvent) : void 
-		{
-			super.handleMouseRollOut(event);
-			App.toolTipMgr.hide();
-			
-		}
+        override protected function handleMouseRollOut(event:MouseEvent) : void 
+        {
+            super.handleMouseRollOut(event);
+            App.toolTipMgr.hide();
+            
+        }
 
-		override public function setData(data:Object) : void 
-		{
-			if (data == null)
-			{
-				return;
-			}
+        override public function setData(data:Object) : void 
+        {
+            if (data == null)
+            {
+                return;
+            }
 
-			super.setData(data);
+            super.setData(data);
 
-			model = ModsListItemRendererVO(data);
-			invalidateSize();
-		}
+            model = ModsListItemRendererVO(data);
+            invalidateSize();
+        }
 
-		override protected function onDispose(): void
-		{
+        override protected function onDispose(): void
+        {
 
-			if (alertMC)
-			{
-				alertMC.dispose()
-			}
+            if (alertMC)
+            {
+                alertMC.dispose()
+            }
 
-			if (modIcon)
-			{
-				modIcon.dispose();
-			}
+            if (modIcon)
+            {
+                modIcon.dispose();
+            }
 
-			modNameTF = null;
-			alertMC = null;
-			modIcon = null;
-			model = null;
+            modNameTF = null;
+            alertMC = null;
+            modIcon = null;
+            model = null;
 
-			super.onDispose();
-		}
+            super.onDispose();
+        }
 
-		override protected function draw() : void 
-		{
-			super.draw();
+        override protected function draw() : void 
+        {
+            super.draw();
 
-			if(model == null)
-			{
-				return;
-			}
+            if(model == null)
+            {
+                return;
+            }
 
-			if (isInvalid(InvalidationType.SIZE)) 
-			{
-				// this won't work correctly
-				enabled = model.isEnabled;
+            if (isInvalid(InvalidationType.SIZE)) 
+            {
+                // this won't work correctly
+                enabled = model.isEnabled;
 
-				// this using instead 
-				// enabled = model.isEnabled
-				// and does not working setState(state)
-				if (!model.isEnabled)
-				{
-					gotoAndPlay('disabled');
-				}
+                // this using instead 
+                // enabled = model.isEnabled
+                // and does not working setState(state)
+                if (!model.isEnabled)
+                {
+                    gotoAndPlay('disabled');
+                }
 
-				modNameTF.text = model.nameLabel;
+                modNameTF.text = model.nameLabel;
 
-				if (StringUtils.isNotEmpty(model.icon))
-				{
-					modIcon.source = model.icon;
-				}
+                if (StringUtils.isNotEmpty(model.icon))
+                {
+                    modIcon.source = model.icon;
+                }
 
-				alertMC.visible = model.isAlerting;
-			}
-		}
-	}
+                alertMC.visible = model.isAlerting;
+            }
+        }
+    }
 }

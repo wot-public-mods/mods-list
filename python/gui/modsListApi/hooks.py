@@ -11,59 +11,75 @@ from gui.shared.personality import ServicesLocator
 
 from ._constants import MODS_LIST_BUTTON_POPOVER, MODS_LIST_BUTTON_VIEW
 from .views.modsButton import ModsButtonView
-from .utils import getParentWindow, override
+from .utils import get_parent_window, override
 from .controller import g_controller
 from .events import g_eventsManager
 
-__all__ = ()
+def show_popover():
+    # type: () -> None
+    """
+    Loads the popover view when the button is clicked.
+    """
+    app = ServicesLocator.appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
+    if not app:
+        return
+    app.loadView(SFViewLoadParams(MODS_LIST_BUTTON_POPOVER, parent=get_parent_window()))
 
-def showPopover():
-	"""fire load popover view on button click"""
-	app = ServicesLocator.appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
-	if not app:
-		return
-	app.loadView(SFViewLoadParams(MODS_LIST_BUTTON_POPOVER, parent=getParentWindow()))
+g_eventsManager.showPopover += show_popover
 
-g_eventsManager.showPopover += showPopover
+def show_button():
+    # type: () -> None
+    """
+    Loads the button view when the application is initialized.
+    """
+    app = ServicesLocator.appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
+    if not app:
+        return
+    app.loadView(SFViewLoadParams(MODS_LIST_BUTTON_VIEW, parent=get_parent_window()))
 
-def showButton():
-	"""fire load button view on application initialized"""
-	app = ServicesLocator.appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
-	if not app:
-		return
-	app.loadView(SFViewLoadParams(MODS_LIST_BUTTON_VIEW, parent=getParentWindow()))
+def on_app_initialized(event):
+    # type: (events.AppLifeCycleEvent) -> None
+    """
+    Handles the application initialization event.
+    """
+    if event.ns != APP_NAME_SPACE.SF_LOBBY:
+        return
+    show_button()
 
-def onAppInitialized(event):
-	if event.ns != APP_NAME_SPACE.SF_LOBBY:
-		return
-	showButton()
-
-g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, onAppInitialized, scope=EVENT_BUS_SCOPE.GLOBAL)
+g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, on_app_initialized, scope=EVENT_BUS_SCOPE.GLOBAL)
 
 def onListUpdated():
-	# get lobby application
-	app = ServicesLocator.appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
-	if not app:
-		return
-	# if manager not exist skip
-	if not app.containerManager:
-		return
-	# get view target container
-	container = app.containerManager.getContainer(WindowLayer.WINDOW)
-	if not container:
-		return
-	# if target view already exist, skip
-	view = container.getView(criteria={POP_UP_CRITERIA.VIEW_ALIAS: MODS_LIST_BUTTON_VIEW})
-	# try load button view
-	if g_controller.isModsExist and not view:
-		return showButton()
+    # type: () -> None
+    """
+    Handles the list updated event.
+    """
+    # Get the lobby application.
+    app = ServicesLocator.appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
+    if not app:
+        return
+    # If the manager does not exist, skip.
+    if not app.containerManager:
+        return
+    # Get the view target container.
+    container = app.containerManager.getContainer(WindowLayer.WINDOW)
+    if not container:
+        return
+    # If the target view already exists, skip.
+    view = container.getView(criteria={POP_UP_CRITERIA.VIEW_ALIAS: MODS_LIST_BUTTON_VIEW})
+    # Try to load the button view.
+    if g_controller.isModsExist and not view:
+        return show_button()
 
 g_eventsManager.onListUpdated += onListUpdated
 
 @override(LobbyFooter, '_initChildren')
 def hooked_initChildren(baseMethod, baseObject):
-	baseMethod(baseObject)
-	baseObject.setChildView(
-		ModsButtonView.buttonLayoutID(),
-		ModsButtonView()
-	)
+    # type: (object, LobbyFooter) -> None
+    """
+    Injects the button view into the lobby footer.
+    """
+    baseMethod(baseObject)
+    baseObject.setChildView(
+        ModsButtonView.buttonLayoutID(),
+        ModsButtonView()
+    )

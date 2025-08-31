@@ -1,17 +1,18 @@
 {
-	"version": 3,
-	"software": {
-		"animate": "/path/to/adobe_animate",
-		"python": "/path/to/python_27"
-	},
-	"game": {
-		"folder": "/path/to/wot_dir",
-		"version": "wot_version"
-	},
-	"info": {
-		"id": "me.poliroid.modslistapi",
-		"name": "Modifications list",
-		"description": "Modifications list - comfortable run, setup and alert",
-		"version": "mod_version"
-	}
+    "version": 5,
+    "software": {
+        "animate": "/path/to/adobe_animate",
+        "python": "/path/to/python_27"
+    },
+    "game": {
+        "force": false,
+        "folder": "/path/to/wot_dir",
+        "version": "wot_version"
+    },
+    "info": {
+        "id": "me.poliroid.modslistapi",
+        "name": "Modifications list",
+        "description": "Modifications list - comfortable run, setup and alert",
+        "version": "mod_version"
+    }
 }

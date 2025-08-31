@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.0
+
+* properly handle stage change (width, height, scale)
+
 ## v1.6.01
 
 * properly handle stage change (width, height, scale)

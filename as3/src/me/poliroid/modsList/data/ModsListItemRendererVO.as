@@ -4,25 +4,25 @@
 package me.poliroid.modsList.data 
 {
 
-	import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.data.daapi.base.DAAPIDataClass;
 
-	public class ModsListItemRendererVO extends DAAPIDataClass
-	{
-		public var id:Number = 0;
+    public class ModsListItemRendererVO extends DAAPIDataClass
+    {
+        public var id:Number = 0;
 
-		public var isEnabled:Boolean = false;
+        public var isEnabled:Boolean = false;
 
-		public var isAlerting:Boolean = false;
+        public var isAlerting:Boolean = false;
 
-		public var nameLabel:String = "";
+        public var nameLabel:String = "";
 
-		public var tooltipLabel:String = "";
+        public var tooltipLabel:String = "";
 
-		public var icon:String = "";
+        public var icon:String = "";
 
-		public function ModsListItemRendererVO(data:Object)
-		{
-			super(data);
-		}
-	}
+        public function ModsListItemRendererVO(data:Object)
+        {
+            super(data);
+        }
+    }
 }

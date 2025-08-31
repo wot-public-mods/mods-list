@@ -4,19 +4,19 @@
 package me.poliroid.modsList.data 
 {
 
-	import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.data.daapi.base.DAAPIDataClass;
 
-	public class ModsListStaticDataVO  extends DAAPIDataClass
-	{
-		public var titleLabel:String = "";
+    public class ModsListStaticDataVO  extends DAAPIDataClass
+    {
+        public var titleLabel:String = "";
 
-		public var tooltipLabel:String = "";
+        public var tooltipLabel:String = "";
 
-		public var closeButtonVisible:Boolean = false;
+        public var closeButtonVisible:Boolean = false;
 
-		public function ModsListStaticDataVO(data:Object)
-		{
-			super(data);
-		}
-	}
+        public function ModsListStaticDataVO(data:Object)
+        {
+            super(data);
+        }
+    }
 }

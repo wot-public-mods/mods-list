@@ -10,58 +10,74 @@ from .views import *
 __all__ = ('g_modsListApi', )
 
 class ModsListApiRepresentation(object):
+    """
+    ModsListApiRepresentation provides a static interface to the mods list controller.
 
-	@staticmethod
-	def addModification(*args, **kwargs):
-		g_controller.addModification(*args, **kwargs)
+    This class defines the public API for adding, updating, removing, and alerting on modifications.
+    """
 
-	@staticmethod
-	def updateModification(*args, **kwargs):
-		g_controller.updateModification(*args, **kwargs)
+    @staticmethod
+    def addModification(*args, **kwargs):
+        # type: (*str, **str) -> None
+        """
+        Adds a new modification to the list.
 
-	@staticmethod
-	def removeModification(*args, **kwargs):
-		g_controller.removeModification(*args, **kwargs)
+        :param id: Unique modification ID - required
+        :param name: Modification name - required
+        :param description: Modification hint (mouse over) - required
+        :param icon: Modification icon (path from res_mods/<game_version>/) - required
+        :param enabled: Is modification enabled (can be clicked) - required
+        :param login: Show modification on Login Window - required
+        :param lobby: Show modification in Lobby - required
+        :param callback: Called on modification click - required
+        """
+        g_controller.addModification(*args, **kwargs)
 
-	@staticmethod
-	def alertModification(*args, **kwargs):
-		g_controller.alertModification(*args, **kwargs)
+    @staticmethod
+    def updateModification(*args, **kwargs):
+        # type: (*str, **str) -> None
+        """
+        Updates an existing modification.
 
-	@staticmethod
-	def clearModificationAlert(*args, **kwargs):
-		g_controller.clearModificationAlert(*args, **kwargs)
+        :param id: Unique modification ID - required
+        :param name: Modification name - optional
+        :param description: Modification hint (mouse over) - optional
+        :param icon: Modification icon (path from res_mods/<game_version>/) - optional
+        :param enabled: Is modification enabled (can be clicked) - optional
+        :param login: Show modification on Login Window - optional
+        :param lobby: Show modification in Lobby - optional
+        :param callback: Called on modification click - optional
+        """
+        g_controller.updateModification(*args, **kwargs)
+
+    @staticmethod
+    def removeModification(*args, **kwargs):
+        # type: (*str, **str) -> None
+        """
+        Removes a modification from the list.
+
+        :param id: Unique modification ID - required
+        """
+        g_controller.removeModification(*args, **kwargs)
+
+    @staticmethod
+    def alertModification(*args, **kwargs):
+        # type: (*str, **str) -> None
+        """
+        Highlights a modification in the list.
+
+        :param id: Unique modification ID - required
+        """
+        g_controller.alertModification(*args, **kwargs)
+
+    @staticmethod
+    def clearModificationAlert(*args, **kwargs):
+        # type: (*str, **str) -> None
+        """
+        Clears the alert state for a modification.
+
+        :param id: Unique modification ID - required
+        """
+        g_controller.clearModificationAlert(*args, **kwargs)
 
 g_modsListApi = ModsListApiRepresentation()
-
-"""
-ModsListApi
-
-	method addModification
-		:param id: Uniq modification ID - required
-		:param name: Modification name - required
-		:param description: Modification hint (mouse over) - required
-		:param icon: Modification icon (path from res_mods/<game_vaersion>/) - required
-		:param enabled: Is modification enabled (can be clicked) - required
-		:param login: Show modification on Login Window - required
-		:param lobby: Show modification in Lobby - required
-		:param callback: Called on modification click - required
-
-	method updateModification
-		:param id: Uniq modification ID - required
-		:param name: Modification name - not necessary
-		:param description: Modification hint (mouse over) - not necessary
-		:param icon: Modification icon (path from res_mods/<game_vaersion>/) - not necessary
-		:param enabled: Is modification enabled (can be clicked) - not necessary
-		:param login: Show modification on Login Window - not necessary
-		:param lobby: Show modification in Lobby - not necessary
-		:param callback: Called on modification click - not necessary
-
-	method removeModification
-		:param id: Uniq modification ID - required
-
-	method alertModification
-		:param id: Uniq modification ID - required
-
-	method clearModificationAlert
-		:param id: Uniq modification ID - required
-"""

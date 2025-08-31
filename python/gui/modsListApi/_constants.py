@@ -11,4 +11,5 @@ LANGUAGE_FILES = 'mods/poliroid.modslistapi/text'
 LANGUAGE_DEFAULT = 'en'
 LANGUAGE_FALLBACK = ('ru', 'be', 'kk', )
 
+# Default mod icon
 DEFAULT_MOD_ICON = '../../gui/maps/modslist/default-mod-icon.png'
