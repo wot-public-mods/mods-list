@@ -12,7 +12,7 @@ package me.poliroid.modsList.data
 
 		public var titleLabel:String = "";
 
-		public var descriptionLabel:String = "";
+		public var tooltipLabel:String = "";
 
 		public var closeButtonVisible:Boolean = false;
 

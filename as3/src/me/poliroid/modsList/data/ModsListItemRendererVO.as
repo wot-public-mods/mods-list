@@ -16,7 +16,7 @@ package me.poliroid.modsList.data
 
 		public var nameLabel:String = "";
 
-		public var descriptionLabel:String = "";
+		public var tooltipLabel:String = "";
 
 		public var icon:String = "";
 

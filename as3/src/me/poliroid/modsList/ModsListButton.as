@@ -253,7 +253,7 @@ package me.poliroid.modsList
 		override protected function setStaticData(data:ModsListStaticDataVO) : void 
 		{
 			_buttonLinkage = data.buttonLinkage;
-			_tooltip = data.descriptionLabel;
+			_tooltip = data.tooltipLabel;
 			invalidateData();
 		}
 

@@ -48,7 +48,7 @@ class _DataProvider(object):
 		result = {
 			'buttonLinkage': linkage,
 			'titleLabel': l10n('title'),
-			'descriptionLabel': l10n('description'),
+			'tooltipLabel': '{HEADER}%s{/HEADER}{BODY}%s{/BODY}' % (l10n('title'), l10n('description')),
 			'closeButtonVisible': True
 		}
 		return result
@@ -129,7 +129,7 @@ class ModificationItem(object):
 			'isEnabled': self.__enabled,
 			'isAlerting': self.__alerting,
 			'nameLabel': self.__name,
-			'descriptionLabel': self.__description,
+			'tooltipLabel': self.__description,
 			'icon': self.__icon
 		}
 		return result

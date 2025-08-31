@@ -38,9 +38,9 @@ package me.poliroid.modsList.controls
 		{
 			super.handleMouseRollOver(event);
 
-			if(StringUtils.isNotEmpty(model.descriptionLabel))
+			if(StringUtils.isNotEmpty(model.tooltipLabel))
 			{
-				App.toolTipMgr.showComplex(model.descriptionLabel);
+				App.toolTipMgr.showComplex(model.tooltipLabel);
 			}
 		}
 
