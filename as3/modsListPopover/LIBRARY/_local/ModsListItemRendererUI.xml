@@ -1,8 +1,8 @@
-<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="_local/ModsListItemRendererUI" itemID="58754565-00000198" linkageExportForAS="true" linkageBaseClass="me.poliroid.modsList.controls.ModsListItemRenderer" linkageClassName="ModsListItemRendererUI" lastModified="1585267206" lastUniqueIdentifier="5">
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="_local/ModsListItemRendererUI" itemID="58754565-00000198" linkageExportForAS="true" linkageBaseClass="me.poliroid.modsList.controls.ModsListItemRenderer" linkageClassName="ModsListItemRendererUI" lastModified="1756620804" lastUniqueIdentifier="5">
   <timeline>
-    <DOMTimeline name="ModsListItemRendererUI">
+    <DOMTimeline name="ModsListItemRendererUI" currentFrame="9">
       <layers>
-        <DOMLayer name="Layer 9" color="#4F80FF" locked="true" heightLiteral="24">
+        <DOMLayer name="Layer 9" color="#4F80FF" locked="true" current="true" isSelected="true">
           <frames>
             <DOMFrame index="0" duration="9" keyMode="9728">
               <elements/>
@@ -51,7 +51,7 @@
             </DOMFrame>
           </frames>
         </DOMLayer>
-        <DOMLayer name="Labels Layer" color="#B16AAD" locked="true" heightLiteral="24">
+        <DOMLayer name="Labels Layer" color="#B16AAD" locked="true">
           <frames>
             <DOMFrame index="0" duration="10" name="up" labelType="name" keyMode="9728">
               <elements/>
@@ -74,7 +74,7 @@
           </frames>
         </DOMLayer>
         <DOMLayer name="elements" color="#FF800A" autoNamed="false" layerType="folder"/>
-        <DOMLayer name="alert icon" color="#D4A0A9" parentLayerIndex="2" locked="true" current="true" isSelected="true" autoNamed="false" heightLiteral="24">
+        <DOMLayer name="alert icon" color="#D4A0A9" parentLayerIndex="2" locked="true" autoNamed="false">
           <frames>
             <DOMFrame index="0" duration="50" keyMode="9728">
               <elements>
@@ -96,11 +96,11 @@
             </DOMFrame>
           </frames>
         </DOMLayer>
-        <DOMLayer name="mod icon" color="#FF4F4F" parentLayerIndex="2" locked="true" autoNamed="false" heightLiteral="24">
+        <DOMLayer name="mod icon" color="#FF4F4F" parentLayerIndex="2" locked="true" autoNamed="false">
           <frames>
             <DOMFrame index="0" duration="50" keyMode="9728">
               <elements>
-                <DOMSymbolInstance libraryItemName="_imports/Image" name="modIcon" selected="true">
+                <DOMSymbolInstance libraryItemName="_imports/Image" name="modIcon">
                   <matrix>
                     <Matrix tx="15" ty="12"/>
                   </matrix>
@@ -127,7 +127,7 @@
             </DOMFrame>
           </frames>
         </DOMLayer>
-        <DOMLayer name="mod name" color="#BDD3F1" parentLayerIndex="2" locked="true" autoNamed="false" heightLiteral="24">
+        <DOMLayer name="mod name" color="#BDD3F1" parentLayerIndex="2" locked="true" autoNamed="false">
           <frames>
             <DOMFrame index="0" duration="50" keyMode="9728">
               <elements>
@@ -139,7 +139,7 @@
                     <DOMTextRun>
                       <characters>modNameTF</characters>
                       <textAttrs>
-                        <DOMTextAttrs aliasText="false" lineHeight="20.1" size="16" bitmapSize="320" face="$TitleFont*" fillColor="#DDDDD0"/>
+                        <DOMTextAttrs aliasText="false" lineHeight="20.05" size="16" bitmapSize="320" face="$TitleFont*" fillColor="#DDDDD0"/>
                       </textAttrs>
                     </DOMTextRun>
                   </textRuns>
@@ -156,7 +156,7 @@
                     <DOMTextRun>
                       <characters>modNameTF</characters>
                       <textAttrs>
-                        <DOMTextAttrs aliasText="false" lineHeight="20.1" size="16" bitmapSize="320" face="$TitleFont*" fillColor="#999999"/>
+                        <DOMTextAttrs aliasText="false" lineHeight="20.05" size="16" bitmapSize="320" face="$TitleFont*" fillColor="#999999"/>
                       </textAttrs>
                     </DOMTextRun>
                   </textRuns>
@@ -166,7 +166,7 @@
           </frames>
         </DOMLayer>
         <DOMLayer name="background" color="#9933CC" autoNamed="false" layerType="folder"/>
-        <DOMLayer name="animated" color="#F55D7C" parentLayerIndex="6" locked="true" autoNamed="false" heightLiteral="24">
+        <DOMLayer name="animated" color="#F55D7C" parentLayerIndex="6" locked="true" autoNamed="false">
           <frames>
             <DOMFrame index="0" duration="10" keyMode="9728">
               <elements/>
@@ -254,11 +254,11 @@
             </DOMFrame>
           </frames>
         </DOMLayer>
-        <DOMLayer name="static" color="#09BDC1" parentLayerIndex="6" locked="true" autoNamed="false" heightLiteral="24">
+        <DOMLayer name="static" color="#09BDC1" parentLayerIndex="6" locked="true" autoNamed="false">
           <frames>
             <DOMFrame index="0" duration="50" keyMode="9728">
               <elements>
-                <DOMSymbolInstance libraryItemName="_local/listItem/backgroundNormal" selected="true" symbolType="graphic" loop="loop">
+                <DOMSymbolInstance libraryItemName="_local/listItem/backgroundNormal" symbolType="graphic" loop="loop">
                   <matrix>
                     <Matrix a="0.99993896484375" d="1.07142639160156"/>
                   </matrix>

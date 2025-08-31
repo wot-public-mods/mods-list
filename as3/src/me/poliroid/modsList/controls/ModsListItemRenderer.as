@@ -28,7 +28,7 @@ package me.poliroid.modsList.controls
 
 		private var model:ModsListItemRendererVO = null;
 
-		public function ModsListItemRenderer() 
+		public function ModsListItemRenderer()
 		{
 			super();
 			mouseEnabledOnDisabled = false;

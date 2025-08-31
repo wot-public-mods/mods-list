@@ -2,8 +2,9 @@
 # Copyright (c) 2015-2025 Andrii Andrushchyshyn
 
 # UI linkages
-MODS_LIST_API_BUTTON_ALIAS = 'ModsListApiButton'
-MODS_LIST_API_POPOVER_ALIAS = 'ModsListApiPopover'
+MODS_LIST_BUTTON_POPOVER = 'ModsListPopover'
+MODS_LIST_BUTTON_VIEW = 'ModsListButton'
+MODS_LIST_BUTTON_INJECT = 'ModsListButtonInject'
 
 # Language
 LANGUAGE_FILES = 'mods/poliroid.modslistapi/text'

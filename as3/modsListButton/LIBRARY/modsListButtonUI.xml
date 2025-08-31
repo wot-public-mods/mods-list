@@ -1,6 +1,6 @@
-<DOMComponentItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="modsListButtonUI" itemID="58769078-0000014d" linkageExportForAS="true" linkageBaseClass="me.poliroid.modsList.ModsListButton" linkageClassName="ModsListButtonUI" lastModified="1566414665" lastUniqueIdentifier="1" displayAsComponent="false" customIconID="0" actionscriptClass="ModsListButtonUI" persistLivePreview11="true" editFrameIndex="1" requiredMinimumPlayerVersion="0" requiredMinimumASVersion="0" parametersAreLocked="true">
+<DOMComponentItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="ModsListButtonUI" itemID="68b3dfbf-00000151" linkageExportForAS="true" linkageBaseClass="me.poliroid.modsList.ModsListButton" linkageClassName="ModsListButtonUI" lastModified="1756622325" lastUniqueIdentifier="1" displayAsComponent="false" customIconID="0" actionscriptClass="ModsListButtonUI" persistLivePreview11="true" editFrameIndex="1" requiredMinimumPlayerVersion="0" requiredMinimumASVersion="0" parametersAreLocked="true">
   <timeline>
-    <DOMTimeline name="modsListButtonUI">
+    <DOMTimeline name="ModsListButtonUI">
       <layers>
         <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
           <frames>

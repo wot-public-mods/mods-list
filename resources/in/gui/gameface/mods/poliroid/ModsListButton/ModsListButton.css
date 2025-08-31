@@ -1,0 +1,113 @@
+.modsButton {
+    margin-right: 6rem;
+    width: 24rem;
+    height: 24rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.mediaMediumWidth .modsButton {
+    width: 32rem;
+    height: 32rem;
+}
+
+.modsButton .modsIcon {
+    opacity: 0.7;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    background-image: url(img://gui/maps/modslist/button-icon.png);
+    background-size: 370px 455px;
+    background-repeat: no-repeat;
+}
+
+.modsButton:hover .modsIcon {
+    opacity: 0.9;
+}
+
+.modsButton:active .modsIcon {
+    opacity: 0.5;
+}
+
+.modsButton .modsBuble {
+    position: relative;
+    transition: opacity 0.2s ease;
+}
+
+.modsButton .modsBubleWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2rem;
+    border-image: url(R.images.gui.maps.icons.library.notification.border) 2
+        fill/2rem round;
+    box-shadow:
+        0 0 15rem 0 rgba(255, 23, 2, 0.6),
+        0 0 7rem 0 #ff3a28,
+        0 1rem 1rem 0 #c13629;
+    background-color: #ffe4c0;
+    padding: 0 3rem;
+    position: absolute;
+    top: -1rem;
+    left: 50%;
+    pointer-events: none;
+    max-width: 67rem;
+    height: 13rem;
+    min-width: 13rem;
+}
+
+.mediaMediumWidth .modsButton .modsBubleWrapper {
+    min-width: 16rem;
+    max-width: 81rem;
+    height: 17rem;
+}
+
+.modsButton .modsBubleWrapper::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url(R.images.gui.maps.icons.library.notification.noise)
+        center/contain repeat;
+    content: "";
+}
+
+.modsButton .modsBubleValue {
+    max-width: 100%;
+    color: rgba(149, 16, 8, 0.9);
+    font-weight: 600;
+    text-overflow: ellipsis;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 13rem;
+    line-height: 1.4;
+    min-width: 7rem;
+    text-align: center;
+}
+
+.mediaMediumWidth .modsButton .modsBubleValue {
+    font-size: 16rem;
+    line-height: 1.1;
+    min-width: 10rem;
+}
+
+.standalone {
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+
+.standalone .modsButton {
+    position: absolute;
+    right: 45rem;
+    bottom: 25rem;
+}
+
+.mediaMediumWidth .standalone .modsButton {
+    right: 55rem;
+}

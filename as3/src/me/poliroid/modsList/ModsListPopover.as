@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2015-2025 Andrii Andrushchyshyn
 
-package me.poliroid.modsList 
+package me.poliroid.modsList
 {
 
 	import scaleform.clik.constants.InvalidationType;
@@ -9,16 +9,16 @@ package me.poliroid.modsList
 	import scaleform.clik.events.ListEvent;
 	import scaleform.clik.controls.ScrollingList;
 
+	import net.wg.data.constants.Linkages;
 	import net.wg.gui.components.controls.ScrollBar;
 	import net.wg.gui.components.popovers.PopOver;
+	import net.wg.infrastructure.base.SmartPopOverView;
 
 	import me.poliroid.modsList.data.ModsListModsVO;
 	import me.poliroid.modsList.data.ModsListItemRendererVO;
 	import me.poliroid.modsList.data.ModsListStaticDataVO;
-	import me.poliroid.modsList.interfaces.IModsListPopoverMeta
-	import me.poliroid.modsList.interfaces.impl.ModsListPopoverMeta
 
-	public class ModsListPopover extends ModsListPopoverMeta implements IModsListPopoverMeta 
+	public class ModsListPopover extends SmartPopOverView
 	{
 
 		private static const RENDERER_HEIGHT:int = 75;
@@ -31,17 +31,21 @@ package me.poliroid.modsList
 
 		public var scrollBar:ScrollBar = null;
 
-		override protected function onDispose() : void 
+		public var invokeModification:Function;
+
+		public var getModsList:Function;
+
+		// bcs SWC in very good condition
+		public function get wrapperLinkage() : String 
 		{
-			modsList.removeEventListener(ListEvent.ITEM_CLICK, handleModsListItemClick);
-			super.onDispose();
+			return Linkages.SMART_POPOVER;
 		}
 
 		override protected function configUI() : void 
 		{
 			super.configUI();
 			modsList.addEventListener(ListEvent.ITEM_CLICK, handleModsListItemClick);
-			getModsListS();
+			getModsList();
 		}
 
 		override protected function draw() : void
@@ -70,23 +74,32 @@ package me.poliroid.modsList
 			}
 		}
 
-		override protected function setStaticData(data:ModsListStaticDataVO) : void 
+		override protected function onDispose() : void 
 		{
-			var popoverWrapper:PopOver = PopOver(wrapper);
-			popoverWrapper.title = data.titleLabel;
-			popoverWrapper.isCloseBtnVisible = data.closeButtonVisible;
+			modsList.removeEventListener(ListEvent.ITEM_CLICK, handleModsListItemClick);
+			super.onDispose();
 		}
 
-		override protected function setModsData(data:ModsListModsVO) : void 
+		public final function as_setStaticData(data:Object) : void
 		{
-			modsList.dataProvider = new DataProvider(data.modsList);
+			var vo:ModsListStaticDataVO = new ModsListStaticDataVO(data);
+			var popoverWrapper:PopOver = PopOver(wrapper);
+			popoverWrapper.title = vo.titleLabel;
+			popoverWrapper.isCloseBtnVisible = vo.closeButtonVisible;
+		}
+
+		public final function as_setModsData(data:Object) : void
+		{
+			var vo:ModsListModsVO = new ModsListModsVO(data);
+			modsList.dataProvider = new DataProvider(vo.modsList);
 			invalidateData();
+			vo.dispose();
 		}
 
 		private function handleModsListItemClick(event:ListEvent): void 
 		{
 			var modID:Number = (event.itemData as ModsListItemRendererVO).id;
-			invokeModificationS(modID);
+			invokeModification(modID);
 			App.popoverMgr.hide();
 		}
 	}

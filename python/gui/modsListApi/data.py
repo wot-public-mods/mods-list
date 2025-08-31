@@ -10,7 +10,7 @@ from ._constants import DEFAULT_MOD_ICON
 from .controller import g_controller
 from .lang import l10n
 from .events import g_eventsManager
-from .utils import prepareDescription, getLogger, is_mt_client
+from .utils import prepareDescription, getLogger
 
 __all__ = ('g_dataProvider', 'ModificationItem', )
 
@@ -25,6 +25,10 @@ class _DataProvider(object):
 	@property
 	def staticData(self):
 		return self._generateStaticData()
+
+	@property
+	def alertsCount(self):
+		return sum(int(item.alerting) for item in g_controller.modifications.values())
 
 	@staticmethod
 	def _generateModsData():
@@ -42,11 +46,7 @@ class _DataProvider(object):
 	@staticmethod
 	def _generateStaticData():
 		"""return value Represented by ModsListModsVO (AS)"""
-		linkage = 'WoTModsListBlinkingButtonUI'
-		if is_mt_client():
-			linkage = 'MTModsListBlinkingButtonUI'
 		result = {
-			'buttonLinkage': linkage,
 			'titleLabel': l10n('title'),
 			'tooltipLabel': '{HEADER}%s{/HEADER}{BODY}%s{/BODY}' % (l10n('title'), l10n('description')),
 			'closeButtonVisible': True
@@ -70,6 +70,10 @@ class ModificationItem(object):
 	@property
 	def dpData(self):
 		return self.__genDataForDP()
+
+	@property
+	def alerting(self):
+		return self.__alerting
 
 	def __init__(self):
 		self.__numID = IDGenerator.next()
@@ -112,8 +116,6 @@ class ModificationItem(object):
 	def setAlerting(self, isAlerting):
 		self.__alerting = isAlerting
 		g_eventsManager.onListUpdated()
-		if isAlerting:
-			g_eventsManager.onButtonBlinking()
 
 	def __availabilityCheck(self):
 		result = False

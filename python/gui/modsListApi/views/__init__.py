@@ -1,20 +1,41 @@
 ﻿# SPDX-License-Identifier: MIT
 # Copyright (c) 2015-2025 Andrii Andrushchyshyn
 
-from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, GroupedViewSettings, ScopeTemplates
 from frameworks.wulf import WindowLayer
+from gui.Scaleform.framework import ScopeTemplates
+from gui.Scaleform.framework import g_entitiesFactories, ComponentSettings, GroupedViewSettings, ViewSettings, ScopeTemplates
+from gui.Scaleform.framework.entities.View import View
 
-from .._constants import MODS_LIST_API_BUTTON_ALIAS, MODS_LIST_API_POPOVER_ALIAS
-from ..views.buttonView import ModsListButtonView
-from ..views.popoverView import ModsListPopoverView
+from .._constants import MODS_LIST_BUTTON_POPOVER, MODS_LIST_BUTTON_VIEW, MODS_LIST_BUTTON_INJECT
+from .modsPopover import ModsListPopoverView
+from .modsButton import ModsButtonInjectComponent
 
-def getViewSettings():
-	buttonSettings = ViewSettings(MODS_LIST_API_BUTTON_ALIAS, ModsListButtonView, 'modsListButton.swf',
-								WindowLayer.WINDOW, None, ScopeTemplates.GLOBAL_SCOPE)
-	popoverSettings = GroupedViewSettings(MODS_LIST_API_POPOVER_ALIAS, ModsListPopoverView, 'modsListPopover.swf',
-										WindowLayer.WINDOW, MODS_LIST_API_POPOVER_ALIAS, MODS_LIST_API_POPOVER_ALIAS,
-										ScopeTemplates.DEFAULT_SCOPE)
-	return buttonSettings, popoverSettings
+g_entitiesFactories.addSettings(
+	GroupedViewSettings(
+		MODS_LIST_BUTTON_POPOVER,
+		ModsListPopoverView,
+		'modsListPopover.swf',
+		WindowLayer.WINDOW,
+		MODS_LIST_BUTTON_POPOVER,
+		MODS_LIST_BUTTON_POPOVER,
+		ScopeTemplates.WINDOW_VIEWED_MULTISCOPE
+	)
+)
 
-for item in getViewSettings():
-	g_entitiesFactories.addSettings(item)
+g_entitiesFactories.addSettings(
+	ViewSettings(
+		MODS_LIST_BUTTON_VIEW,
+		View,
+		'modsListButton.swf',
+		WindowLayer.WINDOW,
+		None,
+		ScopeTemplates.GLOBAL_SCOPE
+	)
+)
+g_entitiesFactories.addSettings(
+	ComponentSettings(
+		MODS_LIST_BUTTON_INJECT,
+		ModsButtonInjectComponent,
+		ScopeTemplates.DEFAULT_SCOPE
+	)
+)

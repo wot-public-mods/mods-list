@@ -1,35 +1,20 @@
-<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#666666" currentTimeline="1" xflVersion="23.0" creatorInfo="Adobe Animate" platform="Windows" versionInfo="Saved by Animate Windows 23.0 build 407" majorVersion="23" buildNumber="407" nextSceneIdentifier="2" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false" filetypeGUID="DD0DDBBF-5BEF-45B2-9F24-A3048D2A676F" fileGUID="94AE3C02CD481447A11AE17D59735018">
+<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#666666" currentTimeline="1" xflVersion="23.0" creatorInfo="Adobe Animate" platform="Windows" versionInfo="Saved by Animate Windows 23.0 build 103" majorVersion="23" buildNumber="103" nextSceneIdentifier="2" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false" filetypeGUID="DD0DDBBF-5BEF-45B2-9F24-A3048D2A676F" fileGUID="94AE3C02CD481447A11AE17D59735018">
      <folders>
-          <DOMFolderItem name="_imports" itemID="5e7d3df6-0000002c" isExpanded="true"/>
-          <DOMFolderItem name="_local" itemID="5e7d3d3f-00000007" isExpanded="true"/>
-          <DOMFolderItem name="_local/button" itemID="5e7d3d43-0000000b" isExpanded="true"/>
-          <DOMFolderItem name="_local/mt_button" itemID="6777ed53-00000378" isExpanded="true"/>
+          <DOMFolderItem name="_imports" itemID="68b3ec6c-000001a6" isExpanded="true"/>
      </folders>
-     <media>
-          <DOMBitmapItem name="_local/button/background.png" itemID="6777eea6-00000464" sourceExternalFilepath="./LIBRARY/_local/button/background.png" sourceLastImported="1585271664" externalFileSize="5052" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="_local/button/background.png" bitmapDataHRef="M 3 1585266282.dat" frameRight="1440" frameBottom="660"/>
-          <DOMBitmapItem name="_local/mt_button/background.png" itemID="6777eea6-00000465" sourceExternalFilepath="./LIBRARY/_local/mt_button/background.png" sourceLastImported="1735912954" externalFileSize="3699" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="_local/mt_button/background.png" bitmapDataHRef="M 3 1735912801.dat" frameRight="1440" frameBottom="620"/>
-          <DOMBitmapItem name="_local/button/icon.png" itemID="5e7d4024-0000007f" sourceExternalFilepath="./LIBRARY/_local/button/icon.png" sourceLastImported="1585271665" externalFileSize="1109" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="_local/button/icon.png" bitmapDataHRef="M 4 1585266288.dat" frameRight="1440" frameBottom="660"/>
-     </media>
      <symbols>
           <Include href="_imports/SmartPopOverUI.xml" itemID="5e7d3e03-00000037" lastModified="1484257064"/>
-          <Include href="_local/button/animation.xml" loadImmediate="false" itemID="5e7d3ffc-00000078" lastModified="1585266684"/>
-          <Include href="_local/button/background.xml" loadImmediate="false" itemID="5e7d4002-00000079" lastModified="1585266690"/>
-          <Include href="_local/button/blinker.xml" loadImmediate="false" itemID="5e7d3ff9-00000077" lastModified="1585266681"/>
-          <Include href="_local/button/icon.xml" loadImmediate="false" itemID="5e7d4007-0000007b" lastModified="1585266695"/>
-          <Include href="_local/mt_button/background.xml" loadImmediate="false" itemID="6777ed6b-00000381" lastModified="1735912974"/>
-          <Include href="_local/MTModsListBlinkingButtonUI.xml" itemID="6777ec5d-00000353" lastModified="1735913118"/>
-          <Include href="_local/WoTModsListBlinkingButtonUI.xml" itemID="6777ebde-0000033d" lastModified="1735912608"/>
-          <Include href="modsListButtonImports.xml" itemID="58765fec-0000015f" lastModified="1486130234"/>
-          <Include href="modsListButtonUI.xml" itemID="58769078-0000014d" lastModified="1566414665"/>
+          <Include href="ModsListButtonImports.xml" itemID="68b3ec81-000001ac" lastModified="1756621953"/>
+          <Include href="ModsListButtonUI.xml" itemID="68b3dfbf-00000151" lastModified="1756622325"/>
      </symbols>
      <timelines>
           <DOMTimeline name="Scene 1">
                <layers>
-                    <DOMLayer name="Layer_1" color="#00FFFF" current="true" isSelected="true" heightLiteral="24">
+                    <DOMLayer name="Layer_1" color="#00FFFF" current="true" isSelected="true">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
-                                        <DOMComponentInstance libraryItemName="modsListButtonUI" name="main" uniqueID="1">
+                                        <DOMComponentInstance libraryItemName="ModsListButtonUI" name="main" uniqueID="1">
                                              <transformationPoint>
                                                   <Point/>
                                              </transformationPoint>
@@ -48,11 +33,8 @@
      <scripts/>
      <PrinterSettings/>
      <publishHistory>
-          <PublishItem publishSize="11101" publishTime="1585266728"/>
-          <PublishItem publishSize="6793" publishTime="1585266498"/>
-          <PublishItem publishSize="11238" publishTime="1585266488"/>
-          <PublishItem publishSize="11238" publishTime="1585266484"/>
-          <PublishItem publishSize="11238" publishTime="1585266483"/>
-          <PublishItem publishSize="11238" publishTime="1585266482"/>
+          <PublishItem publishSize="1932" publishTime="1756633284"/>
+          <PublishItem publishSize="1957" publishTime="1756633095"/>
+          <PublishItem publishSize="1957" publishTime="1756633090"/>
      </publishHistory>
 </DOMDocument>

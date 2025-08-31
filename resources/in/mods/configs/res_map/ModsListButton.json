@@ -1,0 +1,12 @@
+[
+    {
+        "type": "Layout",
+        "path": "coui://gui/gameface/mods/poliroid/ModsListButton/ModsListButton.html",
+        "parameters": {
+            "extension": "",
+            "entrance": "ModsListButton",
+            "impl": "gameface"
+        },
+        "itemID": "ModsListButton"
+    }
+]

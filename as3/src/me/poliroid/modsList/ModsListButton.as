@@ -8,63 +8,30 @@ package me.poliroid.modsList
 	import flash.display.MovieClip;
 	import flash.events.Event;
 
-	import scaleform.clik.constants.InvalidationType;
-	import scaleform.clik.events.ButtonEvent;
-	import scaleform.clik.utils.Constraints;
-
 	import net.wg.app.iml.base.StageResizeEvent;
-	import net.wg.infrastructure.managers.impl.ContainerManagerBase;
-	import net.wg.gui.components.containers.MainViewContainer;
-	import net.wg.infrastructure.events.LifeCycleEvent;
-	import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
-	import net.wg.infrastructure.interfaces.IManagedContent;
-	import net.wg.infrastructure.interfaces.IDisplayObject;
-
 	import net.wg.data.Aliases;
 	import net.wg.data.constants.generated.LAYER_NAMES;
-	import net.wg.gui.lobby.messengerBar.MessengerBar;
-	import net.wg.infrastructure.interfaces.IView;
-	import net.wg.infrastructure.events.LoaderEvent;
-	import net.wg.gui.lobby.LobbyPage;
+	import net.wg.gui.components.containers.inject.GFInjectComponent;
+	import net.wg.gui.components.containers.MainViewContainer;
 	import net.wg.gui.login.impl.LoginPage;
+	import net.wg.infrastructure.base.AbstractView;
+	import net.wg.infrastructure.events.LoaderEvent;
+	import net.wg.infrastructure.interfaces.IManagedContent;
+	import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
+	import net.wg.infrastructure.interfaces.IView;
+	import net.wg.infrastructure.managers.impl.ContainerManagerBase;
+	import net.wg.infrastructure.events.LifeCycleEvent;
 
-	import me.poliroid.modsList.controls.ModsListBlinkingButton;
-	import me.poliroid.modsList.data.ModsListStaticDataVO;
-	import me.poliroid.modsList.interfaces.IModsListButtonMeta;
-	import me.poliroid.modsList.interfaces.impl.ModsListButtonMeta;
-
-	public class ModsListButton extends ModsListButtonMeta implements IModsListButtonMeta 
+	public class ModsListButton extends AbstractView
 	{
 
-		private static const BUTTON_LOGIN_BOTTOM_MARGIN:int = 40;
+		public var _buttonInject:GFInjectComponent = null;
 
-		private static const BUTTON_LOGIN_RIGHT_MARGIN:int = 80;
-
-		private static const BUTTON_LOBBY_TOP_MARGIN:int = 9;
-
-		private static const BUTTON_LOBBY_GAP:int = 5;
-
-		private static const POPOVER_ALIAS:String = 'ModsListApiPopover';
-
-		private static const INVALIDATE_ALIASES:Array = [Aliases.LOGIN, Aliases.LOBBY, Aliases.LOBBY_HANGAR, Aliases.LOBBY_TRAINING_ROOM];
-
-		public var modsButton:ModsListBlinkingButton = null;
-
-		public var messengerBar:MessengerBar = null;
-
-		public var isInLobby:Boolean = false;
-
-		private var _buttonLinkage:String = 'WoTModsListBlinkingButtonUI';
-
-		private var _tooltip:String = '';
-
-		private var _blinking:Boolean = false;
+		private static const INJECTOR_ALIAS:String = 'ModsListButtonInject';
 
 		override protected function configUI() : void 
 		{
 			super.configUI();
-
-			// process already loaded views
 			var viewContainer:MainViewContainer = _getContainer(LAYER_NAMES.VIEWS) as MainViewContainer;
 			if (viewContainer != null)
 			{
@@ -83,72 +50,16 @@ package me.poliroid.modsList
 					viewContainer.setFocusedView(topmostView);
 				}
 			}
-
-			// subscribe to stage resize
 			App.instance.stage.addEventListener(StageResizeEvent.STAGE_RESIZE, onStageResize);
-
-			// subscribe to container manager loader
 			(App.containerMgr as ContainerManagerBase).loader.addEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded, false, 0, true);
 		}
 
 		override protected function onDispose() : void 
 		{
-			buttonDestroy();
-
-			// remove links
-			messengerBar = null;
-
-			// unsubscribe from container manager loader
+			_buttonInject = null;
 			(App.containerMgr as ContainerManagerBase).loader.removeEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded);
-
-			// unsubscribe from stage resize
 			App.instance.stage.removeEventListener(StageResizeEvent.STAGE_RESIZE, onStageResize);
-
 			super.onDispose();
-		}
-
-		override protected function draw() : void 
-		{
-			super.draw();
-
-			if(isInvalid(InvalidationType.SIZE) && modsButton)
-			{
-				if (isInLobby)
-				{
-					if (messengerBar)
-					{
-						fixRightSideBtnsOrder();
-						messengerBar['updateChannelCarouselWidth']();
-					}
-				}
-				else
-				{
-					modsButton.x = App.appWidth - BUTTON_LOGIN_RIGHT_MARGIN
-					modsButton.y = App.appHeight - BUTTON_LOGIN_BOTTOM_MARGIN;
-				}
-			}
-
-			if(isInvalid(InvalidationType.DATA) && modsButton)
-			{
-				modsButton.tooltip = _tooltip;
-				modsButton.blinking = _blinking;
-			}
-
-		}
-
-		override protected function nextFrameAfterPopulateHandler() : void 
-		{
-			super.nextFrameAfterPopulateHandler();
-			addAsChildToApp();
-		}
-
-		// this needs for valid Focus and Position in Login Window 
-		public function addAsChildToApp() : void 
-		{
-			if (parent != App.instance)
-			{
-				(App.instance as MovieClip).addChild(this);
-			}
 		}
 
 		private function _getContainer(containerName:String) : ISimpleManagedContainer
@@ -158,8 +69,17 @@ package me.poliroid.modsList
 
 		private function onStageResize(e:StageResizeEvent) : void
 		{
-			invalidateSize();
-			validateNow();
+			updateInject();
+		}
+
+		// this needs for valid Focus and Position in Login Window 
+		override protected function nextFrameAfterPopulateHandler() : void 
+		{
+			super.nextFrameAfterPopulateHandler();
+			if (parent != App.instance)
+			{
+				(App.instance as MovieClip).addChild(this);
+			}
 		}
 
 		private function onViewLoaded(event:LoaderEvent) : void 
@@ -171,110 +91,50 @@ package me.poliroid.modsList
 		private function processView(view:IView) : void 
 		{
 			var alias:String = view.as_config.alias;
-
 			if (alias == Aliases.LOGIN)
 			{
-				isInLobby = false;
-
-				buttonCreate();
-
-				(view as LoginPage).addChild(DisplayObject(modsButton));
-			}
-
-			if (alias == Aliases.LOBBY)
-			{
-				addAsChildToApp();
-				isInLobby = true;
-				messengerBar = (view as LobbyPage).messengerBar as MessengerBar;
-
-				buttonCreate();
-
-				modsButton.y = BUTTON_LOBBY_TOP_MARGIN;
-
-				messengerBar.addChild(DisplayObject(modsButton));
-				messengerBar.constraints.addElement("modsButton", DisplayObject(modsButton), Constraints.RIGHT);
-
-				messengerBar.addEventListener(LifeCycleEvent.ON_AFTER_POPULATE, handleMessangerBarPopulate);
-				messengerBar.addEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE, handleMessangerBarDispose);
-			}
-
-			if (INVALIDATE_ALIASES.indexOf(alias) >= 0)
-			{
-				invalidateSize();
+				createInject(view);
+				updateInject();
 			}
 		}
 
-		private function handleModsButtonClick(event:ButtonEvent) : void 
+		private function createInject(view:IView) : void
 		{
-			onButtonClickS(isInLobby);
-			_blinking = false;
-			invalidateData();
-			App.toolTipMgr.hide();
-			App.popoverMgr.show(modsButton, POPOVER_ALIAS);
-		}
-
-		private function handleMessangerBarPopulate() : void
-		{
-			fixRightSideBtnsOrder();
-			App.utils.scheduler.scheduleOnNextFrame(fixRightSideBtnsOrder);
-		}
-
-		private function handleMessangerBarDispose() : void
-		{
-			messengerBar = null;
-		}
-
-		private function buttonCreate() : void
-		{
-			buttonDestroy();
-			modsButton = App.utils.classFactory.getComponent(_buttonLinkage, ModsListBlinkingButton);
-			modsButton.addEventListener(ButtonEvent.CLICK, handleModsButtonClick);
-			invalidateData();
-			invalidateSize();
-		}
-
-		private function buttonDestroy() : void
-		{
-			if (modsButton)
-			{
-				if (modsButton.parent)
-				{
-					modsButton.parent.removeChild(modsButton);
-				}
-				modsButton.removeEventListener(ButtonEvent.CLICK, handleModsButtonClick);
-				if (!modsButton.isDisposed())
-				{
-					modsButton.dispose();
-				}
-			}
-			modsButton = null;
-		}
-
-		override protected function setStaticData(data:ModsListStaticDataVO) : void 
-		{
-			_buttonLinkage = data.buttonLinkage;
-			_tooltip = data.tooltipLabel;
-			invalidateData();
-		}
-
-		private function fixRightSideBtnsOrder() : void
-		{
-			// just skip if not initialized
-			if (!messengerBar || !modsButton)
+			if (_buttonInject)
 				return;
-
-			// try insert our button in order if it not in it
-			// insert after notifications and before others
-			var rightSideBtnsOrder:Vector.<IDisplayObject> = messengerBar['_rightSideBtnsOrder'];
-			if (rightSideBtnsOrder && rightSideBtnsOrder.indexOf(modsButton) == -1)
-				rightSideBtnsOrder.splice(1, 0, modsButton);
+			const loginPage = (view as LoginPage);
+			_buttonInject = new GFInjectComponent();
+			_buttonInject.setManageSize(true);
+			loginPage.addChild(DisplayObject(_buttonInject));
+			loginPage.addEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE, _handleLoginPageDispose);
+			registerFlashComponentS(_buttonInject, INJECTOR_ALIAS);
 		}
 
-		override protected function buttonBlinking() : void 
+		private function destroyInject() : void
 		{
-			_blinking = true;
-			invalidateData();
+			if (!_buttonInject)
+				return;
+			unregisterFlashComponentS(INJECTOR_ALIAS);
+			if (_buttonInject.parent)
+				_buttonInject.parent.removeChild(_buttonInject);
+			_buttonInject = null;
 		}
 
+		private function updateInject() : void
+		{
+			if (_buttonInject)
+			{
+				const targetWidth:int = int(150 / App.appScale);
+				const targetHeight:int = int(150 / App.appScale);
+				_buttonInject.x = App.appWidth - targetWidth;
+				_buttonInject.y = App.appHeight - targetHeight;
+				_buttonInject.setSize(targetWidth, targetHeight);
+			}
+		}
+
+		private function _handleLoginPageDispose(event:LifeCycleEvent) : void
+		{
+			destroyInject();
+		}
 	}
 }
