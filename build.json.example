@@ -9,8 +9,7 @@
 		"version": "wot_version"
 	},
 	"info": {
-		"id": "modslistapi",
-		"author": "poliroid",
+		"id": "me.poliroid.modslistapi",
 		"name": "Modifications list",
 		"description": "Modifications list - comfortable run, setup and alert",
 		"version": "mod_version"
