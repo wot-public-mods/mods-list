@@ -1,8 +1,12 @@
 # Changelog
 
-## v1.7.0
+## v1.7.00
 
-* properly handle stage change (width, height, scale)
+* add openwg_gameface dependency check
+* refactor codebase with comments and formatting improvements
+* migrate mods list button to Gameface
+* Overhaul build script for readability and reliability
+* Improve tooltip display
 
 ## v1.6.01
 
