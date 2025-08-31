@@ -11,6 +11,7 @@ from gui.Scaleform.framework.entities.inject_component_adaptor import InjectComp
 from openwg_gameface import ModDynAccessor, gf_mod_inject
 
 from .._constants import MODS_LIST_BUTTON_VIEW
+from ..controller import g_controller
 from ..data import g_dataProvider
 from ..events import g_eventsManager
 from ..lang import l10n
@@ -119,11 +120,12 @@ class ModsButtonView(ViewComponent[ModsButtonModel]):
         """
         return ((self.viewModel.onButtonClick, self.__onButtonClick),)
 
-    def __onButtonClick(self, isInLobby=True):
+    def __onButtonClick(self, context={}):
         # type: (bool) -> None
         """
         Handles the button click event.
         """
+        g_controller.isInLobby = not context.get('standalone', False)
         g_eventsManager.showPopover()
 
 class ModsButtonInjectComponent(InjectComponentAdaptor):

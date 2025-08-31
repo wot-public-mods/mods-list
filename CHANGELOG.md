@@ -1,6 +1,10 @@
 # Changelog
 
-## v1.7.00
+## v1.7.1
+
+* fix: Correctly handle lobby state on button click
+
+## v1.7.0
 
 * add openwg_gameface dependency check
 * refactor codebase with comments and formatting improvements

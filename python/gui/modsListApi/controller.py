@@ -1,7 +1,6 @@
 ﻿# SPDX-License-Identifier: MIT
 # Copyright (c) 2015-2025 Andrii Andrushchyshyn
 
-from .events import g_eventsManager
 from .utils import get_logger
 
 logger = get_logger(__name__)
@@ -14,7 +13,7 @@ class ApiLogicController(object):
 
     def __init__(self):
         # type: () -> None
-        self.__modifications = dict()
+        self.__modifications = dict() # type list[ModificationItem]
         self.__isInLobby = False
 
     @property

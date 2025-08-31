@@ -3,13 +3,8 @@
 
 __version__ = "1.7.0"
 
-g_controller = None
-
 try:
     import openwg_gameface
-    from .controller import g_controller
-    from .hooks import *
-    from .views import *
 except ImportError:
     # log to handle with sentry
     import logging
@@ -19,12 +14,16 @@ except ImportError:
                    '!!!\n'
                    '!!!   ModsListAPI requires the openwg_gameface module to function.\n'
                    '!!!   Without it, this and other GF UI mods will not work correctly.\n'
-                   '!!!   Please download and install it from: https://gitlab.com/openwg/wot.gameface/\n'
+                   '!!!   Please download and install it from: https://gitlab.com/openwg/wot.gameface/-/releases/\n'
                    '!!!\n'
                    '!!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!   !!!\n')
     # Kill game client
     import sys
     sys.exit()
+
+from .controller import g_controller
+from .hooks import *
+from .views import *
 
 class ModsListApiRepresentation(object):
     """

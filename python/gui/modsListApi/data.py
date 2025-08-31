@@ -59,8 +59,6 @@ class _DataProvider(object):
                 result.append(item.dpData)
         if result:
             result = sorted(result, key=lambda item: item.get('id'))
-        if not result:
-            result.append({})
         return {'mods' : result}
 
     @staticmethod
@@ -145,7 +143,8 @@ class ModificationItem(object):
             self.__description = format_description(description)
         if callback is not None:
             self.__callback = callback
-        self.__icon = self.__fixModIcon(icon)
+        if icon:
+            self.__icon = self.__fixModIcon(icon)
         g_eventsManager.onListUpdated()
 
     def __fixModIcon(self, path):
