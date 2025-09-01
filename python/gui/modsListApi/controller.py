@@ -1,6 +1,7 @@
 ﻿# SPDX-License-Identifier: MIT
 # Copyright (c) 2015-2025 Andrii Andrushchyshyn
 
+from .events import g_eventsManager
 from .utils import get_logger
 
 logger = get_logger(__name__)
@@ -89,6 +90,8 @@ class ApiLogicController(object):
         if id not in self.__modifications:
             logger.error('Method @removeModification requires a ModificationItem instance.')
             return
+        del self.__modifications[id]
+        g_eventsManager.onListUpdated()
 
     def alertModification(self, id):
         # type: (str) -> None

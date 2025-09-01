@@ -130,7 +130,7 @@ class ModsButtonView(ViewComponent[ModsButtonModel]):
 
 class ModsButtonInjectComponent(InjectComponentAdaptor):
     """
-    Injects the button view into the lobby footer.
+    Injects adaptor for standalone button in the login window.
     """
 
     def _makeInjectView(self):

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.2
+
+* fix: update mods list on modification removal
+
 ## v1.7.1
 
 * fix: Correctly handle lobby state on button click
