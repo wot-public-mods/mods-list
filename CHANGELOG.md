@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.3
+
+* feat: improve button loading logic and UI
+
 ## v1.7.2
 
 * fix: update mods list on modification removal

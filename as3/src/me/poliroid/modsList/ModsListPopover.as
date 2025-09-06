@@ -25,7 +25,7 @@ package me.poliroid.modsList
 
         private static const BOTTOM_OFFSET:int = 10;
 
-        private static const MAX_ITEMS_IN_LIST:int = 8;
+        private static const MAX_ITEMS_IN_LIST:int = 7;
 
         public var modsList:ScrollingList = null;
 
@@ -70,6 +70,7 @@ package me.poliroid.modsList
                 modsList.validateNow();
                 modsList.rowCount = listItemsCount;
                 modsList.height = modsListHeight;
+                modsListHeight = listItemsCount < 1 ? RENDERER_HEIGHT : modsListHeight;
                 height = modsListHeight + BOTTOM_OFFSET;
             }
         }

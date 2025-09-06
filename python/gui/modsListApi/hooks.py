@@ -15,6 +15,8 @@ from .utils import get_parent_window, override
 from .controller import g_controller
 from .events import g_eventsManager
 
+from openwg_gameface import manager as resmap
+
 def show_popover():
     # type: () -> None
     """
@@ -27,11 +29,13 @@ def show_popover():
 
 g_eventsManager.showPopover += show_popover
 
-def show_button():
+def add_button():
     # type: () -> None
     """
-    Loads the button view when the application is initialized.
+    Loads the button view if UiResourceManager is validated.
     """
+    if not resmap.isResMapValidated:
+        return
     app = ServicesLocator.appLoader.getApp(APP_NAME_SPACE.SF_LOBBY)
     if not app:
         return
@@ -44,7 +48,7 @@ def on_app_initialized(event):
     """
     if event.ns != APP_NAME_SPACE.SF_LOBBY:
         return
-    show_button()
+    add_button()
 
 g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, on_app_initialized, scope=EVENT_BUS_SCOPE.GLOBAL)
 
@@ -68,7 +72,7 @@ def onListUpdated():
     view = container.getView(criteria={POP_UP_CRITERIA.VIEW_ALIAS: MODS_LIST_BUTTON_VIEW})
     # Try to load the button view.
     if g_controller.isModsExist and not view:
-        return show_button()
+        return add_button()
 
 g_eventsManager.onListUpdated += onListUpdated
 
@@ -79,7 +83,18 @@ def hooked_initChildren(baseMethod, baseObject):
     Injects the button view into the lobby footer.
     """
     baseMethod(baseObject)
+    if not resmap.isResMapValidated:
+        return
     baseObject.setChildView(
         ModsButtonView.buttonLayoutID(),
         ModsButtonView()
     )
+
+def onResMapValidated():
+    # type: () -> None
+    """
+    Handles UiResourceManager validation.
+    """
+    return add_button()
+
+resmap.onResMapValidated += onResMapValidated
