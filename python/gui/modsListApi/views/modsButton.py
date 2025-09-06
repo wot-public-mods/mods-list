@@ -21,7 +21,7 @@ class ModsButtonModel(ViewModel):
     The view model for the ModsList API button.
     """
 
-    def __init__(self, properties=3, commands=1):
+    def __init__(self, properties=4, commands=1):
         # type: (int, int) -> None
         super(ModsButtonModel, self).__init__(properties=properties, commands=commands)
 
@@ -35,6 +35,7 @@ class ModsButtonModel(ViewModel):
         self._addStringProperty('title', l10n('title'))
         self._addStringProperty('description', l10n('description'))
         self._addNumberProperty('alerts', g_dataProvider.alertsCount)
+        self._addNumberProperty('modsCount', g_dataProvider.modsCount)
         self.onButtonClick = self._addCommand('onButtonClick')
 
         gf_mod_inject(self, MODS_LIST_BUTTON_VIEW, styles=[
@@ -66,6 +67,14 @@ class ModsButtonModel(ViewModel):
     def getAlerts(self):
         # type: () -> int
         return self._getNumber(2)
+
+    def setModsCount(self, value):
+        # type: (int) -> None
+        self._setNumber(3, value)
+
+    def getModsCount(self):
+        # type: () -> int
+        return self._getNumber(3)
 
 class ModsButtonView(ViewComponent[ModsButtonModel]):
     """
@@ -110,8 +119,8 @@ class ModsButtonView(ViewComponent[ModsButtonModel]):
         """
         Handles the list updated event.
         """
-        alertsCount = g_dataProvider.alertsCount
-        self.viewModel.setAlerts(alertsCount)
+        self.viewModel.setAlerts(g_dataProvider.alertsCount)
+        self.viewModel.setModsCount(g_dataProvider.modsCount)
 
     def _getEvents(self):
         # type: () -> tuple

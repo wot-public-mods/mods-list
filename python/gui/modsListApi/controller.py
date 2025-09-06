@@ -39,7 +39,9 @@ class ApiLogicController(object):
         """
         Sets the lobby status.
         """
-        self.__isInLobby = isInLobby
+        if isInLobby != self.__isInLobby:
+            self.__isInLobby = isInLobby
+            g_eventsManager.onListUpdated()
 
     @property
     def isModsExist(self):

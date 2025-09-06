@@ -22,6 +22,9 @@ const updateButton = () => {
     const button = document.querySelector(".modsButton");
     if (!button) return;
 
+    // Hide button if there are no mods
+    button.style.display = model.model.modsCount > 0 ? "block" : "none";
+
     // Check current layout conditions
     const isMediumScreen = media.width > 1366;
     const isHighlighted = model.model.alerts;

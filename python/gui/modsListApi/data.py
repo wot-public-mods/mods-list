@@ -47,6 +47,14 @@ class _DataProvider(object):
         """
         return sum(int(item.alerting) for item in g_controller.modifications.values())
 
+    @property
+    def modsCount(self):
+        # type: () -> int
+        """
+        Calculates and returns the number of available modifications.
+        """
+        return len(self._generateModsData().get('mods', []))
+
     @staticmethod
     def _generateModsData():
         # type: () -> dict

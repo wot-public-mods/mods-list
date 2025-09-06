@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.4
+
+* feat(button): Hide button when no mods are installed
+
 ## v1.7.3
 
 * feat: improve button loading logic and UI

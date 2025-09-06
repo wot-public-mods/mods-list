@@ -4,6 +4,7 @@
 from frameworks.wulf import WindowLayer
 from gui.app_loader.settings import APP_NAME_SPACE
 from gui.impl.lobby.page.lobby_footer import LobbyFooter
+from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.framework.managers.containers import POP_UP_CRITERIA
 from gui.Scaleform.framework.managers.loaders import SFViewLoadParams
 from gui.shared import events, EVENT_BUS_SCOPE, g_eventBus
@@ -51,6 +52,17 @@ def on_app_initialized(event):
     add_button()
 
 g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, on_app_initialized, scope=EVENT_BUS_SCOPE.GLOBAL)
+
+def on_view_loaded(event):
+    # type: (events.ViewEventType) -> None
+    """
+    Handles the application view loading to switch lobby/login state.
+    """
+    if event.alias == VIEW_ALIAS.LOGIN:
+        g_controller.isInLobby = False
+    elif event.alias in (VIEW_ALIAS.LOBBY, VIEW_ALIAS.LOBBY_HANGAR, VIEW_ALIAS.LEGACY_LOBBY_HANGAR, ):
+        g_controller.isInLobby = True
+g_eventBus.addListener(events.ViewEventType.LOAD_VIEW, on_view_loaded, scope=EVENT_BUS_SCOPE.LOBBY )
 
 def onListUpdated():
     # type: () -> None
