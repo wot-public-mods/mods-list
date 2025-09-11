@@ -4,6 +4,8 @@
 from frameworks.wulf import WindowLayer
 from gui.app_loader.settings import APP_NAME_SPACE
 from gui.impl.lobby.page.lobby_footer import LobbyFooter
+from comp7.gui.impl.lobby.page.lobby_footer import Comp7LobbyFooter
+from comp7_light.gui.impl.lobby.page.lobby_footer import Comp7LightLobbyFooter
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.framework.managers.containers import POP_UP_CRITERIA
 from gui.Scaleform.framework.managers.loaders import SFViewLoadParams
@@ -88,7 +90,6 @@ def onListUpdated():
 
 g_eventsManager.onListUpdated += onListUpdated
 
-@override(LobbyFooter, '_initChildren')
 def hooked_initChildren(baseMethod, baseObject):
     # type: (object, LobbyFooter) -> None
     """
@@ -101,6 +102,9 @@ def hooked_initChildren(baseMethod, baseObject):
         ModsButtonView.buttonLayoutID(),
         ModsButtonView()
     )
+override(LobbyFooter, '_initChildren')(hooked_initChildren)
+override(Comp7LobbyFooter, '_initChildren')(hooked_initChildren)
+override(Comp7LightLobbyFooter, '_initChildren')(hooked_initChildren)
 
 def onResMapValidated():
     # type: () -> None

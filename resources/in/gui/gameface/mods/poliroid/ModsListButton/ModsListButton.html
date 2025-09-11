@@ -7,6 +7,12 @@
         <link rel="stylesheet" crossorigin href="./ModsListButton.css" defer />
     </head>
     <body>
+        <!--
+            The standalone CSS class and the MODS_BUTTON_STANDALONE JS variable 
+            are used to inform the button’s JS logic about its loading source. 
+            They indicate whether the component is injected into Scaleform via 
+            InjectComponentAdaptor or into Gameface via a JavaScript payload.
+        -->
         <div id="root" class="standalone"></div>
         <script>
             window.MODS_BUTTON_STANDALONE = true;
