@@ -81,12 +81,12 @@ class ModsButtonView(ViewComponent[ModsButtonModel]):
     The view for the ModsList API button.
     """
 
-    buttonLayoutID = ModDynAccessor(MODS_LIST_BUTTON_VIEW)
+    viewLayoutID = ModDynAccessor(MODS_LIST_BUTTON_VIEW)
 
     def __init__(self):
         # type: () -> None
         super(ModsButtonView, self).__init__(
-            layoutID=ModsButtonView.buttonLayoutID(),
+            layoutID=ModsButtonView.viewLayoutID(),
             model=ModsButtonModel
         )
 

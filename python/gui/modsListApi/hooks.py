@@ -99,7 +99,7 @@ def hooked_initChildren(baseMethod, baseObject):
     if not resmap.isResMapValidated:
         return
     baseObject.setChildView(
-        ModsButtonView.buttonLayoutID(),
+        ModsButtonView.viewLayoutID(),
         ModsButtonView()
     )
 override(LobbyFooter, '_initChildren')(hooked_initChildren)

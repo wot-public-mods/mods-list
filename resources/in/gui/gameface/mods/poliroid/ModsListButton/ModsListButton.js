@@ -1,5 +1,7 @@
-// Flag to determine if button should work standalone (on login screen) or integrated into lobby
-const standalone = window.MODS_BUTTON_STANDALONE || false;
+
+// Determines if the button should work in standalone mode (login screen)
+// by checking if #root has 'standalone' attribute, otherwise integrates into lobby
+const standalone = document.getElementById("root")?.hasAttribute("standalone") || false;
 
 // Import required libraries
 import { MediaContext } from "../../libs/media.js";
@@ -8,10 +10,10 @@ import { playSound } from "../../libs/sound.js";
 import { showPopover, showTooltip, hideTooltip } from "../../libs/views.js";
 
 // Initialize media context (provides screen size and scale info)
-const media = MediaContext();
+const media = MediaContext(standalone);
 
 // Create model observer
-const model = ModelObserver(standalone ? null : "ModsListButton");
+const model = ModelObserver(standalone ? 0 : "ModsListButton");
 
 /**
  * Updates the style and state of the mods button based on screen dimensions,
@@ -138,10 +140,12 @@ engine.whenReady.then(() => {
     });
     model.subscribe();
 
-    // Case 1: Standalone (login screen) -> attach button to root
+    // Case 1: Standalone (login screen) -> attach button to media-wrapper
     if (standalone) {
-        const root = document.getElementById("root");
-        root.appendChild(createButton());
+        const wrapper = document.querySelector(
+            "div.media-wrapper"
+        );
+        wrapper.appendChild(createButton());
         updateButton();
         return;
     }

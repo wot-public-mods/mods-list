@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.7.6
+* refactor(modsButton): Improve standalone button logic and update its appearance
+
 ## v1.7.5
 * feat: add Comp7 and Comp7Light modes support
 

@@ -19,7 +19,7 @@ g_entitiesFactories.addSettings(
         MODS_LIST_BUTTON_POPOVER,
         ModsListPopoverView,
         'modsListPopover.swf',
-        WindowLayer.WINDOW,
+        WindowLayer.TOP_WINDOW,
         MODS_LIST_BUTTON_POPOVER,
         MODS_LIST_BUTTON_POPOVER,
         ScopeTemplates.WINDOW_VIEWED_MULTISCOPE

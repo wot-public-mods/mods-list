@@ -124,7 +124,7 @@ package me.poliroid.modsList
         {
             if (_buttonInject)
             {
-                const targetWidth:int = int(150 / App.appScale);
+                const targetWidth:int = int(200 / App.appScale);
                 const targetHeight:int = int(150 / App.appScale);
                 _buttonInject.x = App.appWidth - targetWidth;
                 _buttonInject.y = App.appHeight - targetHeight;

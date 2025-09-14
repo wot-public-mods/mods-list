@@ -96,18 +96,18 @@
     min-width: 10rem;
 }
 
-.standalone {
-    width: 150px;
+#root[standalone] .media-wrapper {
+    width: 200px;
     height: 150px;
     position: relative;
 }
 
-.standalone .modsButton {
+#root[standalone] .modsButton {
     position: absolute;
     right: 45rem;
     bottom: 25rem;
 }
 
-.mediaMediumWidth .standalone .modsButton {
-    right: 55rem;
+#root[standalone] .mediaMediumWidth .modsButton {
+    right: 50rem;
 }
