@@ -22,7 +22,7 @@
           <Include href="_local/listItem/backgroundNormal.xml" loadImmediate="false" itemID="5e7d41ab-000000d3" lastModified="1585267115"/>
           <Include href="_local/listItem/hitMC.xml" loadImmediate="false" itemID="588ae58a-0000014c" lastModified="1585267140"/>
           <Include href="_local/ModsListItemRendererUI.xml" itemID="58754565-00000198" lastModified="1756620804"/>
-          <Include href="ModsListPopoverUI.xml" itemID="68b3de95-00000134" lastModified="1756618389"/>
+          <Include href="ModsListPopoverUI.xml" itemID="68b3de95-00000134" lastModified="1760446637"/>
      </symbols>
      <timelines>
           <DOMTimeline name="Scene 1">

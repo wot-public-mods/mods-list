@@ -1,4 +1,4 @@
-<DOMComponentItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="ModsListPopoverUI" itemID="68b3de95-00000134" linkageExportForAS="true" linkageBaseClass="me.poliroid.modsList.ModsListPopover" linkageClassName="ModsListPopoverUI" lastModified="1756618389" lastUniqueIdentifier="4" displayAsComponent="false" customIconID="0" actionscriptClass="ModsListPopoverUI" persistLivePreview11="true" editFrameIndex="1" requiredMinimumPlayerVersion="0" requiredMinimumASVersion="0" parametersAreLocked="true">
+<DOMComponentItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="ModsListPopoverUI" itemID="68b3de95-00000134" linkageExportForAS="true" linkageBaseClass="me.poliroid.modsList.ModsListPopover" linkageClassName="ModsListPopoverUI" lastModified="1760446637" lastUniqueIdentifier="4" displayAsComponent="false" customIconID="0" actionscriptClass="ModsListPopoverUI" persistLivePreview11="true" editFrameIndex="1" requiredMinimumPlayerVersion="0" requiredMinimumASVersion="0" parametersAreLocked="true">
   <timeline>
     <DOMTimeline name="ModsListPopoverUI">
       <layers>
@@ -32,7 +32,7 @@
                     <Point x="8.5" y="72.95"/>
                   </transformationPoint>
                   <parametersAsXML><![CDATA[   <property id="height">
-      <Inspectable name="height" unlocalizedName="height" variable="height" category="" verbose="0" defaultValue="595" type="Number"/>
+      <Inspectable name="height" unlocalizedName="height" variable="height" category="" verbose="0" defaultValue="520" type="Number"/>
    </property>
 ]]></parametersAsXML>
                 </DOMComponentInstance>

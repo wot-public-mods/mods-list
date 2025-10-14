@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.7.7
+* fix: Size of visible scrollbar
+
 ## v1.7.6
 * refactor(modsButton): Improve standalone button logic and update its appearance
 
