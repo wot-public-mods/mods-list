@@ -1,5 +1,5 @@
 ﻿# SPDX-License-Identifier: MIT
-# Copyright (c) 2015-2025 Andrii Andrushchyshyn
+# Copyright (c) 2015-2026 Andrii Andrushchyshyn
 
 # UI linkages
 MODS_LIST_BUTTON_POPOVER = 'ModsListPopover'
