@@ -3,14 +3,17 @@
 
 from frameworks.wulf import WindowLayer
 from gui.app_loader.settings import APP_NAME_SPACE
-from gui.impl.lobby.page.lobby_footer import LobbyFooter
-from comp7.gui.impl.lobby.page.lobby_footer import Comp7LobbyFooter
-from comp7_light.gui.impl.lobby.page.lobby_footer import Comp7LightLobbyFooter
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.framework.managers.containers import POP_UP_CRITERIA
 from gui.Scaleform.framework.managers.loaders import SFViewLoadParams
 from gui.shared import events, EVENT_BUS_SCOPE, g_eventBus
 from gui.shared.personality import ServicesLocator
+
+# overrides hooks
+from battle_royale.gui.Scaleform.daapi.view.lobby.footer.battle_royale_lobby_footer import BattleRoyaleLobbyFooter
+from comp7_light.gui.impl.lobby.page.lobby_footer import Comp7LightLobbyFooter
+from comp7.gui.impl.lobby.page.lobby_footer import Comp7LobbyFooter
+from gui.impl.lobby.page.lobby_footer import LobbyFooter
 
 from ._constants import MODS_LIST_BUTTON_POPOVER, MODS_LIST_BUTTON_VIEW
 from .views.modsButton import ModsButtonView
@@ -64,7 +67,7 @@ def on_view_loaded(event):
         g_controller.isInLobby = False
     elif event.alias in (VIEW_ALIAS.LOBBY, VIEW_ALIAS.LOBBY_HANGAR, VIEW_ALIAS.LEGACY_LOBBY_HANGAR, ):
         g_controller.isInLobby = True
-g_eventBus.addListener(events.ViewEventType.LOAD_VIEW, on_view_loaded, scope=EVENT_BUS_SCOPE.LOBBY )
+g_eventBus.addListener(events.ViewEventType.LOAD_VIEW, on_view_loaded, scope=EVENT_BUS_SCOPE.LOBBY)
 
 def onListUpdated():
     # type: () -> None
@@ -105,6 +108,7 @@ def hooked_initChildren(baseMethod, baseObject):
 override(LobbyFooter, '_initChildren')(hooked_initChildren)
 override(Comp7LobbyFooter, '_initChildren')(hooked_initChildren)
 override(Comp7LightLobbyFooter, '_initChildren')(hooked_initChildren)
+override(BattleRoyaleLobbyFooter, '_initChildren')(hooked_initChildren)
 
 def onResMapValidated():
     # type: () -> None

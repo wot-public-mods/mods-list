@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.8
+* feat: add support for battle royale lobby footer
+* chore: update copyright year to 2026
+
 ## v1.7.7
 * fix: Size of visible scrollbar
 
