@@ -60,10 +60,12 @@ class Localization(object):
         """
         if locale_key in self.language:
             return self.language[locale_key]
-        elif locale_key in self.languages[self._client_default]:
-            return self.languages[self._client_default][locale_key]
-        elif locale_key in self.languages[self._ui_default]:
-            return self.languages[self._ui_default][locale_key]
+        client_defaul = self.languages.get(self._client_default, {})
+        if locale_key in client_defaul:
+            return client_defaul[locale_key]
+        ui_default = self.languages.get(self._ui_default, {})
+        if locale_key in ui_default:
+            return ui_default[locale_key]
         return locale_key
 
     @cache_result
@@ -73,9 +75,9 @@ class Localization(object):
         Gets a dictionary of all localized strings.
         """
         result = {}
-        for k, v in self.languages[self._ui_default].items():
+        for k, v in self.languages.get(self._ui_default, {}).items():
             result[k] = v
-        for k, v in self.languages[self._client_default].items():
+        for k, v in self.languages.get(self._client_default, {}).items():
             result[k] = v
         for k, v in self.language.items():
             result[k] = v
