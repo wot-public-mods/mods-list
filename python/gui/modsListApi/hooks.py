@@ -1,6 +1,9 @@
 ﻿# SPDX-License-Identifier: MIT
 # Copyright (c) 2015-2026 Andrii Andrushchyshyn
 
+import importlib
+import typing
+
 from frameworks.wulf import WindowLayer
 from gui.app_loader.settings import APP_NAME_SPACE
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
@@ -9,17 +12,16 @@ from gui.Scaleform.framework.managers.loaders import SFViewLoadParams
 from gui.shared import events, EVENT_BUS_SCOPE, g_eventBus
 from gui.shared.personality import ServicesLocator
 
-# overrides hooks
-from battle_royale.gui.Scaleform.daapi.view.lobby.footer.battle_royale_lobby_footer import BattleRoyaleLobbyFooter
-from comp7_light.gui.impl.lobby.page.lobby_footer import Comp7LightLobbyFooter
-from comp7.gui.impl.lobby.page.lobby_footer import Comp7LobbyFooter
-from gui.impl.lobby.page.lobby_footer import LobbyFooter
-
 from ._constants import MODS_LIST_BUTTON_POPOVER, MODS_LIST_BUTTON_VIEW
 from .views.modsButton import ModsButtonView
-from .utils import get_parent_window, override
+from .utils import get_parent_window, override, get_logger
 from .controller import g_controller
 from .events import g_eventsManager
+
+if typing.TYPE_CHECKING:
+    from gui.impl.lobby.page.lobby_footer import LobbyFooter
+
+logger = get_logger(__name__)
 
 from openwg_gameface import manager as resmap
 
@@ -93,7 +95,7 @@ def onListUpdated():
 
 g_eventsManager.onListUpdated += onListUpdated
 
-def hooked_initChildren(baseMethod, baseObject):
+def button_inject_hook(baseMethod, baseObject):
     # type: (object, LobbyFooter) -> None
     """
     Injects the button view into the lobby footer.
@@ -105,10 +107,27 @@ def hooked_initChildren(baseMethod, baseObject):
         ModsButtonView.viewLayoutID(),
         ModsButtonView()
     )
-override(LobbyFooter, '_initChildren')(hooked_initChildren)
-override(Comp7LobbyFooter, '_initChildren')(hooked_initChildren)
-override(Comp7LightLobbyFooter, '_initChildren')(hooked_initChildren)
-override(BattleRoyaleLobbyFooter, '_initChildren')(hooked_initChildren)
+
+def button_inject(path, name):
+    try:
+        module = importlib.import_module(path)
+        cls = getattr(module, name, None)
+        if cls is None:
+            logger.error('Class not found: %s.%s', path, name)
+            return
+        override(cls, '_initChildren')(button_inject_hook)
+    except ImportError:
+        logger.warning('Module not loaded yet: %s', path)
+    except Exception:
+        logger.exception('Failed to inject %s.%s', path, name)
+
+for path, name in (
+    ('gui.impl.lobby.page.lobby_footer', 'LobbyFooter'),
+    ('comp7.gui.impl.lobby.page.lobby_footer', 'Comp7LobbyFooter'),
+    ('comp7_light.gui.impl.lobby.page.lobby_footer', 'Comp7LightLobbyFooter'),
+    ('last_stand.gui.impl.lobby.page.ls_lobby_footer', 'LSLobbyFooter'),
+    ('battle_royale.gui.Scaleform.daapi.view.lobby.footer.battle_royale_lobby_footer', 'BattleRoyaleLobbyFooter')
+): button_inject(path, name)
 
 def onResMapValidated():
     # type: () -> None
