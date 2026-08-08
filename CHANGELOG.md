@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.7.9
+* feat: add support for Last Stand lobby footer
+* fix(localization): handle missing default language resources
+* fix(button): prevent the standalone button from moving on scroll
+
 ## v1.7.8
 * feat: add support for battle royale lobby footer
 * chore: update copyright year to 2026
